@@ -1,0 +1,127 @@
+---
+title: "Project"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(viridis)
+```
+
+
+```{r}
+
+df <- read.csv(file = "./datasets/clean/clean_data.csv", sep = ",")
+df["year"] <- lapply(df["year"], as.numeric)
+
+most_generating <- subset(df, year <= 2000)
+most_generating <- most_generating[c("director", "revenue")]
+most_generating <- na.omit(most_generating, director)
+most_generating["revenue"] <- lapply(most_generating["revenue"], as.numeric)
+most_generating <- most_generating %>% group_by(director) %>%
+                    summarize(revenue = sum(revenue, na.rm = TRUE)) %>%
+                    arrange(desc(revenue))
+
+six_directors <- head(most_generating, n=6)
+six_directors
+
+directors <- subset(df, year >= 2001)
+directors <- subset(directors, director=="Steven Spielberg" | director=="Robert Zemeckis" | director=="James Cameron" | 
+                      director=="Ron Howard" | director=="Roland Emmerich" | director=="Chris Columbus")
+directors <- directors[c("director", "revenue", "year")]
+directors <- directors %>% group_by(director, year) %>%
+                    summarize(revenue = sum(revenue, na.rm = TRUE)) %>%
+                    arrange(director)
+
+```
+
+
+```{r}
+
+directors["revenue"] <- lapply(directors["revenue"], function(x){return(x/100000000)})
+
+ggplot(data = directors, aes(x=year, y=revenue, color=director)) +
+  geom_point() +
+  geom_line() +
+  scale_color_viridis_d() +
+  ggtitle("Revenue of best past producers during the 21st century") +
+  labs(x = "year", y = "Revenue (in 100 millions of dollars)")
+
+```
+
+
+```{r}
+
+genres <- do.call(rbind,strsplit(as.character(df$genres),'\\|'))[,1]
+df1 <- data.frame(genres = genres, select(df, -genres))
+unique(df1$genres)
+
+versatile <- subset(df1, director=="Steven Spielberg" | director=="Robert Zemeckis" | director=="James Cameron" | 
+                      director=="Ron Howard" | director=="Roland Emmerich" | director=="Chris Columbus")
+versatile <- versatile[c("director", "genres")]
+
+
+ggplot(data = versatile, aes(x=genres)) +
+  geom_bar(colour = "white", fill = "cornflowerblue") +
+  facet_wrap(~director) +
+  coord_flip() +
+  ggtitle("Genres of best past producers") +
+  labs(x = "Genres", y = "Count")
+
+
+```
+
+```{r, fig.width=5, fig.height=7}
+
+versatile <- subset(df1, director=="Steven Spielberg" | director=="Robert Zemeckis" | director=="James Cameron" | 
+                      director=="Ron Howard" | director=="Roland Emmerich" | director=="Chris Columbus")
+versatile <- versatile[c("director", "genres")]
+
+all_genres <- merge( data.frame(unique(versatile$genres)), data.frame(unique(versatile$director)) )
+names(all_genres)[1] <- "genres"
+names(all_genres)[2] <- "director"
+
+
+versatile["total"] <- 1
+versatile["freq"] <- 1
+versatile <- versatile %>% group_by(director, genres, total) %>% summarize(freq = sum(freq))
+versatile <- versatile %>% group_by(director) %>% mutate(total = sum(freq))
+versatile <- merge(x=versatile, y=all_genres, by=c("genres", "director"), all.y = TRUE)
+versatile["order"] <- 1
+versatile <- versatile %>% mutate(order = freq/total)
+versatile <- versatile %>% group_by(genres) %>% mutate(order = sum(order, na.rm = TRUE))
+versatile$genres <- reorder(versatile$genres, versatile$order)
+
+
+
+
+theme_heat <- theme_classic() +
+  theme(axis.line = element_blank(),
+        axis.ticks = element_blank())
+
+
+plot <- ggplot(versatile, aes(x = director, y = genres) ) +
+  geom_tile(aes(fill = freq/total), color = "white") +
+  coord_fixed() + 
+  theme_heat
+
+# plot with text overlay and viridis color palette
+plot + geom_text(aes(label = round(freq/total, 2)), color = "white") +
+      scale_fill_viridis() +
+      # formatting
+      ggtitle("Prefered genres by the best past producers",
+              subtitle = "Heatmaps of genres prefered by the six identified past producers") +
+      theme(plot.title = element_text(face = "bold")) +
+      theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
+      theme(plot.caption = element_text(color = "grey68"))
+
+```
+
+
+

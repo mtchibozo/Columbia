@@ -1,0 +1,870 @@
+---
+title: "EDAV Final Project Fall 2019"
+author: "Anjani Prasad Atluri (aa4462), Amaury Sudrie(as5961), Maxime Tchibozo(mt3390), Thomas Causero(tc3030)"
+output:
+  html_document:
+    code_folding: hide
+  pdf_document: default
+---
+```{r, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE)
+```
+
+
+<h1>I. Introduction </h1>
+There have been many analysis done on movie datasets but almost none of them were focused on specific questions they tried to answer. Through our analysis we wish to answer/test 3 major questions. <br>
+They are:
+
+1. Are movie production houses looking at the old patterns of movie genres and their financial success and are trying to replicate their success by making more movies of similar genre?
+
+2. Is Martin Scorsese's recent claim about the superhero movies right? If yes then what is the possible solution?
+
+3. How have the most bankable directors of the older generation been performing in the past 2 decades? Who among them is the most versatile and most profitable?
+
+Context for question 2:
+Martin Scorsese recently claimed that the superhero movies have been taking over the theaters and are overshadowing other good movies that released during the same time. He said he feels that they are like these amuzement parks and not like the cinema he grew up loving. This opinion caused a lot of raised eyebrows. 
+
+Conext for question 3:
+The bankability of the directors (in our analysis) is measured by the revenues their movies generated. The higher the revenue, higher the bankability. 
+
+<h1>II. Data Sources </h1>
+
+
+This project uses two different datasets (the normal dataset, and the superhero movie dataset), both taken from different sources.
+
+The normal dataset was created by scraping the movie data directly from TMDB : The Movie DataBase. We could have gone with the IMDB dataset but the issue with it was that it had the genres of a movie ordered alphabetically, TMDB had them ordered according to the relevance to the movie. TMDB is an online database containing data on tens of thousands of movies released over the past 50 years. It is a useful source of movie data for developers since it has a pre-built API which allows anyone to scrape data on any movie in the database, provided they create an account and receive an API key. We have used the API to collect the top 100 highest grossing movies of each year, for the years from 1980 to 2019. This scraping process was done in Python [see new_dataloader.py file on GitHub](https://github.com/apalmk/EDAV/blob/master/API%20work/new_dataloader.py) through this we collected the  'id', 'original_title', 'popularity', 'budget', 'revenue', 'genres', 'vote_count', 'vote_average', 'runtime', 'release_date' and ‘director’ values for 3959 different movies (Though we were supposed to get 4000 movies, the API coudn’t extract some movies). It is worth noting that TMDB has its own popularity metric as well as a voting system to evaluate whether the public enjoyed each of the movies. The vote count and the vote average are the number of votes and the average of the vote values the movie received. These votes are given by the users of TMDB API.
+
+The second dataset contains data on movies based solely on comics superhero characters, and was hand-built by scraping data from Wikipedia, IMDB, Rotten Tomatoes and Box Office Mojo. We decided to focus on superhero movies only containing characters from Marvel and DC comics, as these studios have produced the overwhelming majority of superhero movies in the past two decades. As was the case for the main dataset, the scraping was done in Python [see superhero_scrape.py file on GitHub](https://github.com/apalmk/EDAV/blob/master/Superhero%20Scraping/superhero_scrape.py). 
+
+The first step to creating the superhero movie dataset was identifying the titles of all movies based on Marvel or DC characters. This was done by scraping the table of movies from the  “List_of_films_based_on_Marvel_Comics_publications” and “List_of_films_based_on_DC_Comics_publications” Wikipedia pages - using the BeautifulSoup Python library [See ty.py on GitHub](https://github.com/apalmk/EDAV/blob/master/Superhero%20Scraping/ty.py). Once the names of these movies were identified, we scraped the IMDB, Box Office Mojo and Rotten Tomatoes websites of each movie page. We were able to find all IMDB pages automatically, but for some 30 Rotten Tomatoes pages, and 40 Box Office Mojo pages the automatic linking did not work. For those movies, we manually searched for copied the links to each page in the Python script.
+
+Once all links were copied into the script, we scraped each page to obtain the relevant information. Since no single website contained all the information we were after, we had to scrape different types of data from different websites (IMDB, Rotten Tomatoes or Box Office Mojo pages). From IMDB, we downloaded the IMDB score, release date, budget, opening weekend gross, total domestic gross and worldwide gross. From Rotten Tomatoes we downloaded the critic score and the audience score. It is worth noting that Rotten Tomatoes was the only website to offer a critic score, and not just a score that any user can contribute to. Finally, from Box Office Mojo we downloaded the number of theaters that each superhero movie was displayed in.
+
+The final “clean_superhero.csv” dataset contains the title, IMDB link, Rotten Tomatoes link, Box Office Mojo link, IMDB rating, release date, budget, Rotten Tomatoes critic score, Rotten Tomatoes audience score, number of theaters displaying the movie, comic book studio, domestic opening weekend gross, total domestic gross and worldwide gross for 89 superhero movies released between 1950 and 2019.
+
+In two instances, we used external datasets to provide information on average movie ticket prices over time (to check the effect of inflation on our data) and the total number of movie theaters in the US over time (to check the ratio of theaters in the US that displayed a specific movie). 
+
+Both datasets were taken from the National Association of Theatre Owner, a private company headquartered in Washington, D.C.
+
+NATO represents some 33,000 movie screens in all 50 states. Cinema chains subscribe to NATO membership and are required to provide information on the ticket prices for the movies they display as well as specific information on individual movie theaters.
+
+For movie ticket price and number of theaters, the data comes directly from the companies which own movie theatres in the US.
+
+The TMDB data on the other hand is completely user contributed. TMDB is a free and open movie database, meaning any user can submit an incorrect data issue, or click “Edit” on any movie to access the editing interface. 
+
+Content issue reports are mostly handled by content moderators who are volunteers. Moderators then work on locking and unlocking data, deleting entries, seasons/episodes, images and keywords, resetting URLs and primary posters. 
+
+The major reason we selected TMDB database instead of IMDB is because IMDB database has the genres of the movies listed in alphabetical order, but TMDB listed them in the order of relevance to the movie. 
+
+
+<h1>III. Data Transformation </h1>
+
+Some part of the data cleaning was performed in python while scraping itself. For example, in the superhero movie dataset, we removed the “$” signs from the revenue and budget columns, converted numbers in “900,000,000” format to “900000000”, and added in a column containing only the release year of each superhero movie, to avoid having to extract the year from the release date in R.
+
+In R we extracted the release year from the release date and converted it into numeric data to facilitate our analysis. We sometimes had to remove the “,” comma signs from the revenue data. Once this is done we converted the revenue data to numeric.
+
+
+<h1>IV. Missing Values Analysis </h1>
+We are having two datasets, one for top 100 highest grossing movies per year (from the years 1980 to 2019)(Let us call this normal dataset from here on) and the other having details of all the superhero movies. We will separately do the NA analysis on both of them.
+
+<h3>NA analysis for the Normal Dataset</h3>
+
+```{r, echo=FALSE}
+#load libraries
+library(dplyr)
+library(tidyverse)
+library(parcoords)
+library(shiny)
+library(shinythemes)
+library(readr)
+library(viridis)
+library(ggplot2)
+library(gganimate)
+library(ggthemes)
+library(plotly)
+library(GGally)
+```
+
+Some NA values in this dataset have been imputed to 0s in certain columns and None in other columns, we make them back into NAs. To be specific some NAs in the budget, and revenue were imputed to 0 and the NAs in the runtime were imputed to 'None'. Since we know that the budget, revenue and runtime certainly cannot be equal to zero or None, we can safely conclude that they have been imputed to 0s and make them back to NA again for our analysis. The genres and director columns also have NA values, which are present as empty strings, we are making them into NAs as well.
+
+Now we will see the percentage of NA values in each column of the dataset.
+```{r}
+dfg=read.csv('dataset1_4000.csv',sep=";")
+dfg$budget <- replace(dfg$budget, dfg$budget == 0, NA)
+dfg$revenue <- replace(dfg$revenue, dfg$revenue == 0, NA)
+dfg$runtime <- replace(dfg$runtime, dfg$runtime == 'None', NA)
+dfg$genres=replace(dfg$genres, dfg$genres == '', NA)
+
+pr1=colSums(is.na(dfg))/nrow(dfg)*100
+sort(pr1,decreasing = TRUE)
+```
+We can see that the budget column has the highest missing values, followed by revenue, runtime, genres, and director. No other columns have any missing values.
+
+Let us now try to visualize the missing patterns:
+```{r}
+library(extracat)
+nm1=dfg
+colnames(nm1)=c("director","id","title","popularity","budget","revenue","genres","VC","VA","runtime","RD")
+visna(nm1, sort='b')
+```
+<br />
+<br />
+Note: The names of some columns have been re-coded in the interest of space. ("title"="original title","VC"="Vote count","VA"="Vote Average", "RD"="release date").
+
+We see something interesting here, even though from the plot it looks like many rows are missing runtime, genre, and the director details, we found on careful examination of the dataset that the missing values of the director column, genre column and the runtime column have a higher number of unique missing patterns than the other columns. Since visna compiles all the rows with similar missing patterns into one single row, and most of the missing patterns of director, genre and the runtime are unique, it looks like they appear more frequently when we look at the blue fills in their columns.  
+
+From the missing row patterns we can see that, of all the rows that are having missing values, most rows are missing budget details. The highest missing values are in the budget column, and then revenue and then runtime, then there are a few in genre and a few in director.
+
+We can see that whenever revenue of a movie is missing, budget is also missing.
+
+Let us now add an extra column to our dataset with its values as number of NAs in the row (i.e. number of missing value per movie). Let us also check our assumption that movies of bad quality (low total ratings (total rating values are obtained by multiplying no of votes with vote average of each movie)), or the movies that are less popular or the movies that are old have more NA values. We draw a scatter plot matrix for ratings score, year of release, popularity and no of NA values in the row to check if a strong correlation exists.
+
+```{r}
+
+#Extracting the year of release
+dfgg= dfg %>% mutate(year=as.numeric(substring(release_date,1,4)))
+
+#Summing up all the NAs in a row
+v=as.data.frame(rowSums(is.na(dfgg)))
+dfg1=cbind(dfgg,v)
+dfg1 <- dplyr::rename(dfg1, na_sum = `rowSums(is.na(dfgg))`)
+dfg1=mutate(dfg1, tot_rating=vote_count*vote_average)
+dfg2 = select(dfg1,popularity,year,tot_rating,na_sum)
+
+#Selecting only the rows that have NA values
+dfg3=filter(dfg2,dfg2$na_sum!=0)
+ggpairs(dfg3,progress=FALSE)
+```
+<br />
+<br />
+Note: tot_rating and na_sum from the plots represent the total rating and the number of NA values for that movie.
+
+Though there is a slight negative correlation between the popularity and number of NA values, release year and number of NA values, and total rating and the number of NA values; it is not strong enough to strengthen our assumption. But from the plots we can see that higher no of missing values (more than 2 missing values) in a row (per movie) are fairly concentrated for the movies that were released before 1990. It is the same with popularity and total rating too, i.e. there are more number of NAs for movies with popularity below 40, and we can also see that no movie with a popularity score over 50 actually has any NA value. There is only one exception for this which is the movie Frozen II which has a popularity score above 400 and is missing the budget details. Most of the movies that are having missing values are missing budget value irrespective of their popularity, year of release or total rating.
+
+Let us now remove the rows containing NA values from our dataset for our analysis from here on. We will save this as our clean dataset, and since we have extracted the years of the movies from the release date (we did it while making the scatter plot matrix), this will have years column seperately in numeric format. Removing all the NA values removed 747 movies from the original dataset (which had 3959 movies) now we are left with 3212 movies.
+```{r}
+new_df=na.omit(dfgg)
+#We lost 747 movies after removing the NA values from the dataset
+write.csv(new_df,"/Users/ap/Documents/EDAV_assignments/clean_data.csv", row.names = FALSE)
+```
+
+<h3>NA analysis for the Superhero Dataset</h3>
+Let us repeat the same procedure for the superhero dataset, and see if there are any missingness patterns in this dataset. 
+First let us see the percentage of missing values in each column of the dataset.
+```{r}
+df=read.csv("clean_superhero.csv")
+pr=colSums(is.na(df))/nrow(df)*100
+sort(pr,decreasing = TRUE)
+```
+
+We can see from the above output that we don't have a lot of missing values in our dataset, and of the missing values we have most of them are missing opening weekend collection details. The "theaters" column has the number of theaters that were allocated to the movie. gross_usa and the gross_worldwide columns show the gross amount made by the movie in the US and worldwide. The budget column gives the budget of the movie. There are some missing values in the theaters column, and some in the gross_usa column and some in the gross_worldwide column and a very few in the budget column.
+
+```{r}
+library(extracat)
+nm=df
+colnames(nm)=c("name","imdb","rt","bm","imdbr","RD","budget","CS","AS","theaters","studio","year","opw","Gusa","Gwrld")
+visna(nm, sort='b')
+```
+
+Note: The names of some variables have been re-coded in the interest of space. ("opw"="opening weekend gross","Gusa"="overall domestic gross,"Gwrld"="Worldwide gross","rt"="rotten tomato link", "imdbr"="imdb rating", "RD"="release date","CS"="Critics Score", "AS"="Audience Score").
+
+We can see from the plot that most of the rows have all the values. In the rows having missing values, the most common missing pattern is the worldwide gross, US gross, number of theaters and opening weekend. We can see that whenever budget is missing worldwide gross, USA gross, theater allocation, and opening weekend collection details are missing.
+
+Whenever the domestic gross is missing, the worldwide gross and the opening weekend collection are missing (which makes sense as without data on opening weekend gross data we can't calculate the domestic gross and without domestic gross we can't calculate the worldwide gross). Whenever the theater allocation details are missing the opening weekend data is also missing.
+
+
+```{r}
+#Extracting release years from the release dates of the movies
+dff1=df %>% mutate(year = substr(release_date, nchar(as.character(release_date))-10+1, nchar(as.character(release_date))))
+dff1 = dff1 %>% mutate(year_of_release = substr(year, 1,4))
+dff1$year_of_release=as.numeric(dff1$year_of_release)
+```
+Let us now see if there is any correlation between the release year, imdb score and the number of NAs in the row of the movie.
+```{r}
+library(GGally)
+dff1=dff1 %>% mutate(NAs=rowSums(is.na(dff1)))
+dff2 = select(dff1,year_of_release,imdb_rating,NAs)
+#taking only the movies that have NA values in their rows
+dff3=filter(dff2,dff2$NAs!=0)
+ggpairs(dff3)
+```
+
+We can see that there is a strong negative correlation between the year of release and the number of NA values for the movies, that have missing values. It strengthens our suspicion that the missing budget, revenue, theater data values are because of the lack of records for the older superhero movies.
+
+
+<h1>V. Analysis and Results </h1>
+
+<h3> a)Analysis of Genres of movies in our dataset</h3>
+
+```{r}
+dff <- read.csv('clean_data.csv')
+```
+
+The dataset we are woking with is composed of 3212 rows and 12 columns, in this part of our analysis we are primarily focusing on the the "genre", "vote average", "budget", "revenue" and "runtime" columns.
+
+Note: The genre details of the movies in the datadet are given as "Action|Comedy|Adventure" etc, for our analysis we are considering the first genre (let us call this primary genre from here on) in the list, as it is the primary genre of the movie (The genres in the genre column of the dataset are present in the order of their relevance to the movie(ex: if a movie have 2 genres action and comedy, and if action is its primary genre, it is represented as "Action|Comedy") and are not ordered alphabetically). 
+
+
+Let us now see the list of all the unique primary genres in our normal dataset.
+```{r, warning=FALSE, echo=TRUE}
+#Only keep the first genre, which is the most relevant
+genres1 <- do.call(rbind,strsplit(as.character(dff$genres),'\\|'))[,1]
+df1 <- data.frame(genres = genres1, select(dff, -genres))
+unique(as.character(df1$genres))
+```
+As we can see there are 19 unique primary genres in our dataset. Now let us see how many movies of each these genres are present in the dataset. This will help get an idea of the distribution of primary genres in our normal dataset.
+
+```{r}
+#plot (number of movies for each genre)
+genres_info <- df1 %>%
+               count(genres) %>%
+               mutate(perc =  (n / nrow(df1))*100)
+
+ggplot(genres_info, aes(x=reorder(genres,n), y=perc)) + 
+  geom_bar(stat = 'identity') + 
+  xlab('Genre') +
+  ylab('Percentage of movies') +
+  ggtitle('Percentage of movies in our dataset of each unique primary genre') +
+  coord_flip()
+```
+
+We can see that the most number of movies in our dataset have their primary genre as action. We will now take the top most present primary genres in our dataset for further analysis.
+
+In our dataset, the 5 most present genres are:
+* Action (~20.7%)
+* Comedy (~19.8%)
+* Drama (~17.9%%)
+* Adventure (~9.71%%)
+* Horror (~6.63%%)
+We are going to focus our study on these genres, which represent ~75% of the whole dataset.
+
+Let us first look at how the average budget of movies made in each of these 5 genres has been changing over the years.
+```{r echo=FALSE}
+#5 most present genres : Comedy, Action, Drama, Adventure, Horror
+genres_under_study <- arrange(genres_info,-n)[1:5,'genres'][['genres']]
+#only keep rows whose genre is among the top 5
+df2 <- filter(df1, genres %in% as.vector(genres_under_study))
+
+
+resultss =df2 %>%
+  dplyr::group_by(year, genres) %>%
+  dplyr::summarise(budget = mean(budget, na.rm = T), revenue = mean(revenue), 
+            mark = sum(vote_average*vote_count)/sum(vote_count)) %>% ungroup()
+
+resultss$genres <- factor(resultss$genres, levels = c('Adventure', 'Action', 'Comedy', 'Drama','Horror'))
+resultss$budget=resultss$budget/1000000
+resultss$revenue=resultss$revenue/1000000
+o=ggplot(data = resultss) + 
+  geom_line(aes(x = year, y = budget, color=genres)) +
+  scale_color_colorblind() +
+  ggtitle('Evolution of average budget over the years') + labs(x = "year", y = "Budget (in millions of dollars)") 
+
+ggplotly(o) %>% config(displayModeBar = F)
+```
+
+Note: When hovering over the line we can see the budget, year, and the genre. Clicking on the legend will remove the line of that genre and will provide for a better view of other line plots. If you want to separately see the trend in the budget of each genre please turn off the line of the other genres by clicking on their legend.
+
+From the overall trend we can see that the average budget allocated for movies of each genre has been increasing (this might also be happening because of inflation). The average budget for "Adventure" movies has increased at a faster pace then the average budget for the movies of other genres we are considering.
+
+Let us now see if the same order is maintained in the average revenue generated by movies made in each of these 5 genres.
+
+```{r}
+
+resultss$genres <- factor(resultss$genres, levels = c('Adventure', 'Action', 'Horror', 'Comedy','Drama'))
+o1=ggplot(data = resultss) + 
+  geom_line(aes(x = year, y = revenue, color=genres)) +
+  scale_color_colorblind() +
+  ggtitle('Evolution of average revenue over the years') + labs(x = "year", y = "Revenue (in millions of dollars)") 
+
+ggplotly(o1) %>% config(displayModeBar = F)
+```
+From the graph we can see that, the average revenue generated by the genres also has been increasing over the years and the ordering of the genres is more or less the same. The movies of "Adventure" genre have generated more revenue than other genres in most of the years, except the years 1982, 1988, 1994, 2009 and 2015.
+
+Let us now look at the average Return on Invesment for each of the 5 genres we are considering. Return on investment is calculated by subtracting the budget from revenue and dividing this difference by the budget. This will signify the profit each movie made for one dollar of its investment. We then group the movies by their primary genres and see which genre gives high return on investment.
+
+```{r, warning=FALSE}
+#x axis is the genre, bar graph
+df3=read.csv("main_ds_without_superhero.csv")
+#Removing one movie whose budget is misrepresented as 2 dollars
+df3<-df3[!(df3$budget==2 ),]
+#Removing movie with wrong details
+df3<-df3[!(df3$id==506972 ),]
+df3<-df3[!(df3$id==506664 ),]
+df3<-df3[!(df3$id==503314 ),]
+
+genres1 <- do.call(rbind,strsplit(as.character(df3$genres),'\\|'))[,1]
+df4 <- data.frame(genres = genres1, select(df3, -genres))
+df4 <- select(df4,genres,revenue,budget,original_title,release_date)
+df4 <- filter(df4, genres %in% as.vector(genres_under_study))
+df4 <- dplyr::mutate(df4,ROI = (revenue-budget)/budget)
+df4 %>%
+  dplyr::group_by(genres) %>%
+  dplyr::summarise(average_ROI = mean(ROI)) -> resultss2
+
+ggplot(resultss2) + 
+  geom_bar(aes(x=reorder(genres,-average_ROI), y=average_ROI), stat='identity') +
+  xlab('Genres') +
+  ylab('Average Return on Investment')+
+  ggtitle('Average Return on Investment of each of the 5 genres we are considering')
+```
+<br />
+<br />
+Note: ROI doesn't have a unit of measurement, in general the higher the ROI, the more value we receive for investment.
+
+After removing the suspicious movies that did not have consistent budget and revenue data, we end up with this graph. We can see that horror movies have a very high average return on investment. This is because they are not expensive to make, and if they are good they generate a huge revenue. After filtering and checking the data, we found that the movie with the highest ROI is "Paranormal Activity 2009" which had a budget of 15,000 dollars and made 193 million dollars globally. The second highest is "The Blair Witch Project" which is the first ever found footage genre movie. It was made on a budget of 60,000 dollars and generated a revenue of 248 million dollars. These movies increased the average ROI of the Horror genre. Even without these movies "Horror" movies have a higher ROI than other genres. When observing the comedy genre, we found that a Japanese zombie comedy movie called "One Cut of the Dead" was made on a budget of 30,000 dollars and generated a revenue of 200 million dollars after its international release. This movie alone is one of the reaons for the high average ROI of comedy movies. Of the movies belonging to the Drama genre, the movie with highest ROI is a Hindi movie "Secret Superstar" it has an ROI of 479. 
+
+Let us now look at the average runtime of the movies of each primary genre we have chosen.
+```{r}
+#Reference: https://edav.info/cleveland.html
+theme_dotplot <- theme_bw(14) +
+    theme(axis.text.y = element_text(size = rel(.75)),
+        axis.ticks.y = element_blank(),
+        axis.title.x = element_text(size = rel(.75)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+        
+xd = data.frame(df2 %>% group_by(genres) %>% summarise(avg_rt=mean(runtime)))
+
+# create the plot
+ggplot(xd, aes(x = avg_rt, y = reorder(genres, avg_rt))) +
+    geom_point(color = "blue", size=3) +
+    scale_x_continuous(limits = c(90, 125),
+        breaks = seq(90, 125, 10)) +
+    theme_dotplot +
+    xlab("Average runtime in minutes") +
+    ylab("Genres") +
+    ggtitle("Average runtime by primary genre") +
+    theme(axis.title.x = element_text(size=15)) +
+    theme(axis.title.y = element_text(size=15)) +
+    theme(axis.text.x = element_text(size=12)) +
+    theme(axis.text.y = element_text(size=12))
+```
+<br />
+<br />
+From this we can see that Horror movies on average have the smallest runtime of the genres we have chosen. Action and Adventure movies have almost the same average runtime and Dramas have the longest runtime of them all.
+
+Let us now see how many of the top 100 highest grossing movies of each year (our dataset has top 100 highest grossing movies of each year from 1980 to 2019, we have lost some movies after removing NA values) have one of the 5 genres we're considering (Action, Adventure, Comedy, Drama, Horror) as main genre (Since we have extracted only the main genre from the genre column of each movie). Since we have the data from 1980 to 2019, we would have to draw one bar graph per year to show this, which is unnecessary. Let us instead visualize these graphs in animation:
+
+```{r}
+#reference https://towardsdatascience.com/create-animated-bar-charts-using-r-31d09e5841da
+cv= data.frame(df2 %>% dplyr::group_by(year,genres) %>% dplyr::summarise(cnt = n()) %>% ungroup())
+
+#giving ranking to cv for the order maintenance
+cv_formatted <- cv %>%
+  dplyr::group_by(year) %>%
+  #breaks ties randomly
+  dplyr::mutate(rank = rank(-cnt,ties.method = "random"),
+         cnt_lbl = paste(" ",cnt)) %>% dplyr::ungroup()
+#trial=filter(cv_formatted, year<1983)
+sp = ggplot(cv_formatted, aes(rank, group = genres, 
+                fill = as.factor(genres), color = as.factor(genres))) + scale_colour_colorblind() + scale_fill_colorblind()+
+  geom_tile(aes(y = cnt/2,
+                height = cnt,
+                width = 0.8), alpha = 0.9, color = NA) +
+  geom_text(aes(y = 0, label = paste(genres, " ")), vjust = 0.2, hjust = 1, size=7) +
+  geom_text(aes(y=cnt,label = cnt_lbl, hjust=0),size=7) +
+  coord_flip(clip = "off", expand = FALSE) +
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_reverse() +
+  guides(color = FALSE, fill = FALSE) +
+  theme(axis.line=element_blank(),
+        axis.text.x=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        axis.title.x=element_blank(),
+         axis.title.y=element_blank(),
+        legend.position="none",
+        panel.background=element_blank(),
+        panel.border=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.grid.major.x = element_line( size=.1, color="grey" ),
+        panel.grid.minor.x = element_line( size=.1, color="grey" ),
+        plot.title=element_text(size=23, hjust=0.55, face="bold", colour="grey", vjust=-1),
+        plot.background=element_blank(),
+       plot.margin = margin(2,2, 2, 4, "cm"))
+
+anim = sp + transition_states(year, transition_length = 3, state_length = 2) +
+  view_follow(fixed_x = TRUE)  +
+  labs(title = 'No of movies of our 5 primary genres made in Year: {closest_state}')
+
+animate(anim, duration=70, fps = 20,  width = 1500, height = 1000, 
+        renderer = gifski_renderer())
+anim_save("bar_anim.gif")
+```
+
+We can see from the animation that for the most part horror was ranked last, and was never on the top spot, implying that in the 5 genres we're considering, it never so happened that more horror movies were present in the top 100 highest grossing films of a year (from 1980 to 2019) than the other 4 genres we're considering. This tells us that even though horror movies have their audience, they generally are a niche genre and don't have a very wide appeal like other genres like action or drama. This is the reason why there are not as many horror movies in the dataset as the other genre movies we're considering. We can also see that action movies were at the top spot consistently for the last 9 years. This implies that for the past 9 years, most of the top 100 highest grossing movies had their main genre as action. Drama movies were mostly fluctuating between 2nd and 3rd position and were rarely present at the 1st or 4th spots. There was stretch of years from 2004 to 2007 during which the ranks (or relative positions) of the genres in the graph remained same. During those years, in the top 100 highest grossing movies there were more Comedy movies, followed by Drama, followed by Action, followed by Adventure and Horror movies at the end. This shows movies having their main genre in that aforementioned order were present more (in the same order given before i.e. most of them are Comedy, then Drama, then Action, then Adventure and at last Horror) in the top 100 highest grossing films of the years from (2004 to 2007). Since the revenue generated by a movie translates to the number of people that watched, which in turn says something about the preference of people in those years, we can safely say that most audiences preferred movies whose main genre is Comedy, followed by movies whose main genre was Drama, then Action and then Horror. Surprisingly, this order of preference lasted from 2004 to 2007.
+
+Now let us look at the average ratings of movies of the genres we are considering.
+```{r}
+gen_rat=df2
+gen_rat=gen_rat[c("genres", "vote_average")]
+g3 = gen_rat %>% group_by(genres) %>% summarize(avg_rating = mean(vote_average, na.rm = TRUE)) %>% ungroup()
+
+vb=ggplot(data= g3, mapping = aes(x=fct_reorder(genres,-avg_rating), y=avg_rating))
+vb + geom_col() + ggtitle("Average ratings received by movies of genres we're considering") + scale_y_continuous(breaks = seq(0, 10, by = 1)) +
+  labs(x = "Genre", y = "Average rating on a scale of 10")
+```
+
+It is surprising to see that there is not a lot of difference in the average ratings received by the movies made in the genres we're considering. Dramas receiving high average can be expected, as it is like a general consensus that dramas are highest quality cinema (one simply needs to look at all the past best picture Oscar winners).
+
+Now we have to the big question we are trying to answer. 
+Let us now test our assumption that movie production houses tend to look at old patterns of movie genres and their financial success and try to make more movies of similar genre to earn high revenues. We do this by making a scatter plot between no of movies of a particular genre in a taken year and the revenue generated by the movies of this genre from the previous years. For example with the assumption that a movie takes 2 years to make on an average, we will take the number of movies made in each genre in 2018  (on y-axis) and plot them against the revenue of these genres from the year 2016 (on x-axis). If there is a strong correlation, it means that since the movies belonging to these genres have performed well financially in 2016, more of such movies were made in 2018. The issue with trying to test this with static graphs is that we will have to make multiple static graphs (one for each combination of years) and we will have to hard code the gap (suppose 2 years). This is a perfect oppurtunity for an interactive graph. We have made a shiny app in which the user can chose a beginning year and a gap, and see the scatter plot of no of movies of genres released in the beginning year plus the gap v/s the average revenue of these genres in the beginning year. Each point on the graph represents a genre. We hosted this app using shinyapps.io [click here to try the app](https://movieanalysis.shinyapps.io/project/).
+
+Note: We have limited the gap to 5 years, as except in a very few situations the average time to make a movie is generally less than 5 years.
+
+After using our interactive part to test our assumption, we have seen that there is no strong correlation between the number of movies of a genre made in the starting year chosen plus the gap and the average revenue of these genres from the starting year. So either our assumption that "production houses tend to look at old patterns of movie genres and their financial success and try to make more movies of similar genre to earn high revenues" was wrong, or the movies that were made such a way didn’t make their way in to our dataset (since we made our dataset by collecting top 100 high grossing movies by year, we can say that the these movies didn't make it to the top 100 highest grossing movies of that year). So it is not suggested see the older trends and make movies of similar genre if you want to make a movie that becomes one of the top grossing movies of its year.
+
+<h3> b)Analysis of Martin Scorsese's claim and a possible solution to the problem</h3>
+
+We see that nowadays many of the yesteryear's famous directors (like Martin Scorsese) are coming out and speaking up against the monopoly of super hero films over the theaters. Mr.Scorsese also claimed that these movies are like amuzement parks and cannot be called cinema, he also exclaimed that because of this kinds of movies the other good movies released during the same time are over-shadowed.
+
+On thinking about this claim, we came up with a metric for these kinds of movies, these would be movies that generally have not so good critics score (below 60 on rotten tomatoes), a high-budget (above $100 million) and a worldwide gross above 500 million dollars. The reason behind chosing the critics score is that even if the audience like the "amuzement park" style of movies the critics will be harsh with their ratings if they feel the movies was made only for eye feast. To see if movies with these characteristics exist in the superhero dataset we made an interactive paralell coordinate plot. For each of the variables (critics score, worldwide gross, and the budget) of the plot, you can select a value range for these variables (by clicking and dragging over the axes) to see if such movies indeed exist. We would suggest checking for budget over 100 million dollars, worldwide gross above 500 million dollars and rotten tomato score of 60 and below.
+
+<h4>Parallel Coordinate Plot</h4>
+```{r}
+library(parcoords)
+df <- read.csv("clean_superhero.csv")
+
+df["critic_score_rt"] <- lapply(df["critic_score_rt"], function(x) as.numeric(gsub("%", "",x)))
+
+par_plot = c(11,8,15,7)
+dfj=df[,par_plot]
+dfj$gross_worldwide=dfj$gross_worldwide/(1000000)
+dfj$budget=dfj$budget/(1000000)
+names(dfj)=c("studio","critics score","worldwide gross (in millions)", "budget (in millions)")
+
+parcoords(dfj, brushMode = "1D-axes", reorderable = T, queue = T,rownames=F,color = list(colorBy = "studio",colorScale = "scaleOrdinal",colorScheme = "schemeCategory10"), withD3 = TRUE)
+```
+
+As we can see, there indeed exist such movies in the superhero dataset that are of "Amusement park" type. Having seen this let us get into the analysis of the other aspects of the superhero movies.
+
+Let us look at the trend in the domestic gross revenue (domestic gross revenue is the gross revenue generated in the US during the full run of a movie) generated by the superhero movies over the years. If there are multiple superhero movies released in a year we are adding up their revenues.
+
+```{r}
+gross_year <- data.frame(release_date = dff1$year_of_release, gross_usa = dff1$gross_usa)
+gross_year$gross_usa=gross_year$gross_usa/1000000
+results <- data.frame(gross_year %>%
+  dplyr::group_by(release_date) %>%
+  dplyr::summarise(total_gross_usa = sum(as.double(gross_usa), na.rm = TRUE)))
+results <- results[order(results['release_date']),]
+results=na.omit(results)
+ggplot(results, aes(release_date, y=total_gross_usa)) + 
+  geom_line() +
+  geom_point() +
+  ggtitle("Total gross in USA over the years") + theme(plot.title = element_text(hjust = 0.5)) +
+  scale_x_continuous(breaks=seq(min(results$release_date), max(results$release_date), 5))+
+  xlab("Year") + 
+  ylab("Gross in USA in millions")
+```
+
+We can see from the overall trend that the total gross collections generated by superhero movies in the domestic market has been increasing. From the magnitude of these sharp increases we can see that the increase in gross revenue in US is not just because of inflation. We can see a very sharp increase from 2015 to 2018; one of the major reasons for this is the higher number of superhero movies made in these years. We can see sharp dips in the gross collection in the years 2015, 2010 and 2009. To see why this happended let us make a bar graph to see number of superhero movies that were released during these years.
+
+
+```{r}
+ggplot(gross_year, aes(release_date)) + 
+  geom_bar() + 
+  ggtitle("Number of Superhero movies made over the years") + scale_x_continuous(breaks=seq(min(results$release_date), max(results$release_date), 5))+theme(plot.title = element_text(hjust = 0.5))+
+  xlab("Year") + 
+  ylab("Number of movies")
+```
+
+Six superhero movies were released in 2018, and 6 in 2019, but the dip in the revenue generated in 2019 is due to the fact that the movie "Joker" hasn't finished its full run yet and we only have its domestic gross till the time we collected the data, this brought down the average gross of 2019. We can see that 3 superhero movies were released in 2015 in contrast to the years before and after 2015 (which had more number of superhero movies), this explains the gross collections dip in 2015. The same can be said about 2009 and 2010. From the overall trend in the graph we can see that number of superhero movies being made over the years has been increasing.
+
+
+Since total gross over the years is a metric that depends on the number of movies that were released in that year, let us see the total <strong>average</strong> gross of the superhero movies over the years.
+
+```{r}
+results1 <- data.frame(gross_year %>%
+  group_by(release_date) %>%
+  summarise(avg_gross_usa = mean(gross_usa, na.rm = TRUE)))
+results1 <- results1[order(results1['release_date']),]
+results1=na.omit(results1)
+
+ggplot(results1, aes(release_date, y=avg_gross_usa)) + 
+  geom_line() +
+  geom_point() + scale_x_continuous(breaks=seq(min(results1$release_date), max(results1$release_date), 5))+theme(plot.title = element_text(hjust = 0.5)) +
+  ggtitle("Average gross in USA over the years") +
+  xlab("Year") + 
+  ylab("Gross in USA in millions")
+```
+
+In 1978 Superman was released, and from then on other superhero movies were released but they couldn't perform as well as Superman of 1978 till Batman Returns in 1992. Some movies that came in the middle (1978-1992) are Supergirl in 1984, Superman IV in 1987. Batman in 1989 started to revive the revenues of the superhero movies again. The peak in 2002 is due to the movies "Blade" and "Spiderman" both of which are character from Marvel comics. The dip in 2005 was due to the movies Batman Begins, Constantine and Electra. Even though Batman Begins performed well the revenue generated in that year is brought down by the poor performance of Constantine and Electra (both are characters from Marvel comics). The same goes for 2010, where Iron Man 2 performed well but the average is brought down due to the movie Jonah Hex. The peak in 2013 is due to a slew of superhero movies, namely Iron Man 3, Man of Steel, The Wolverine and Thor: The Dark World. We can see that the years that generated high revenues saw the releases of movies about relatively well known superheroes and have gotten good revenues if the movie had high ratings (implying good quality). 
+But to verify this statement, we will do a scatter plot between the critics scores from rotten tomato page of the movie and the revenue it generated. This will tell us if the movies have gotten good revenues due to the superhero bubble or due to good quality content.
+
+```{r}
+score_vs_revenue <- data.frame(name = dff1$name, critic = dff1$critic_score_rt, gross = dff1$gross_worldwide)
+score_vs_revenue["critic"] <- lapply(score_vs_revenue["critic"], function(x) as.numeric(gsub("%", "",x)))
+score_vs_revenue <- na.omit(score_vs_revenue)
+x <- list(
+  title = "Critic Score (in percentages)"
+)
+y <- list(
+  title = "Revenue (in billions of dollars)")
+p <- plot_ly(score_vs_revenue, x = ~critic, y = ~gross, type = 'scatter', mode = 'markers',
+        text = ~paste('name: ', name)) %>% layout(xaxis = x, yaxis = y, title="Scatterplot of Critics Score vs Revenue of super hero movies", annotations = list(text = paste('<b>correlation coefficient:<b>',round(cor(score_vs_revenue$critic,score_vs_revenue$gross),2)),  x = 0.5, y = 1,yref = "paper",xref = "paper",xanchor = "middle",yanchor = "bottom", showarrow = FALSE,font = list(size = 15)),margin = list(l=25, r=50, b=60, t=100, pad=0)) %>% config(displayModeBar = F) 
+ggplotly(p)
+
+
+```
+Note: You can hover over the points to see the name of the movies they represent.
+
+We see that there is no strong correlation between the critics score of the movies and the revenue they generate. This could mean that the revenue generated by the movies that have a critics score of below 60 is due to the superhero bubble. (Note: Though the revenues generated by the movies having bad critics scores seem lower than the revenues generated by the superhero movies with good critics score, some of them have still cross the half a billion mark, which is a very big achievement for normal movies)
+
+Let us see how the average budget and revenue of the superhero movies has been changing over the years.
+```{r}
+ts_budget_revenue <- data.frame(year = dff1$year_of_release, budget = dff1$budget, gross = dff1$gross_worldwide)
+ts_budget_revenue <- ts_budget_revenue %>% group_by(year) %>% summarize(budget = mean(budget), gross = mean(gross))
+ts_budget_revenue <- na.omit(ts_budget_revenue)
+ts_budget_revenue <- gather(ts_budget_revenue, key = "category", value = "value", -year)
+ts_budget_revenue["value"] <- lapply(ts_budget_revenue["value"], function(x) {return(as.numeric(x)/100000000)})
+p<-ggplot(data = ts_budget_revenue, aes(x=year, y=value, color=category)) +
+  geom_point() +
+  geom_line() + scale_color_colorblind()+
+  ggtitle("Average revenues and budgets of the of super heroes movies over time") +
+  labs(x = "year", y = "Revenue and budget (in 100 millions of dollars)")
+p1<-ggplotly(p) %>% config(displayModeBar = F)
+ggplotly(p1)
+```
+
+There is a general increasing trend for both gross and budget over time. After the initial release of the 1978 movie Superman, which was a box office hit, superhero movies struggled to become financially viable: in 1984, for example, superhero movies actually cost more money than they made on average. A new era for superhero movies started in 1989 with the release of Batman, which significantly contributed to the large average revenue of that year.
+
+After this commercial success, budgets for superhero movies increased and with that came higher worldwide revenues. In 1997 and 1998 however, Batman & Robin and Steel came out, and both were commercial failures. This is the main reason behind the dip in those two years. 
+
+Since the year 2000, budgets have steadily increased, but revenues have skyrocketed: this is due to highly successful franchises : the Spider-Man saga in the early 2000s, the Iron Man series at the end of the 2000s and The Avengers since 2012). These sagas are the main reason behind the mainstream appeal of superhero movies today, much to the regret of Martin Scorsese.
+
+Let us now see the box plots of ratings (critics and audience) differentiated on the movie studio that produced them. This would help us compare the quality of the superhero movies between the studios (general consensus is that Marvel movies have better score and revenue than their DC counterparts). Through this we can also see if there are any outliers in the data (uncharacteristically high or low rated movies).
+
+```{r}
+ggplot(dff1, aes(x = reorder(studio, -imdb_rating, median), y = imdb_rating)) + 
+  # plotting
+  geom_boxplot(fill = "#cc9a38", color = "#473e2c") + stat_boxplot(geom="errorbar") +
+  # formatting
+  ggtitle("IMDB Score of Marvel vs. DC movies",
+          subtitle = "Boxplots of IMDB score by movie studio") +
+  labs(x = "Movie Studio", y = "IMDB Score") +
+  theme_grey(16) +
+  theme(plot.title = element_text(face = "bold")) +
+  theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
+  theme(plot.caption = element_text(color = "grey68"))
+```
+<br />
+<br />
+This graph shows that while Marvel and DC movies have a similar median rating on IMDB (7 vs. 6.5), the interquartile range for DC movies is much larger. This means that Marvel movies are more consistent when compared to DC movies in the matters of IMDB scores. There is more variability for DC movies, 25% of which have an IMDB score of less than 5.2.
+It is worth noting that the best rated DC movie achieves a higher IMDB score than the best rated Marvel movie. The outliers (uncharacteristically low rated movies) in the Marvel movies according to the ratings are "The Fantastic Four(1994)", "Fantastic Four (2015)" , "Ghost Rider: Spirit of Vengeance" and the "Captain America (1991)" movies. It looks like there are only 3 outliers but in actuality there are 4 (Two movies The Fantastic Four(1994) and Ghost Rider: Spirit of Vengeance have the same imdb rating of 4.3).
+
+What about the Rotten Tomatoes scores?
+```{r}
+# boxplot bystudio 
+dfn2 = df[!is.na(df$critic_score_rt),]
+ggplot(dfn2, aes(x = reorder(studio, -critic_score_rt, median), y = critic_score_rt)) + 
+  # plotting
+  geom_boxplot(fill = "#cc9a38", color = "#473e2c") + stat_boxplot(geom="errorbar") + 
+  # formatting
+  ggtitle("Rotten Tomatoes Critic Score",
+          subtitle = "Boxplots of RT Critic score by studio") +
+  labs(x = "studio", y = "Critic score (%)") +
+  theme_grey(16) +
+  theme(plot.title = element_text(face = "bold")) +
+  theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
+  theme(plot.caption = element_text(color = "grey68"))
+```
+<br />
+<br />
+It is worth taking a pause to interpret this graph. Whereas the audience ratings (IMDB, Rotten Tomatoes) had a similar median for Marvel and DC movies, the critic scores are much more severe. The median for marvel movies is 77%, whereas the median for DC movies is 55%. Critics clearly seem to prefer Marvel movies, while audiences are more undecided.
+
+
+One can still argue that we haven't considered inflation, when we did the revenue analysis. So we will see how many times on an average the superhero movies are being watched (in the US) over the years. To do this we will divide the domestic gross revenue generated by a movie by the average ticket price during the year in which the movie was released. This will give us the average number of times that particular movie was viewed, then we group them by year and get the mean of average number of times all the superhero movies released in that year were watched. 
+
+Note: We collected the average movie ticket price in the US from the National Theater Owner Association website.
+```{r,echo=FALSE,warning=FALSE,results='hide',fig.keep='all',message=FALSE}
+g=read.csv("avgticketprice.csv")
+options(warn=-1)
+g$Year <- as.numeric(as.character(g$Year))
+#One year is in a different format than the other years, so we had to manually add it.
+g[30,1]=1989
+g$Average.Ticket.price <- as.numeric(as.character(substring(g$Average.Ticket.price,2,)))
+colnames(g)[1] <- "year_of_release"
+colnames(g)[2] <- "price"
+hg = suppressWarnings(right_join(dff1,g, by=c("year_of_release")))
+hg1=na.omit(hg)
+hg1=mutate(hg1, no_of_views=(gross_usa/price))
+results2=data.frame(hg1 %>%
+  group_by(year_of_release) %>%
+  summarise(avg_views = mean(no_of_views, na.rm = TRUE)))
+ggplot(results2, aes(year_of_release, y=avg_views)) + 
+  geom_line() +
+  geom_point() +
+  ggtitle("Average views for superhero movies in USA over the years") +
+  xlab("Year") + 
+  ylab("average views in USA")
+```
+
+Looking at the plot we can see that when accounting for inflation, Batman, which was released in 1989 got the highest audience and Superman which was released in 1978 got a similar number of views. Total number of views has dropped since then and rose again in 1998 (Blade I) till 2002 (year during which the first Spider-man movie was released, and Blade II was released). The movies released in 2012 also got a similar amout of views as the ones in 2002. Four movies were released in 2012 and the major movies that caused this spike in viewership are The Avengers and the Dark Knight Rises. We can see that there has been a constant rise in viewership from 2015 to 2018. So we can see that from the past 5 years there has been a constant increase in the viewership of the super-hero movies, but their viewership was not as high as the first Batman and Superman movies. This can be due to the intial excitement of comic fans to see their favorite characters come live on the screen.
+
+Since we have seen that the trend in viewership for the superhero movies has indeed been rising for the past 5 years, let us see the trend in the theater allocation. To do this we will merge our dataset with a different one which has the number of theaters present in a year in the US (obtained from the National Association of Theater Owners website). Then we will get the ratio of number of theater allocated per movie by dividing the number of theaters allocated for this movie by the total number of theaters in the US in the year this movie released. We then group by year and plot the average number of theaters allocated for super-hero movies over the years. Unfortunately we only have theater count in US details from the year 1995, so we will lose 11 movies that came before 1995 after the merging of both the datasets.
+
+```{r}
+theaters=read.csv("theaters_in_us.csv")
+#Making the comma seperated factor values into numeric
+theaters[,2:4] <- lapply(theaters[,2:4],function(x){as.numeric(gsub(",", "", x))})
+#Changing the name of the column to facilitate the merge
+colnames(theaters)[which(names(theaters) == "Theaters")] <- "year_of_release"
+dff2 <- dff1 %>% right_join(theaters, by=c("year_of_release"))
+#removing movies that lack theater details
+dff3=dff2[!is.na(dff2$theaters),]
+dff3= mutate(dff3, theater_ratio=theaters/Total)
+results3=data.frame(dff3 %>%
+  group_by(year_of_release) %>%
+  summarise(avg_theaters = mean(theater_ratio, na.rm = TRUE)))
+ggplot(results3, aes(year_of_release, y=avg_theaters)) + 
+  geom_line() +
+  geom_point() +
+  ggtitle("Average ratio of theaters allocated for superhero movies in USA over the years") +
+  xlab("Year") + 
+  ylab("average ratio of theaters allocated in USA")
+```
+
+We can see that the average ratio of theaters allocated to these movies with the theaters present in those years has been increasing overall. There was a drop in the average number of theaters allocated in the year 1997, two movies namely, Batman and Robin, and Steel were released that year. Batman and Robin had 0.3933 as the ratio of number of theaters it was allocated (which is comparable to the previous year) but the average ratio is brought down because the movie "Steel" (which had a ratio of 0.168). This is because it was not based on a very famous superhero, and therefore was not allocated a lot of theaters. The small downs in the trend are mostly due to lesser number of theaters being allocated to not so famous superhero characters like "catwoman". We can clearly see an increasing trend in the ratio of number theaters displaying superhero movies, and in recent years we can see that over 70% of the theaters in the US are playing a superhero movie should one be released during that time. This clearly proves the claim made by Mr.Scorsese that these movies are taking up more number of theaters, making it hard for the smaller movies released during the same time to even get some audience. 
+
+Now let us see if there is any correlation between the revenue generated by a movie and the no of theaters it was allocated. You can hover over the points to see what movies those points represent.
+```{r}
+x <- list(
+  title = "No of theaters allocated"
+)
+y <- list(
+  title = "Gross Domestic Revenue in Millions")
+p <- plot_ly(dff3, x = ~theaters, y = ~gross_usa, type = 'scatter', mode = 'markers',
+        text = ~paste('name: ', name)) %>% layout(xaxis = x, yaxis = y, title="Theaters allocated v/s gross domestic revenue") %>%  add_lines(y = ~fitted(loess(gross_usa ~ theaters)),
+            line = list(color = 'rgba(7, 164, 181, 1)'),
+            name = "Loess Smoother") %>% config(displayModeBar = F)
+
+ggplotly(p)
+```
+
+Though it is not very strong, there is a correlation between number of theaters allocated for the movie and the revenue it generated. This means that other movies that are not getting enough movie theaters because of superhero movies, are indeed losing on some revenue and in turn are not getting the viewership they deserve. We can also see that after 3500 theaters, there is a fast rise in the gross domestic revenue obtained by the movie.
+
+<h4>Possible Solution</h4>
+Let us now look at how much of the domestic revenue of a superhero movie is obtained on its opening weekend. To do this, we will divide the domestic revenue obtained in the first week by the domestic revenue generated by the movie in its entire run-time. This tells us what part of the overall revenue of these movies is obtained in the first week. We will then use bar plots to see what part of the domestic revenue is obtained in the first week itself for most of these movies. (Note: The bars are ordered according to the ordinal order of ratio i.e. from 0.1 to 0.5 and not based on number of movies having this ratio).
+```{r, }
+#removing rows with NAs in the opening weekend and USA gross columns
+df=na.omit(df, cols = c("opening_weekend_usa", "gross_usa"))
+df=mutate(df, r=round(opening_weekend_usa/gross_usa, digits=1))
+ggplot(df, aes(r)) + 
+  geom_bar() + 
+  ggtitle("Part of domestic revenue obtained within the first week") + theme(plot.title = element_text(hjust = 0.5))+
+  xlab("ratio of opening week domestic gross to overall domestic gross") + 
+  ylab("Number of movies")
+```
+
+From this bar plot we can see that most of the movies (nearly 68% of the movies in the dataset) get more than 40% of their domestic revenue within the first week of their runtime itself. Now let use see how the trend of views in the first week of the release of the superhero movie.
+```{r}
+hg2=mutate(hg1, no_of_views_in_1stweek=(opening_weekend_usa/price)/1000000)
+results5=data.frame(hg2 %>%
+  group_by(year_of_release) %>%
+  summarise(avg_views_week1 = mean(no_of_views_in_1stweek, na.rm = TRUE)))
+ggplot(results5, aes(year_of_release, y=avg_views_week1)) + 
+  geom_line() +
+  geom_point() +
+  ggtitle("Average views in week 1 for superhero movies in USA over the years") +
+  xlab("Year") + 
+  ylab("average views (in millions) per week 1 in USA")
+```
+<br />
+<br />
+Though there are lot of ups and downs we can see that the overall trend has been rising, signaling that more people are watching superhero movies withtin the first week itself. This can be due to many possible reasons. One reason that strikes us is the fear of spoiler filled reviews. In the current trend of giving spoiler filled reviews to movies online people are afraid that if they wait for too long they might have to learn about the fate of their favorite superheroes through spoilers or leaked post credit scenes. (This is not accounting for the increase in the population over these years).
+
+This sparks a possible solution to the theater allotment issue. If a theater runs 4 shows of a movie per a day, and if it is plannnig on showcasing a superhero movie, it can showcase the superhero movie in all the 4 shows for the first week and from the second week can showcase the superhero movie in 2 of its prime slots and another movie in the rest of the slots. This would help other movies (that were released at the same time as the superhero movies) get the viewership they deserve.
+
+To see why more superhero movies are being made by the production companies in the recent years, we will have to look at the average return on investment by year of these superhero movies v/s the normal top 100 highest grossing movies from our main dataset. For this analysis, we have used an updated version of our main dataset. To keep the comparision of return on investment over the years fair, we have constructed our updated dataset by removing all the superhero movies from our main dataset. 
+
+```{r}
+library(ggplot2)
+library(gganimate)
+
+#Reference https://www.r-graph-gallery.com/287-smooth-animation-with-tweenr.html
+superheroes_ROI <- ((dff1$gross_worldwide-dff1$budget)/dff1$budget)
+superheroes_year <- dff1$year_of_release
+df_database=read.csv('main_ds_without_superhero.csv')
+#superhero is for superhero database, regular is for the regular dataset
+df_database<-df_database[!(df_database$budget==2 ),]
+#Removing movie with wrong details
+df_database<-df_database[!(df_database$id==506972 ),]
+df_database<-df_database[!(df_database$id==506664 ),]
+df_database<-df_database[!(df_database$id==503314 ),]
+df_database=mutate(df_database,returnperdollar=revenue/budget)
+regular_ROI <- ((df_database["revenue"]-df_database["budget"])/df_database["budget"])
+regular_year <- df_database["year"]
+
+superhero_roi_frame = data.frame(year=superheroes_year,ROI=superheroes_ROI)
+mean_superhero_roi_frame <- aggregate(superhero_roi_frame[, 2], list(superhero_roi_frame$year), mean)[-c(1,2),]
+mean_superhero_roi_frame = mean_superhero_roi_frame[!is.na(mean_superhero_roi_frame$x),]
+mean_superhero_roi_frame$type = rep("Superhero", nrow(mean_superhero_roi_frame))
+regular_roi_frame = data.frame(year=regular_year,ROI=regular_ROI)
+mean_regular_roi_frame <- aggregate(regular_roi_frame[,2],list(regular_roi_frame$year),mean)[-c(40),]
+mean_regular_roi_frame$type = rep("Regular", nrow(mean_regular_roi_frame))
+mean_merged = rbind(mean_superhero_roi_frame,mean_regular_roi_frame)
+
+goo <- mean_merged %>%
+    ggplot( aes(Group.1,x, color=type,group=type)) +
+    geom_line() + geom_point(aes(group = type))+guides(color = guide_legend()) +
+    ggtitle("Average Return on Investment of Superhero and regular Movies over the years") +
+    ylab("Return on investment") + xlab("Year")+transition_reveal(Group.1) + ease_aes('linear')
+animate(goo, duration = 15, fps = 20, width = 800, height = 800, renderer = gifski_renderer())
+anim_save("output.gif")
+```
+From the above animated graph we can see that the ROI line for regular movies has been more or less constant over the years. The ROI line for superhero movies however was initially lower than the ROI line for regular movies but has caught up to the regular movies line in 1990 to 1995, and fell lower after that. But we can see its resurgence from 2015 and if it keeps growing at the same pace it will eventually grow above the regular movies. This indicates that superhero movies might get more profitable than the average normal movies in the future. That is, studios can expect a higher return from superhero movies than from regular movies in the near future should this trend continue. This might be a possible explanation for movie studios jumping on the "superhero movie bandwagon".
+
+Note: The peaks in the regular movie line in the years 1999, 2009, and 2017 are due to the very high ROI of the movies "The Blair Witch Project", "Paranormal Activity" and "One Cut of the Dead" respectively. We have discussed this during our ROI by genre analysis.
+
+
+
+<h3>c) Director Analysis </h3>
+For this part of our analysis we are once again using the normal dataset form the first part.
+
+In this part of our analysis let us see how the top bankable directors (the bankability is determined by the revenue generated by their movies, the higher the revenue, the higher the bankability) of older years have been performing over the years. We will take the top 6 directors based on the financial performance of their movies from the year 1980 to 2000. We will then see how the movies they made after the year 2000 have been performing. This will help us see if the movies of these directors are consistently performing well.  
+
+```{r}
+most_generating <- filter(dff, year <= 2000)
+most_generating <- most_generating[c("director", "revenue")]
+most_generating <- most_generating %>% dplyr::group_by(director) %>%
+                    dplyr::summarize(revenue = sum(revenue, na.rm = TRUE)) %>% ungroup()
+most_generating  <-  arrange(most_generating,desc(revenue))
+
+#Getting the 6 top directors based on the financial performance of their movies
+six_directors <- data.frame(head(most_generating, n=6))
+six_directors=as.character(six_directors$director)
+directors <- filter(dff, year >= 2001)
+directors <- filter(directors, director %in% six_directors)
+directors <- directors[c("director", "revenue", "year","original_title")]
+directors <- directors %>% dplyr::group_by(director, year) %>%
+                    dplyr::summarize(revenue = mean(revenue, na.rm = TRUE)) %>% ungroup()
+resultss$genres <- factor(resultss$genres, levels = c('Adventure', 'Action', 'Drama', 'Comedy','Horror'))
+
+                    directors$director= factor(directors$director, levels = c('James Cameron', 'Roland Emmerich', 'Chris Columbus', 'Steven Spielberg','Robert Zemeckis','Richard Donner'))
+
+directors["revenue"] <- lapply(directors["revenue"], function(x){return(x/100000000)})
+
+p<-ggplot(data = directors, aes(x=year, y=revenue, color=director)) +
+  geom_point() +
+  geom_line() +
+  scale_color_viridis_d() +
+  ggtitle("Revenues of the of movies top bankable Directors (from 1980 to 2000) during the 21st century") +
+  labs(x = "year", y = "Revenue (in 100 millions of dollars)")
+
+p1<-ggplotly(p) %>% config(displayModeBar = F)
+ggplotly(p1)
+```
+When hovering over the points we can see the revenue, year and the name of the director. Clicking on the legend will remove the line of that director and will provide for a better view of other line plots.
+
+Note: One would expect to see the title of the movie too when hovering over the point, but this is not possible, as one director would have made more than 1 movie in the same year (Two movies of Spielberg "Minority Report" and "Catch Me If You can" released in 2002, another two movies of Spielberg "War of the Worlds" and "Munich" released in 2005 and yet again two more of Spielberg movies "Adventures of Tintin" and "The war horse" released in 2011). In such cases we are taking the average of the revenue of the movies released that year. 
+
+We can see that only two directors released their movies in the year 2001, Spielberg released "A.I. Artificial Intelligence" a sci-fi movie and Chris Columbus released Harry Potter and the Philosopher's Stone. We can see that Harry Potter generated more revenue than "A.I." this can attributed to several aspects like the international  appeal of the books, this would have easily caused a lot of hype than Spielberg's "A.I.". The same directors again released their movies in 2002, this time Chris Columbus released "Harry Potter and the Chamber of Secrets" and Spielberg released "Minority Report" and again Harry Potter performed better than "Minority Report". In 2004 Roland Emmerich released "The Day After Tommorow" and Robert Zemeckis released "The Polar Express", and Spielberg released "The Terminal", and "The Day After Tomorrow" performed better than the other two at the box-office.
+
+We can see from the data that Spielberg was more active by releasing a high number of  movies (he released 11 movies in 18 years (from 2001 to 2019)). The director who made the lowest number of movies in this time span from 2001 to 2019 is James Cameron, who only released one movie which is "Avatar" and it shattered all the records. It is the movie that caused the scale of our y-axis to be so high. Then comes Richard Donner who made two movies in these years, namely "Timeline" and "16 blocks" which didn't do really well at the box-office. The peak in 2008 for Spielberg was due to the movie "Indiana Jones and the Kingdom of Crystal Skulls" and the peak in 2009 for Roland Emmerich was for the movie "2012". Though Spielberg made more movies, their revenues were not very consistent, Robert Zemeckis made 6 movies in the time span we took, and even though their revenues were not as good as Spielberg's movies, they were more consistent. Chris Columbus made 4 movie out of which 2 are from the "Harry Potter" franchise and one is from "Percy Jackson" franchise and one is the movie "Pixels". The revenue generated by "Pixels" and "Percy Jackson: The Lightning Thief" is nowhere near the revenue generated by the Harry Potter movies (without even accounting for inflation as both the Harry Potter movies are older compared to "Pixels" and "Percy Jackson"). In the year 2008, Spielberg's "Indiana Jones and the Kingdom of the Crystal Skulls" was released and Roland Emmerich's 10,000 BC was released. Indiana Jones performed much better.
+
+From the overall trend we can see that "James Cameron" made just one movie and it performed much better than the other movies. Chris Columbus's movies in 2010 and 2015 couldn't generate as high a revenue as the Harry Potter movies he made. The revenues of Roland Emmerich's and Spielberg's movies fluctuate more when compared to the movies of other directors in our plot. Richard Donner's movies haven't performed as well as the movies of his peers from our plot, and he didn't make any more movies after the year 2006.
+
+Now out of these directors we have chosen let us see what genres they attempted and what genres most of their movies had. (This data is for the time span 1980 to 2019).
+```{r}
+versatile <- filter(df1, director %in% six_directors)
+versatile <- versatile[c("director", "genres")]
+ggplot(data = versatile, aes(x=genres)) +
+  geom_bar(colour = "white", fill = "cornflowerblue") +
+  facet_wrap(~director) +
+  coord_flip() +
+  ggtitle("Genres attempted by our top bankable directors") +
+  labs(x = "Genres", y = "Count")
+```
+
+We can clearly see that Spielberg didn't play safe and attempted the most number of genres, 8 to be precise. He made 11 movies that had "Adventure" as their major genre and 11 movies that had "Drama" as their major genre and made one movie in the rest of the genres he attempted. The second most versatile director from our big 6 is Robert Zemeckis, who attempted 6 different genres in total and made 7 "Adventure" movies, 3 "Action" movies, 3  "Drama" movies, 2 "Comedy" movies and one "Fantasy" and "Animation" genre movie each. Ronald Emmerich made more action movies (6 to be precise) when comparing with other genres, and the same happened with James Cameron and Richard Donner. Richard Donner made the highest number of action movies of them all. Spielberg made the highest number of "Adventure" and "Drama" movies of them all. To see more interesting patterns within the genres of movies these directors attempted, let us make a heatmap.
+
+```{r, fig.width=10, fig.height=15, warning=FALSE}
+all_genres <- merge( data.frame(unique(versatile$genres)), data.frame(unique(versatile$director)) )
+names(all_genres)[1] <- "genres"
+names(all_genres)[2] <- "director"
+versatile["total"] <- 1
+versatile["freq"] <- 1
+versatile <- versatile %>% group_by(director, genres, total) %>% summarize(freq = sum(freq))
+versatile <- versatile %>% group_by(director) %>% mutate(total = sum(freq))
+versatile <- merge(x=versatile, y=all_genres, by=c("genres", "director"), all.y = TRUE)
+versatile["order"] <- 1
+versatile <- versatile %>% mutate(order = freq/total)
+versatile <- versatile %>% group_by(genres) %>% mutate(order = sum(order, na.rm = TRUE))
+versatile$genres <- reorder(versatile$genres, versatile$order)
+theme_heat <- theme_classic() +
+  theme(axis.line = element_blank(),
+        axis.ticks = element_blank())
+plot <- ggplot(versatile, aes(x = director, y = genres) ) +
+  geom_tile(aes(fill = freq/total), color = "white") +
+  coord_fixed() + 
+  theme_heat
+# plot with text overlay and viridis color palette
+plot + geom_text(aes(label = round(freq/total, 3)), color = "white") +
+      scale_fill_viridis() +
+      # formatting
+      ggtitle("Genres attempted by our top bankable directors",
+              subtitle = "Heatmaps of genres attempted by the six top bankable directors") +
+      theme(plot.title = element_text(face = "bold")) +
+      theme(plot.subtitle = element_text(face = "bold", color = "grey35")) +
+      theme(plot.caption = element_text(color = "grey68"))
+```
+
+We can see an interesting pattern here, each one of them made at leat one movie in the "Action" genre, one movie in the "Adventure" genre and one movie in the "Drama" genre. Only Robert Zemeckis made a movie in the "Animation" genre. Chris Columbus made 3 comedy movies which is the highest from this set of directors. Spielberg is the only one in this group of directors to have attempted "Thriller", and "History" movies. Only Spielberg and Roland Emmerich made "Science Fiction" movies. Only 3 of the 6 directors ("Chris Columbus", "Robert Zemeckis", and "Spielberg") made Comedy movies. Only 3 of the 6 directors("Richard Donner","Robert Zemeckis" and "Steven Spielberg") made "Fantasy" movies.
+
+Let us now look at the distribution of the average ratings of the movies made by these 6 most bankable directors. We will be using the vote average column (which is on the scale of 1 to 10) from our main dataset, in the following analysis.
+```{r}
+top_dir_ratings <- filter(df1, director %in% six_directors)
+top_dir_ratings=top_dir_ratings[c("director", "vote_average", "vote_count")]
+g1 = top_dir_ratings %>% group_by(director) %>% summarize(avg_rating = mean(vote_average, na.rm = TRUE)) %>% ungroup()
+
+vb=ggplot(data= g1, mapping = aes(x=fct_reorder(director,-avg_rating), y=avg_rating))
+vb + geom_col() + ggtitle("Average ratings of the movies of the top bankable directors") + scale_y_continuous(breaks = seq(0, 10, by = 1)) +
+  labs(x = "Director", y = "Average rating on a scale of 10")
+```
+
+The average score is not as high as we would expect though and there is not huge difference between the average ratings of the top bankable directors. On exploring the dataset further we have seen that there are movies that had better ratings than the ones made by these directors, but they did not receive nearly as much revenue. This indicates that there should not be a strong positive correlation between the revenue generated by movies and their ratings (revenue generated by a movie is not dependent on it quality(rating)). To test this on our data let us quickly check if there is a correlation between the revenue and the average ratings of the movies in our data.
+
+Let us now look at how much these directors generally spend on their movies:
+```{r}
+top_dir_budget <- filter(df1, director %in% six_directors)
+top_dir_budget=top_dir_budget[c("director", "budget")]
+top_dir_budget$budget=top_dir_budget$budget/1000000
+g2 = top_dir_budget %>% group_by(director) %>% summarize(avg_budget = mean(budget, na.rm = TRUE)) %>% ungroup()
+
+vb1=ggplot(data= g2, mapping = aes(x=fct_reorder(director,-avg_budget), y=avg_budget))
+vb1 + geom_col() + ggtitle("Average budgets of the movies of the top bankable directors") + scale_y_continuous(breaks = seq(0, 130, by = 30))+
+  labs(x = "Director", y = "Average budget in millions")
+```
+<br />
+<br />
+We can see that Roland Emmerich's movies have the highest budget on an average, this is because he makes more "dystopian" movies, which will need a lot of visual and special effects, and these cost a lot of money. Though James Cameron did not spend a lot on "Titanic" the average budget rose due to the budget of "Avatar". The movies of Steven Spielberg and Robert Zemeckis cost almost the same amount of money to make. Richard Donner makes the least expensive movies of our top bankable directors.
+
+Let us now look at how many dollars do the movies of these directors make for 1 dollar they spend. This can be calculated by dividing the revenue by the budget of the movie.
+```{r}
+top_dir_d <- filter(df1, director %in% six_directors)
+top_dir_d=top_dir_d[c("director", "budget","revenue")]
+g4 = top_dir_d %>% group_by(director) %>% summarize(avg_d = mean((revenue/budget), na.rm = TRUE)) %>% ungroup()
+vb3=ggplot(data= g4, mapping = aes(x=fct_reorder(director,-avg_d), y=avg_d))
+vb3 + geom_col() + ggtitle("Average Ratio of revenue and budget of the movies of our top directors") + scale_y_continuous(breaks = seq(0, 12, by = 1)) +
+  labs(x = "Director", y = "No of dollars made per 1 dollar spent")
+```
+<br />
+<br />
+We can see that Chris Columbus's movies get back 11 dollars on an average for every dollar spent, Spielberg's movies get back 8.5 dollars for every dollar spent, and James Cameron's movies get 7.5 dollars for every dollar spent. Richard Donner's movies again get the least number of dollars (3 dollars) back for every dollar spent.
+
+<h1>VI. Interactive Component</h1>
+We have already discussed about our interactive component in the analysis and results section. Through our interactive component we would like to check our assumption that movie production houses tend to look at old patterns of movie genres and their financial success and try to make more movies of similar genre to earn high revenues. [click here to try the app](https://movieanalysis.shinyapps.io/project/)
+
+<h1> VII. Conclusion </h1>
+Our analysis was more insightful than we thought it would be. Many of our assumptions about the data didn't come true, like for example we though that our production house assumption would come true but it didn't. Through this oppurtunity we have thoroughly explored the concept of superhero movie bubble and the problems it is causing to other cinema. 
+<br>
+<br>
+Limitations of our analysis:
+<br>
+1. Whenever there were multiple directors in the dataset we have only considered the first director that was given the credit.
+<br>
+2. The API sometimes produced movies with missing revenue and budget values causing us to remove them.
+<br>
+3. During some parts of our analysis we haven't accounted for the inflation.

@@ -1,0 +1,217 @@
+---
+title: "Thomas_graphs"
+author: "Thomas Causero"
+date: "12/10/2019"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+```
+
+
+```{r}
+#load libraries
+library(tidyverse)
+library(parcoords)
+library(shiny)
+library(shinythemes)
+library(readr)
+library(ggthemes)
+```
+
+
+```{r}
+#load dataset and remove rows without genres
+path <- '../datasets/clean/clean_data.csv'
+df <- filter(read.csv(path), genres != '')
+head(df,1)
+```
+
+The dataset we are woking with is composed of 3932 rows and 12 columns, each representing a movie with several characteistics such as: director, title, popularity, budget, revenue, genre, ratings or date.
+In all the study, we plotted as many relevant graphs as possible, using specific colors, so that even people with color vision deficiency can look at the graphs easily. 
+
+## Get all movies genres
+
+```{r}
+#Only keep the first genre, which is the most relevant
+genres <- do.call(rbind,strsplit(as.character(df$genres),'\\|'))[,1]
+df1 <- data.frame(genres = genres, select(df, -genres))
+unique(df1$genres)
+```
+
+In the original dataset, there are many genres for each movie. The first genre is the most relevant, the others bring more precision but we are not going to consider them in our study. Then, we only kept the first genre for each movie for the rest of the study.
+
+```{r}
+#plot (number of movies for each genre)
+genres_info <- df1 %>%
+               count(genres) %>%
+               mutate(perc =  n / nrow(df1))
+
+ggplot(genres_info, aes(x = reorder(genres,n), y = n)) + 
+  geom_bar(stat = "identity") + 
+  xlab('Genre') +
+  ylab('Volume') +
+  ggtitle('Distribution of movies (Volume)') +
+  coord_flip()
+
+ggplot(genres_info, aes(x=reorder(genres,n), y=perc)) + 
+  geom_bar(stat = 'identity') + 
+  xlab('Genre') +
+  ylab('%') +
+  ggtitle('Distribution of movies (%)') +
+  coord_flip()
+```
+
+On our dataset, the 5 most present genres are:
+* Comedy (~22%)
+* Action (~20%)
+* Drama (~18%)
+* Adventure (~8%)
+* Horror (~7%)
+We are going to focus our study on these genres, which represent 75% of the whole dataset.
+
+## 5 most present genres
+
+```{r}
+#5 most present genres : Comedy, Action, Drama, Adventure, Horror
+genres_under_study <- arrange(genres_info,-n)[1:5,'genres'][['genres']]
+genres_under_study
+#only keep rows whose genre is among the top 5
+df2 <- filter(df1, genres %in% as.vector(genres_under_study))
+#keep only interesting rows and omit NA values
+df2 <- na.omit(select(df2, year, genres, popularity, budget, revenue, vote_count, vote_average))
+df2 %>%
+  group_by(year, genres) %>%
+  summarise(popularity = mean(popularity), budget = mean(budget, na.rm = T), revenue = mean(revenue), 
+            mark = sum(vote_average*vote_count)/sum(vote_count)) -> results
+
+ggplot(data = results) + 
+  geom_line(aes(x = year, y = popularity, color=genres)) + 
+  scale_color_colorblind() +
+  ggtitle('Evolution of popularity of each genre over the year')
+
+ggplot(data = results) + 
+  geom_line(aes(x = year, y = budget, color=genres)) + 
+  scale_color_colorblind() +
+  ggtitle('Evolution of budget of each genre over the year')
+
+ggplot(data = results) + 
+  geom_line(aes(x = year, y = revenue, color=genres)) + 
+  scale_color_colorblind() +
+  ggtitle('Evolution of revenue of each genre over the year')
+
+ggplot(data = results) + 
+  geom_line(aes(x = year, y = mark, color=genres)) + 
+  scale_color_colorblind() +
+  ggtitle('Evolution of ratings of each genre over the year')
+```
+
+Here, we plotted the popularity, budget, revenue and ratings for each of the genre under study, which are the 5 most present genres.
+
+## Influence of revenues over genres
+
+```{r}
+#group by genres for year t and year t+gap
+gap <- 2
+
+df2 %>%
+  group_by(genres,year) %>%
+  summarize(revenue_generated_t1 = mean(revenue), n_movies_t1 = n()) %>%
+  ungroup() -> results1
+results1$n_movies_t2 <- NA
+
+for (year in results1$year){
+    for (genre in genres_under_study){
+       tmp <- results1[results1$year == year-gap & results1$genres == genre,]['n_movies_t1']
+       results1[results1$year == year & results1$genres == genre,]['n_movies_t2'] <- as.numeric(tmp)
+    }
+}
+results1 <- na.omit(results1)
+
+correlation <- cor(results1$n_movies_t2,log(results1$revenue_generated_t1))
+
+#log scale
+ggplot(data = results1, aes(x = log(revenue_generated_t1), y = n_movies_t2, color = genres)) + 
+  geom_point() + 
+  xlab('Average revenue generated in year t (log scale)') +
+  ylab(paste('Number of movies in year t+',gap)) +
+  ggtitle('Influence of revenue on genres') +
+  annotate("text", x=18, y=30, label= paste('correlation coefficient:',round(correlation,2))) +
+  scale_color_colorblind()
+```
+
+In this graph, we plotted for every year and every genre (in the 5 under study), the number of movies poduced in year t+gap, depending on the average revenue generated in year t. Indeed, we estimated that 2 years are needed to make a movie and we wanted to check the influence of revenue on genres. On this graph, it is rather easy to see that there is a positive correlation between them. Indeed, the bigger the average revenue is in year t, the more movies of this genre there will be in year t+gap.
+
+To make the rersults more clear and interactive for the user, we created a shiny app, that enables the user to choose the year and the gap, and that will draw a scatter plot (one point corresponding to one genre), to see the influence of revenue on genres. We also specified the correlation coefficient on the graph.
+
+```{r}
+# Define UI
+ui <- # Use a fluid Bootstrap layout
+  fluidPage(    
+    # Give the page a title
+    titlePanel("Influence of revenue over genres"),
+    # Generate a row with a sidebar
+    sidebarLayout(      
+      # Define the sidebar with one input
+      sidebarPanel(
+        selectInput("year", "Year:", 
+                    choices=unique(df2$year)),
+        selectInput("gap", "Gap (in years):", 
+                    choices=1:5),
+        hr()
+      ),
+      # Create a spot for the barplot
+      mainPanel(
+        plotOutput("movieplot")  
+      )
+    )
+  )
+
+# Define server function
+server <- function(input, output) {
+    # Fill in the spot we created for a plot
+    output$movieplot <- renderPlot({
+      t1 <- as.numeric(input$year)
+      t2 <- t1 + as.numeric(input$gap)
+      tmp_t1 <- select(filter(df2, year == t1),genres, revenue)
+      revenue_t1 <- tmp_t1 %>% group_by(genres) %>% summarise(revenue = mean(revenue, na.rm = T))
+      tmp_t2 <- select(filter(df2, year == t2),genres)
+      n_movies_t2 <- tmp_t2 %>% group_by(genres) %>% summarise(n_t2 = n())
+      output <- merge(revenue_t1, n_movies_t2)
+      max_x <- max(output$revenue)
+      max_y <- max(output$n_t2)
+      cor_coef <- cor(output$revenue, output$n_t2)
+      # Render a barplot
+      ggplot(output, aes(x=log(revenue), y=n_t2)) + geom_point() +
+        geom_text(label=output$genres, nudge_y = max_y/40) +
+        xlab(paste('Average revenue in',t1,'(log scale)')) +
+        ylab(paste('Numbe of movies in',t2)) +
+        ggtitle('Influence of revenues on genres') +
+        annotate("text", x=log(max_x/2), y=max_y, label= paste('correlation coefficient:',round(cor_coef,2)))
+    })
+}
+
+# Create Shiny object
+shinyApp(ui = ui, server = server)
+```
+
+
+```{r}
+#Average Return on investment (revenue - budget) (divided by number of movies that have this genre)
+#x axis is the genre, bar graph
+df3 <- select(df2,genres,revenue,budget)
+df3 <- mutate(df3,ROI = revenue-budget)
+df3 %>%
+  group_by(genres) %>%
+  summarise(average_ROI = mean(ROI)) -> results2
+#TS to do as well
+ggplot(results2) + 
+  geom_bar(aes(x=reorder(genres,-average_ROI), y=average_ROI), stat='identity') +
+  xlab('Genres') +
+  ylab('Average ROI')+
+  ggtitle('ROI depending on genres ')
+```
+
+On this graph, we looked at the ROI depending on the genre, and we can easily see that the best movies to get a high ROI are adventure movies.

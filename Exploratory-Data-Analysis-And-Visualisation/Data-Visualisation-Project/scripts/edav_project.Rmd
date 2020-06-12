@@ -1,0 +1,66 @@
+---
+title: "project"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+1. NA Analysis:
+
+Some NA values in this dataset have been imputed to 0s in certain columns and None in other columns, we make them back into NAs. To be specific some NAs in the budget, and revenue were imputed to 0 and the NAs in the runtime were imputed to 'None'. Since we know that the budget, revenue and runtime certainly cannot be equal to zero or None, we can safely conclude that they have been imputed to 0s and make them back to NA again for our analysis. Genres column also has NA values which are present as empty strings, we are making them into NAs.
+```{r}
+library(dplyr)
+dfg=read.csv('dataset1_4000.csv',sep=";")
+dfg$budget <- replace(dfg$budget, dfg$budget == 0, NA)
+dfg$revenue <- replace(dfg$revenue, dfg$revenue == 0, NA)
+dfg$runtime <- replace(dfg$runtime, dfg$runtime == 'None', NA)
+dfg$genres=replace(dfg$genres, dfg$genres == '', NA)
+
+pr1=colSums(is.na(dfg))/nrow(dfg)*100
+sort(pr1,decreasing = TRUE)
+```
+
+We can see that the budget column has the highest no of NAs, followed by revenue, runtime, genres, and director. No other columns have any NA values.
+
+Let us now try to visualize the missing patterns:
+```{r}
+library(extracat)
+visna(dfg, sort='b')
+```
+We see something interesting here, even though from the plot it looks like many rows are missing runtime, genre, and the director details, we found on careful examination of the dataset that the missing values of the director column, genre column and the runtime column have more no of unique missing patterns than the other columns, since visna compiles all the rows with similar missing patterns into one single row, and since most of the missing patterns of director, genre and the runtime are unique it looks like they are more in number. 
+
+In rows patterns we can see that of the rows that are having missing values, most no of rows are missing budget details. 
+
+We can see that whenever revenue of a movie is missing, budget is also missing.
+
+Let us now add an extra column to our dataset with its values as no of NAs in the row (i.e. no of missing value per movie). Let us also check our assumption that movies of bad quality (low total ratings (total rating values are obtained by multiplying no of votes with vote average of each movie)), or the movies that are less popular or the movies that are old have more NA values. We draw a scatter plot matrix for ratings score, year of release, popularity and no of NA values in the row to check if a correlation exists.
+
+```{r}
+library(GGally)
+#Extracting the year of release
+dfg= dfg %>% mutate(year=as.numeric(substring(release_date,1,4)))
+
+#Summing up all the NAs in a row
+v=as.data.frame(rowSums(is.na(dfg)))
+dfg1=cbind(dfg,v)
+dfg1 <- rename(dfg1, na_sum = `rowSums(is.na(dfg))`)
+dfg1=mutate(dfg1, tot_rating=vote_count*vote_average)
+dfg2 = select(dfg1,popularity,year,tot_rating,na_sum)
+
+#Selecting only the rows that have NA values
+dfg3=filter(dfg2,dfg2$na_sum!=0)
+ggpairs(dfg3,progress=FALSE)
+```
+Though there is a slight negative correlation between popularity, release year and and total ratings, it is not strong enough to strenghten our assumption. But from the plots we can see that higher no of missing values (more than 2 missing values) in a row (per movie) are fairly concentrated for the movies that were released before 1990. It is the same with popularity and total rating too, i.e. there are more no of NAs for movies with popularity below 40, and we can also see that no movie above 50 popularity actually has an NA value except an outlier (movie Frozen II, with missing budget value). Most of the movies that are having missing values are missing budget value irrespective of their popularity, year of release or total rating.
+
+Let us now remove the rows containing NA values from our dataset for our analysis from here on.
+```{r}
+new_df=na.omit(dfg)
+#We lost 747 movies after removing the NA values from the dataset
+write.csv(new_df,"/Users/ap/Documents/EDAV_assignments/main_ds_without_superhero.csv", row.names = FALSE)
+```
+
