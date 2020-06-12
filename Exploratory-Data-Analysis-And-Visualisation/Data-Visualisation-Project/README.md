@@ -1,4 +1,4 @@
-# Manually curated movie dataset analysis
+# Movie Industry Case Study - Data Analysis and Visualisation
 
 Anjani Prasad ATLURI (@apalmk - https://github.com/apalmk), Thomas CAUSERO, Amaury SUDRIE (@Amelrich - https://github.com/Amelrich), Maxime TCHIBOZO
 
