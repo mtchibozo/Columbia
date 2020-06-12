@@ -1,8 +1,10 @@
 # EDAV
 
-This is a copy of the knowledgeable Amaury SUDRIE's git repo on this project: https://github.com/Amelrich/EDAV.
+This is a copy of the knowledgeable Amaury SUDRIE's git repo on this project. Link to the website: https://amelrich.github.io/EDAV/
 
 The website is hosted on his GitHub. It is also available from Joyce ROBBINS' Community Contribution website.
+
+This repo does not contain any interesting code, but the EDAV website [edav.info/] is an invaluable resource. Anyone interested in presenting data in an easily digestible way should be familiar with this website. And now it exists in French, amazing! Spread the word!
 
 ## English Version
 
