@@ -1,4 +1,4 @@
-# EDAV
+# EDAV.info Translation into French
 
 This is a copy of the knowledgeable Amaury SUDRIE's git repo on this project. Link to the website: https://amelrich.github.io/EDAV/
 
