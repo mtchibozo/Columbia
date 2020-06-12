@@ -1,0 +1,183 @@
+# Projet final {#project}
+
+![](images/banners/banner_presentation.png)
+
+## Vue d'ensemble
+
+Cette section couvre ce qui est attendu pour le projet final **Spring 2019**. 
+
+**Note Generale**: Remarquez que cette doc ne peut pas couvrir l'ensemble des règles et principes d'EDAV. Nous esperons que vous suivrez toutes les consignes et bonnes pratiques vues en classe.
+
+
+## Info Generale
+
+### Objectif
+
+L'objectif de ce projet est d'explorer et analyser des données / créer des visualizations avec les données de vos choix dans le but d'étendre vos connaissances sur des sujets qui vous intéressent directement.
+
+### Equipes
+
+Pour ce projet vous devrez travailler en équipes de 2. Si vous souhaitez choisir votre partenaire, faites-le avant **Jeudi 28 Mars, 2019.** Piazza est une bonne ressource pour montrer vos centres d'intérêts et trouver des partenares. Après le 28 Mars, des partenaires seront assignés de manière aléatoire. (Ce qui est bien pour vous préparer à travailler dans un environnement avec des collègues que vous ne connaissez pas bien.) Si vous avez déjà un partenaire et souhaitez commencer avant la date limite (ce qui est encouragé), envoye-moi un email.
+
+Une fois que le partenaire est assigné, glissez vos noms dans un des groupes déjà créés avec le nom "Final Project <number>" dans la rubrique *People* de Courseworks. Ne cliquez pas sur le bouton *+Group*. (Si vous ne suivez pas ces instructions et que vous créez votre propre groupe, il ne sera pas lié au rendu de projet final, et vous ne pourrez pas soumettre votre projet correctement.)
+
+Une fois les groupes créés, nous vous demanderons une petite description de vos idéez, commmencez à vous préparer dès maintenant!
+
+
+### Sujets
+
+Le choix du sujet est libre... choisissez quelquechose qui vous intéresse directement et qui attise votre curiosité! Pensez à des questions auxquelles vous ne connaissez pas la réponse. Puis cherchez les données qui vous aideraient à répondre à ces questions.
+
+### Données
+
+Les données peuvent venir de sources différentes; elles ne doivent pas nécessairement venir du même jeu de données. Par exemple, si vous souhaitez travailler avec des données collectées et distribuées par le [Centers for Disease Control](https://www.cdc.gov/DataStatistics/){target="_blank"}, c'est ici que vous devrez obtenir les données, et pas par un parti tiers qui a posté des données. Evitez les jeux de données classiques (i.e `Titanic`) et ceux qui sont utilisez sur Kaggle (ou d'autres competitions). 
+
+### Code
+
+Votre code devrait être sur GitHub. Nous allons passer du temps en classe pour apprendre comment utiliser Git/GitHub, mais vous êtes libres de choisir comment vous le faîtes.
+
+Faites que votre projet soit organisé.  Au minimum, créez un dossier `data/raw` (avec peut-être `.gitignore`), un dossier `data/tidy`  (ou alors un autre nom qui montre que vous avez déjà travaillé sur les données... il ne doit pas forcément être propre), et un dossier `analysis` pour vos fichiers `.Rmd` et `.html` (output). Vous pouvez aussi avoir un dossier`R` pour preprocesser les scripts ou functions qui ne sont pas dans le fichier `.Rmd`.
+
+Dans votre rapport, mettez un lien vers le repo, et des liens vers les fichiers spécifiques qui vous semblent importants. Les visualisations statiques devront être faîtes en R, mais pas les autres ressources (i.e données importées et/ou nettoyées).
+
+
+### Analyse
+
+Vous êtes libres pour le choix de ce que vous utilisez, tant que vous vous contraignez aux techniques d'exploration (plutôt que de modélisation/prédiction). Par ailleurs, votre analyse doit être documentée clairement, proprement, et doit pouvoir être reproduite.
+
+
+### Feedback
+
+Vous pouvez à tout moment demander conseil aux TA ou à l'instructrice (Joyce). Notre rôle principal sera de vous guider dans votre approche et dans votre choix de données / sujet / direction. Comme toujours, vous pouvez poser vos questions sur [Piazza](https://piazza.com/){target="_blank"}, particulièrement pour ce qui est des questions de code ou de problèmes techniques. Vous pouvez aussi vous dévouer pour parler de votre projet à la classe entière pour récupérer des avis--si vous souhaitez faire ceci, [emailez l'instructrice](http://stat.columbia.edu/department-directory/name/joyce-robbins/){target="_blank"} pour choisir une date.
+
+### Examen par des pairs
+
+Après avoir rendu vos projets finaux, on vous demandera d'écrite des "peer reviews" des autres projets. Chaque personne devra faire une critique de deux sujets, et des instructions vous seront données.
+
+
+**Note**: une partie de la note que vous recevrez pour ce cours est basée sur la qualité de la critique que vous apportez, *pas* sur les critques que votre projet reçoit. Vos notes pour le projet seront uniquement déterminées par l'instructrice et les TA (comme c'est le cas pour les autres devoirs).
+
+
+## Format du rapport
+
+Le rapport devrait faire à peu près 15 pages avec graphiques, sans code. A peu près pages pour les parties I.-IV. et 10 pages pour les parties V.-VII. Vous pouvez vérifier le nombre de pages en regardant l'aperçu avant impression du navigateur. Tous les graphiques doivent être accompagnés d'une description/interprétation en texte. Vous devrez certainement produire plus de graphiques que vous avez de place dans votre rapport. Vous garderez ceux-ci dans des fichiers sur GitHub, et vous les lierez au rapport si ils sont utiles/
+
+
+A l'exception de la partie interactive, votre projet devra être rendu via CourseWorks sour format **.Rmd** et **.html**, avec graphiques / output knitté. Le format de sortie dans le YAML devrait être:
+
+```
+output: 
+  html_document:
+    code_folding: hide
+```
+
+Ce format permet aux utilisateurs de choisir s'ils veulent voir le code ou non. Il y aura certainement des parties de votre projet que vous ne pourrez pas inclure dans les fichier .Rmd / .html . **Dans ces cas, vous devrez poster vos ressourecs en ligne et mettre des liens dans votre rapport pour y accéder.** Cela vaut particulièrement pour la partie graphiques interactifs.
+
+Vous perdrez des points si nous avons du mal à lire votre fichier, que nous avons à vous redemander de publier les graphiques visibles, si les liens sont cassés, ou que nous avons du mal à accéder à votre travail. C'est ok si le code est dans des fichiers différents, tant que vous avez des liens qui fonctionnent dans votre rapport pour y accéder. **Note**: L'utilisation de Markdown + blocs de code est supposée faciliter la combinaison de code, texte et graphiques. Si ce n'est pas le cas, c'est que vous êtes sans doute en train d'utiliser le mauvais outil.  Concentrez-vous sur les textes et graphiques, pas le formattage. Si vous n'êtes pas sûr de si quelquechose est important ou non, demandez-nous.
+
+*Conseil*: n'attendez pas avant de commencer à écrire. Votre projet général sera certainement mieux si vous arrêtez d'essayer d'avoir le graphique parfait et que vous vous *mettez à écrire*!
+
+Vous êtes encouragés à être le plus honête possible. Si il y a des défauts dans votre travail, des obstacles de taille, des désaccords, des choix importants, etc. -- le genre de chose que se passe en "behind-the-scene" ou autres choses importantes mais qui n'apparaissent pas dans les rapports. Vous pouvez utiliser la première personne ("I"/"We") ou mentionner directement le nom de votre partenaire si besoin. 
+
+
+## Schéma
+
+Votre rapport doit contenir les sections suivantes, avec en-tête ("I. Introduction", etc.) comme suit:
+
+### I. Introduction {-}
+
+Expliquez pourquoi vous avez choisi ce sujet, et les questions qui vous intéressent. Donnez un contexte pour les lecteurs qui ne connaissent pas ce sujet.
+
+
+### II. Description des données et de leur source {-}
+
+Décrivez la source des données: qui est responsable de la collecte de ces données? Comment ont-elles été collectées? Si vous aviez le choix, expliquez comment vous choisisseriez.
+
+Donnez quelques données élémentaires sur le dataset: type des variables, quantité de données, etc.
+
+Décrivez tout problème lié aux données.
+
+(Vous devriez pouvoir écrire cette rubrique avant même d'avoir travaillé avec les données.)
+
+
+### III. Description des données importées / nettoyées / transformées {-}
+
+Decrivez le processus que vous avez suivi pour mettre en forme les données pour le R.
+
+### IV. Analyse des données manquantes {-}
+
+Décrivez les éventuelles répétitions ou motifs que vous observez avec les données manquantes.
+
+
+### V. Resultats  {-}
+
+Donnez un bref résumé non technique des trouvailles les plus importantes de votre recherche - ce résumé doit être écrit pour un public non-technique. Faites bien attention à nettoyer vos graphiques, vous assurer que les meilleures pratiques pour la présentation ont été suivies, comme décrit dans la [rubrique présentation](#presentation-style) ci-dessous.
+
+**Note**: "Presentation" fait ici référence au style des graphiques, i.e graphiques qui ont été nettoyés pour la présentation, par opposition aux graphiques bruts qu'on utilis souvent en exploration de données. Vous n'avez pas à présenter votre travail à toute la classe!
+
+
+### VI. Partie interactive {-}
+
+Selectionnez une (ou plusieures) observations-clés et présentez-les de façon interactive. Soyez selectifs dans les choix que vous présentez à l'utilisateur; l'idée est qu'il puisse comprendre les questions que vous vous êtes posés et les tendances que vous avez découvertes en 5-10 minutes. En d'autres termes, ils devraient comprendre la valeur de votre analyse, d'un point de vue économoique, scientifique, en terme de compétence générale, etc.
+
+Les graphiques interactifs doivent suivre toutes les bonnes pratiques, tout comme les graphiques statiques pour ce qui est de la perception, l'étiquettge, la justesse, etc.
+
+
+Vous pouvez choisir l'outil (D3, Shiny, ou autre) La complexité de votre outil sera prise en compte: nous attendons plus de complexité d'un outil de haut-niveau comme Shiny que d'un outil de bas niveau comme D3, où c'est à vous de tout construire.
+
+Assurez-vous que l'utilisateur comprend bien l'outil et comment l'utiliser.
+
+
+Publiez votre graphique quelquepart sur internet et mettez un lien dans votre rapport vers cette partie interactive. Les choix évidents sont [blockbuilder.org](http://blockbuilder.org/){target="_blank"} pour créer un bloc pour D3, et [shinyapps.io](https://www.shinyapps.io/){target="_blank"} pour les applis Shiny, mais d'autres options marchent aussi. Vous êtes encouragés à partager votre retour d'expérience sur  [Piazza](https://piazza.com/){target="_blank"} pour aider vos camarades.
+
+Notez: la partie interactive compte pour à pau près 25\% de la note finale du projet. Ne passez pas 90\% de votre temps dessus... concentrez-vous sur la partie exploration et analyse de données.
+
+### VII. Conclusion {-}
+
+Discutez des limitations et perspectives, des lessons apprises.
+
+## Style de presentation 
+
+Comme indiqué pendant l'année, on attend plus de vous pour des graphiques qui doivent être partagés avec d'autres personnes. En EDAV général, on se contente du minimum, mais vous devrez faire de votre mieux pour la présentation ici. Voici une checklist d'outils destinés à perfectionner vos graphiques (et les rendre présentables).  (Ne vous souciez pas de ces prooblèmes pour la partie EDA.)
+
+*   Titre, étiquettes des axes, étiquettes de graduation, légendes doivent être comprehensibles et lisibles.
+*   Les etiquettes de graduation ne devraient pas être étiquetées en notation scientifique ou avec beaucoup de zéros, comme 3000000000. Convertissez-les en chiffres plus petits et changez les unités: 3000000000 devient "3" quand l'étiquette de l'axe est "milliards de vues".
+*   Les unités devraient être intuitives (Un axe étiqueté mois/jour/an format is intuitif; un axe étiquetté en secondes depuis le 1er Janvier, 1970 ne l'est pas.)
+*   L'épaisseur de la police doit la rendre lisible. Le ggplot par défaut est trop petit. Vous pouvez facilement le changer en passant la police de base comme celle du thème, en faisaint par exemple `+ theme_grey(16)` (La police par défaut est 11).
+*   L'ordre des objets sur les axes et les légendes doivent être logiques (l'ordre alphabétique n'est pas toujours bon.).
+*   Les couleurs doivent pouvoir être vues par des daltoniens.
+*   Si les niveaux de données catégoriques sont longs, faîtes que la variable catégorique soit sur l'axe des y et les noms soient horizontaux. Une meilleure option, si possible, est de raccourcir le nom des niveaux.
+*   Pas tous les graphiques EDA se prêtent à la présentation, soit parce qu'ils sont trop compliqués à comprendre ou parce qu'ils ne permettent pas un étiquettage clair. Le problème d'étiquettage peut être résolu en ajoutant du texte dans un éditeur d'image. Le bémol est que ce n'est plus reproduisible. Si vous choisissez cette option, pour Mac,  [Keynote](https://www.apple.com/keynote/){target="_blank"} et [Paintbrush](https://paintbrush.sourceforge.io/){target="_blank"} sont de bonnes options gratuites. 
+*   Faîtes au plus simple. Evitez les couleurs quand elles ne sont pas nécessaires. Demandez-vous : la couleur rend-elle ce graphique plus claire? Si non, n'en mettez pas.
+*   Testez vos graphiques avec des amis non-techniques, et demandez du feedback à vos amis/famille.
+
+
+Avant tout, amusez-vous <i class="far fa-smile-beam"></i>
+
+## Grading
+
+Nous préférons ma *qualité* plutôt que la *quantité*
+
+Pour déterminer vos notes, nous regardons:
+
+* **Originalité** Vos questions font-elles réfléchir? Encouragent-elle le lecteur à voir le sujet sous un nouvel angle?
+
+* **Contexte** Vos graphiques et descriptions textuelles reflètent-elles une bonne compréhension du sens de vos données? Est-ce que le *pourquoi* est clair? Vos interprétations sont-elles raisonables?
+
+* **Reproductibilité** Avez-vous rendu votre code clair pour le lecteur, et facile à exécuter pour qu'il retrace votre analyse? Avez vous inclu des explications pour ce qui ne peut pas être reproduit? Le code est-il clair?
+
+
+* **Multidimensionnalité** Avez vous bien étudié les relations multidimensionnelles?
+
+* **Choix de formes graphiques** Vos graphiques sont-ils bien choisis par rapport à vos données.
+
+* **Paramètres / choix de design ** Avez-vous bien choisi vos paramètres, couleurs, etc.?
+
+* **Standards** Faîtes que vos graphiques vérifiernt [les normes stylistiques de presentation](#presentation-style)?
+
+* **Partie interactive** La partie interactive se lie-t-elle bien aux objectifs du projet? Est-elle utile aux objectifs du projet? Aide-t-elle le lecteur à comprendre les conclusions principales?
+
+
+## Resources
+
+["Tidy Tuesday Screencast: analyzing college major & income data in R"](https://www.youtube.com/watch?v=nx5yhXAQLxw){target="_blank"} David Robinson explore des jeux de données avec R en live, sans les connaître au préalable. Cela pourra vous aider à démarrer.

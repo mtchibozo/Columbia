@@ -1,0 +1,78 @@
+# (PART) Special Data Types {-}
+
+# Spatial Data {#maps}
+
+<!-- Section en construction
+----------------------------------------------------------------------------- -->
+![Maps](images/banners/banner_maps.png)
+*En cours de progression. Toute amélioration est la bienvenue. Si vous souhaitez participer rendez vous sur [contribuer au repo](contribute.html).*
+<!-- ------------------------------------------------------------------------ -->
+
+
+## Les choropleth maps
+
+Les choropleth maps utilisent de la couleur pour indiquer la valeur d'une variable dans une région définie, généralement région politiques. ["Mapping in R just got a whole lot easier"](https://www.computerworld.com/article/3175623/mapping-in-r-just-got-a-whole-lot-easier.html){target="_blank"} par Sharon Machlis (2017-03-03) propose un tutoriel sur l'utilisation des packages **tmap**, **tmaptools**, et **tigris** pour créer des choropleth maps. Notez qu'avec cette approche, vous devrez fusionner des shapefiles géographiques avec vos autres données, avant de mapper. 
+
+["Step-by-Step Choropleth Map in R: A case of mapping Nepal"](https://medium.com/@anjesh/step-by-step-choropleth-map-in-r-a-case-of-mapping-nepal-7f62a84078d9){target="_blank"} parcourt le processus de création d'une choropleth map avec **rgdal** et **ggplot2**.  (Nous n'avons suivi aucun de ces tutoriels pas à pas.... Si vous le faites, veuillez donner votre avis en [soumettant un avis](https://github.com/jtr13/EDAV/issues){target="_blank"}).
+
+
+Le package **choroplethr** permet de dessiner facilement des choropleth maps des [États américains, pays et secteurs de recensement, ainsi que les pays du monde](https://arilamstein.com/documentation/choroplethr/reference/){target="_blank"} sans traiter directement avec les shapefiles. Son compagnon le package, **choroplethrZip**, fournit des données pour faire des [choropleth sur les zip code](https://arilamstein.com/creating-zip-code-choropleths-choroplethrzip/){target="_blank"}; **choroplethrAdmin1** dessine des choropleths pour les régions administratives des [pays du monde](https://rdrr.io/cran/choroplethrAdmin1/man/get_admin1_countries.html){target="_blank"}. Ce qui suit est un bref tutoriel sur l’utilisation de ces packages.
+
+Remarque: Vous devrez aussi installer **choroplethrMaps** pour pouvoir travailler avec **choroplethr**. En outre, **choroplethr** possède un certain nombre d’autres dépendances qui devraient être installé automatiquement, mais si elles ne l'étaient pas, vous pouvez les installer manuellement le package manquant en appelant `library(choroplethr)`: **maptools**, et **rgdal**, **sp**.
+
+Maintenant nous allons utiliser le jeu de données `state.x77` pour cet exemple:
+
+
+```r
+library(tidyverse)
+library(choroplethr)
+
+# data frame doit contenir "region" et "value" columns
+
+df_illiteracy <- state.x77 %>% as.data.frame() %>% 
+  rownames_to_column("state") %>% 
+  transmute(region = tolower(`state`), value = Illiteracy)
+
+state_choropleth(df_illiteracy,
+                 title = "State Illiteracy Rates, 1977",
+                 legend = "Percent Illiterate")
+```
+
+<img src="maps_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+
+**Remarque**: le "cours gratuit" `choroplethr` sur lequel vous pourriez tomber arrive un cours à la fois, il ne constitue donc pas la meilleure option, à moins que vous ne disposiez de quelques semaines à perdre.
+
+
+## Square bins
+
+Les packages tels que `statebins` permettent de créer des choropleth maps des régions en maintenant approximativement l'emplacement de la région, mais ni la taille ni la forme.
+
+**Important**:  N'installez pas `statebins` depuis CRAN; utilisez la [version en développement](https://github.com/hrbrmstr/statebins){target="_blank"} -- il contient de nombreuses améliorations, détaillées dans ["Statebins Reimagined"](https://rud.is/b/2017/11/18/statebins-reimagined/#comment-19346){target="_blank"}.
+
+
+```r
+# devtools::install_github("hrbrmstr/statebins")
+library(statebins)
+df_illit <- state.x77 %>% as.data.frame() %>% 
+  rownames_to_column("state") %>% 
+  select(state, Illiteracy)
+
+# Remarque: direction = 1 change l'ordre des fill scale 
+# les nuances si foncées représentent des taux d'analphabétisme plus élevés
+# (The default is -1).
+
+statebins(df_illit, value_col="Illiteracy",
+          name = "%", direction = 1) +
+  ggtitle("State Illiteracy Rates, 1977") +
+  theme_statebins()
+```
+
+<img src="maps_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+
+## Données sur la Longitude / Latitude 
+
+Notez que les options ci-dessus fonctionnent avec les *frontières politiques*, basé sur les noms des régions que vous fournissez. Ces maps requièrent des packages avec des informations sur les limites géographiques. Les données de longitude / latitude, d'autre part, peuvent être tracées simplement avec un scatterplot où x = longitude et y = latitude, sans aucune maps contextuelle (juste ne pas confondre x & y!). La première partie de ["Data wrangling visualisation and spatial analysis: R Workshop"](http://www.seascapemodels.org/data/data-wrangling-spatial-course.html) par C. Brown, D. Schoeman, A. Richardson, et B. Venables fournit une procédure détaillée d'exploration et d'analyse de données spatiales avec les données copepod (un type de zooplancton) en utilisant cette technique avec `ggplot2::geom_point()`. 
+
+Si on veut ajouter un fond d'écran, il y a plusieurs options.  Le [tutoriel](http://www.seascapemodels.org/data/data-wrangling-spatial-course.html) mentionné ci-dessus fournit des exemples en utilisant les packages **maps** ou **sf**. C'est une ressource hautement recommandée, car elle couvre une grande partie du processus de la Data Science, notamment dans le contexte de l'obtention, du nettoyage, de la transformation des données, de l'exploration des données,de la modélisation et de la prédiction.
+
+Un autre bon choix pour les maps contextualisées est **ggmap**, qui offre plein d'options différentes. L'API Google Maps était la solution idéale, mais maintenant [elle vous demande de souscrire à la solution payante Google Cloud](https://cloud.google.com/free/){target="_blank"}.  A votre inscription, vous obtiendrez un crédit gratuit de 300 USD, mais si vous ne souhaitez pas fournir de carte de crédit lors de l'inscription, vous pouvez utiliser Stamen Maps la fonction  `get_stamenmap()` à la place. Utilisez la version de développement du package; des instructions et de nombreux exemples sont disponibles sur la [page GitHub](https://github.com/dkahle/ggmap){target="_blank"} ["Getting started Stamen maps with ggmap"](https://statisticaloddsandends.wordpress.com/2018/10/25/getting-started-stamen-maps-with-ggmap/){target="_blank"} et vous aidera à démarrer avec les maps Stamen à travers notamment un exemple utilisant le jeu de données Sacramento dans le package **caret**. 

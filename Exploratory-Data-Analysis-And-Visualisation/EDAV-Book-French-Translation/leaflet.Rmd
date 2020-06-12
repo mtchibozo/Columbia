@@ -1,0 +1,259 @@
+# Interactive Geographic Data {#leaflet}
+
+![](images/banners/banner_leaflet.png)
+*Ce chapitre est à l'origine une contribution communautaire de [AkhilPunia](https://github.com/AkhilPunia){target="_blank"}*
+
+*En cours de progression. Toute amélioration est la bienvenue. Si vous souhaitez participer rendez vous sur [contribuer au repo](contribute.html).*
+
+
+## Vue d'ensemble
+
+Vous connaissez certainement différentes libraries pour afficher des données géographiques telles que `ggmap` et` choroplethr`. Bien que ces libraries fournissent de nombreuses fonctionnalités intéressantes pour mieux présenter les informations avec des graphes 2D, ils leur manquent encore une caractéristique importante : l’interactivité. Voici "leaflet" - une librairie écrit en javascript pour gérer les cartes interactives. Fait amusant : il est activement utilisé par de nombreux grands journaux, tels que le New York Times ou le Washington Post.
+
+Plongeons nous dedans.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Brève description du jeu de données
+Pour notre analyse, nous utiliserons le NYC Open Data décrivant les écoles de New York City en 2016. [Vous en trouverez plus sur la page Kaggle.](https://www.kaggle.com/passnyc/data-science-for-good/home){target="_blank"} Nous allons nous concentrer sur les distributions de différentes variables en tant que facteur de positions géographiques.
+
+```{r load library, eval=TRUE, message=FALSE}
+library(tidyverse)
+library(leaflet)
+library(htmltools)
+library(leaflet.extras)
+library(viridis)
+schools <- read_csv('data/2016_school_explorer.csv')
+```
+
+## Plotting Markers
+Ici, nous pouvons voir que toutes les écoles privées à New York ont été tracées sur une carte que l'on peut zoomer et dézoomer. Les marqueurs sont utilisés pour indiquer l'emplacement de chaque école. Si nous survolons un marqueur, il affiche le nom de l'école. Trop cool, non ?!
+
+```{r fig1-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
+lat<-median(schools$Latitude)
+lon<-median(schools$Longitude)
+
+schools %>% 
+  filter(`Community School?`=="Yes") %>%
+  leaflet(options = leafletOptions(dragging = TRUE))  %>%
+  addTiles() %>%
+  addMarkers(label=~`School Name`) %>%
+  setView(lng=lon,lat=lat, zoom = 10)
+```
+
+Voici le code :
+
+```{r fig1, eval=FALSE, message=FALSE}
+lat<-median(schools$Latitude)
+lon<-median(schools$Longitude)
+
+schools %>% 
+  filter(`Community School?`=="Yes") %>%
+  leaflet(options = leafletOptions(dragging = TRUE))  %>%
+  addTiles() %>%
+  addMarkers(label=~`School Name`) %>%
+  setView(lng=lon,lat=lat, zoom = 10)
+```
+
+## Heatmaps dynamiques
+Les Heatmaps sont des outils vraiment utiles pour visualiser la distribution d'une variable particulière sur une région donnée (ils sont si utiles que [nous avons une page sur eux](heatmap.html)). Dans cet exemple, nous voyons comment `leaflet` est capable de calculer dynamiquement le nombre d'écoles dans une région donnée à partir de données de latitude et de longitude uniquement. Vous pouvez en faire l'expérience en effectuant un zoom avant ou arrière dans le graphique.
+
+```{r fig2-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
+lat<-mean(schools$Latitude)
+lon<-mean(schools$Longitude)
+
+leaflet(schools) %>% 
+  addProviderTiles(providers$CartoDB.DarkMatterNoLabels) %>%
+  addWebGLHeatmap(size=15,units="px")  %>%
+  setView(lng=lon,lat=lat, zoom = 10)
+```
+
+Voici le code :
+
+```{r fig2, eval=FALSE, message=FALSE}
+lat<-mean(schools$Latitude)
+lon<-mean(schools$Longitude)
+
+leaflet(schools) %>% 
+  addProviderTiles(providers$CartoDB.DarkMatterNoLabels) %>%
+  addWebGLHeatmap(size=15,units="px")  %>%
+  setView(lng=lon,lat=lat, zoom = 10)
+```
+
+## Clustering dynamique
+Nous pouvons voir ici comment `leaflet` permet de regrouper dynamiquement des données en fonction de leur distance géographique à un niveau de zoom donné.
+
+```{r fig3-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
+schools %>% 
+  leaflet() %>% 
+  addTiles() %>%
+  addCircleMarkers(radius = 2, label = ~htmlEscape(`School Name`),
+                         clusterOptions = markerClusterOptions()) 
+```
+
+Voici le code :
+
+```{r fig3, eval=FALSE, message=FALSE}
+schools %>% 
+  leaflet() %>% 
+  addTiles() %>%
+  addCircleMarkers(radius = 2, label = ~htmlEscape(`School Name`),
+                         clusterOptions = markerClusterOptions()) 
+```
+
+## Afficher les groupes
+
+```{r fig4-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
+top<- schools %>%
+  group_by(District)%>%
+  summarise(top=length(unique(`School Name`)),lon=mean(Longitude),lat=mean(Latitude))%>%
+  arrange(desc(top))%>%
+  head(10)
+
+pal <- colorFactor(viridis(100),levels=top$District )
+
+top %>%
+  leaflet(options = leafletOptions(dragging = TRUE))  %>%
+  addProviderTiles(providers$CartoDB.DarkMatterNoLabels) %>%
+  addCircleMarkers(radius=~top/10,label=~paste0("District ", District," - ", top," Schools"),color=~pal(District),opacity = 1) %>%
+  setView(lng=lon,lat=lat, zoom = 10) %>%
+  addLegend("topright", pal = pal, 
+            values = ~District,
+            title = "District",
+            opacity = 0.8)
+```
+
+Voici le code :
+
+```{r fig4, eval=FALSE, message=FALSE}
+top<- schools %>%
+  group_by(District)%>%
+  summarise(top=length(unique(`School Name`)),lon=mean(Longitude),lat=mean(Latitude))%>%
+  arrange(desc(top))%>%
+  head(10)
+
+pal <- colorFactor(viridis(100),levels=top$District )
+
+top %>%
+  leaflet(options = leafletOptions(dragging = TRUE))  %>%
+  addProviderTiles(providers$CartoDB.DarkMatterNoLabels) %>%
+  addCircleMarkers(radius=~top/10,label=~paste0("District ", District," - ", top," Schools"),color=~pal(District),opacity = 1) %>%
+  setView(lng=lon,lat=lat, zoom = 10) %>%
+  addLegend("topright", pal = pal, 
+            values = ~District,
+            title = "District",
+            opacity = 0.8)
+```
+
+## Afficher des données catégorielles
+Nous pouvons visualiser la distribution d'une catégorie particulière sur la carte. Ceci est réalisé grâce à un widget interactif situé en haut à droite qui permet de choisir une ou plusieurs catégories particulières. L'exemple ci-dessous montre comment les écoles de diffèrents, certains quartiers sont séparés de manière raciale.
+
+```{r fig5-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
+ss <- schools %>% dplyr::select(`School Name`,Latitude, Longitude,`Percent White`, `Percent Black`, `Percent Asian`, `Percent Hispanic`)
+
+segregation <- function(x){
+ majority = c()
+ w <- gsub("%","",x$`Percent White`)
+ b <- gsub("%","",x$`Percent Black`)
+ a <- gsub("%","",x$`Percent Asian`)
+ h <- gsub("%","",x$`Percent Hispanic`)
+ 
+ for (i in seq(1,nrow(ss))){
+   if (max(w[i],b[i],a[i],h[i]) == w[i])
+     {majority <- c(majority,'White')}
+   else if (max(w[i],b[i],a[i],h[i]) == b[i])
+     {majority <- c(majority,'Black')}
+   else if (max(w[i],b[i],a[i],h[i]) == a[i])
+     {majority <- c(majority,'Asian')}
+   else if (max(w[i],b[i],a[i],h[i]) == h[i])
+     {majority <- c(majority,'Hispanic')}  
+  }
+ return(majority)
+}
+ 
+ss$race <- segregation(ss)
+  
+white <- ss %>% filter(race == "White")
+black <- ss %>% filter(race == "Black")
+hispanic <- ss %>% filter(race == "Hispanic")
+asian <- ss %>% filter(race =="Asian")
+
+lng <- median(ss$Longitude)
+lat <- median(ss$Latitude)
+
+pal_sector <- colorFactor( viridis(4), levels = ss$race)
+
+m3 <- leaflet() %>% addProviderTiles("CartoDB") %>% 
+        addCircleMarkers(data = white, radius = 2, label = ~htmlEscape(`School Name`),
+                         color = ~pal_sector(race), group = "White")
+
+m3 %>% addCircleMarkers(data = black, radius = 2, label = ~htmlEscape(`School Name`),
+                         color = ~pal_sector(race), group = "Black")  %>% 
+        addCircleMarkers(data = hispanic, radius = 2, label = ~htmlEscape(`School Name`),
+                         color = ~pal_sector(race), group = "Hispanic") %>% 
+        addCircleMarkers(data = asian, radius = 2, label = ~htmlEscape(`School Name`),
+                        color = ~pal_sector(race), group = "Asian") %>% 
+        addLayersControl(overlayGroups = c("White", "Black","Hispanic","Asian")) %>%
+        setView(lng=lng,lat=lat,zoom=10)
+
+```
+
+Voici le code :
+
+```{r fig5, eval=FALSE, message=FALSE}
+ss <- schools %>% dplyr::select(`School Name`,Latitude, Longitude,`Percent White`, `Percent Black`, `Percent Asian`, `Percent Hispanic`)
+
+segregation <- function(x){
+ majority = c()
+ w <- gsub("%","",x$`Percent White`)
+ b <- gsub("%","",x$`Percent Black`)
+ a <- gsub("%","",x$`Percent Asian`)
+ h <- gsub("%","",x$`Percent Hispanic`)
+ 
+ for (i in seq(1,nrow(ss))){
+   if (max(w[i],b[i],a[i],h[i]) == w[i])
+     {majority <- c(majority,'White')}
+   else if (max(w[i],b[i],a[i],h[i]) == b[i])
+     {majority <- c(majority,'Black')}
+   else if (max(w[i],b[i],a[i],h[i]) == a[i])
+     {majority <- c(majority,'Asian')}
+   else if (max(w[i],b[i],a[i],h[i]) == h[i])
+     {majority <- c(majority,'Hispanic')}  
+  }
+ return(majority)
+}
+
+ss$race <- segregation(ss)
+
+white <- ss %>% filter(race == "White")
+black <- ss %>% filter(race == "Black")
+hispanic <- ss %>% filter(race == "Hispanic")
+asian <- ss %>% filter(race =="Asian")
+
+lng <- median(ss$Longitude)
+lat <- median(ss$Latitude)
+
+pal_sector <- colorFactor( viridis(4), levels = ss$race)
+
+m3 <- leaflet() %>% addProviderTiles("CartoDB") %>% 
+        addCircleMarkers(data = white, radius = 2, label = ~htmlEscape(`School Name`),
+                         color = ~pal_sector(race), group = "White")
+
+m3 %>% addCircleMarkers(data = black, radius = 2, label = ~htmlEscape(`School Name`),
+                         color = ~pal_sector(race), group = "Black")  %>% 
+        addCircleMarkers(data = hispanic, radius = 2, label = ~htmlEscape(`School Name`),
+                         color = ~pal_sector(race), group = "Hispanic") %>% 
+        addCircleMarkers(data = asian, radius = 2, label = ~htmlEscape(`School Name`),
+                        color = ~pal_sector(race), group = "Asian") %>% 
+        addLayersControl(overlayGroups = c("White", "Black","Hispanic","Asian")) %>%
+        setView(lng=lng,lat=lat,zoom=10)
+``` 
+
+Ces exemples ne donnent qu'un aperçu de ce qui est vraiment possible avec cette librairie. Si vous souhaitez explorer davantage de fonctionnalités et de cas d'utilisation, consultez les liens ci-dessous.
+ 
+## External Resources 
+- [Leaflet in R Documentation](https://rstudio.github.io/leaflet/){target="_blank"}: documentation principale du package.
+- [Basic leaflet maps in R](https://rpubs.com/mattdray/basic-leaflet-maps){target="_blank"}: tutoriel avec exemples.
+- [Interesting Kaggle Kernel visualizing earthquake data using leaflet in R ](https://www.kaggle.com/verawe/earthquakes-leaflet-highcharter-visualizations){target="_blank"}: un autre cas d'étude à explorer.

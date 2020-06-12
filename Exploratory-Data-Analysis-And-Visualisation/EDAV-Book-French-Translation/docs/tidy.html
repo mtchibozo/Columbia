@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>23 Revue détaillée : Tidy Data &amp; dplyr | edav.info/</title>
+  <meta name="description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="23 Revue détaillée : Tidy Data &amp; dplyr | edav.info/" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://edav.info/" />
+  <meta property="og:image" content="https://edav.info/images/edav_link_logo.png" />
+  <meta property="og:description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course." />
+  <meta name="github-repo" content="amalrich/EDAV" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="23 Revue détaillée : Tidy Data &amp; dplyr | edav.info/" />
+  
+  <meta name="twitter:description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course." />
+  <meta name="twitter:image" content="https://edav.info/images/edav_link_logo.png" />
+
+<meta name="author" content="Zach Bogart, Joyce Robbins" />
+<meta name="author" content="Translated by Amaury Sudrie, Maxime Tchibozo, Romane Goldmuntz and Vy Tran" />
+
+
+<meta name="date" content="2019-10-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="import.html"/>
+<link rel="next" href="missing.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="libs/lfx-webgl-heatmap-0.2.7/lfx-webgl-heatmap-prod.js"></script>
+<script src="libs/lfx-webgl-heatmap-0.2.7/lfx-webgl-heatmap-bindings.js"></script>
+<link id="lfx-webgl-heatmap-skyline-attachment" rel="attachment" href="libs/lfx-webgl-heatmap-0.2.7/skyline-gradient.png"/>
+<link id="lfx-webgl-heatmap-deep-sea-attachment" rel="attachment" href="libs/lfx-webgl-heatmap-0.2.7/deep-sea-gradient.png"/>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
+<script src="libs/vis-4.20.1/vis.min.js"></script>
+<script src="libs/visNetwork-binding-2.0.8/visNetwork.js"></script>
+<!-- 
+Favicon 
+  - included in the toolbar of every page
+  - EDAV Logo favicon
+  - via: https://www.favicon-generator.org/
+-->
+
+<link rel="apple-touch-icon" sizes="57x57" href="images/icons/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="images/icons/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="images/icons/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="images/icons/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="images/icons/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="images/icons/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/icons/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="images/icons/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon/favicon-16x16.png">
+<link rel="manifest" href="images/icons/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="images/icons/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html"><b>edav.info/</b></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenue</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#tout-ce-dont-vous-aurez-besoin-pour-exploratory-data-analysis-visualization"><i class="fa fa-check"></i><b>0.1</b> Tout ce dont vous aurez besoin pour Exploratory Data Analysis &amp; Visualization</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contact"><i class="fa fa-check"></i><b>0.2</b> Contact</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.3</b> License</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.4</b> Colophon</a></li>
+</ul></li>
+<li class="part"><span><b>I Getting Started</b></span></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#avant-propos"><i class="fa fa-check"></i><b>1.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#types-dassistance"><i class="fa fa-check"></i><b>1.2</b> Types d’assistance</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#information-bleu"><i class="fa fa-check"></i><b>1.2.1</b> Information (Bleu)</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#revue-detaillee-rouge"><i class="fa fa-check"></i><b>1.2.2</b> Revue détaillée (Rouge)</a></li>
+<li class="chapter" data-level="1.2.3" data-path="intro.html"><a href="intro.html#documentation-vert"><i class="fa fa-check"></i><b>1.2.3</b> Documentation (Vert)</a></li>
+<li class="chapter" data-level="1.2.4" data-path="intro.html"><a href="intro.html#references-yellow"><i class="fa fa-check"></i><b>1.2.4</b> References (Yellow)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#aider-a-ameliorer-edav.info"><i class="fa fa-check"></i><b>1.3</b> Aider à améliorer <em>edav.info/</em></a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#fun-stuff"><i class="fa fa-check"></i><b>1.4</b> Fun stuff</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#t-shirts"><i class="fa fa-check"></i><b>1.4.1</b> T-shirts</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#acknowledgments"><i class="fa fa-check"></i><b>1.5</b> Acknowledgments</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#our-contributors"><i class="fa fa-check"></i><b>1.5.1</b> Our Contributors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Les bases de R</a><ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#top-10"><i class="fa fa-check"></i><b>2.1</b> Top 10</a></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#depannage"><i class="fa fa-check"></i><b>2.2</b> Dépannage</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#mon-document-ne-se-visualise-pas-correctement-quand-jutilise-knit"><i class="fa fa-check"></i><b>2.2.1</b> Mon document ne se visualise pas correctement quand j’utilise “knit”</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basics.html"><a href="basics.html#les-fonctions-ne-marchent-plus"><i class="fa fa-check"></i><b>2.2.2</b> Les fonctions ne marchent plus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#astuces-et-tours-de-passe-passe"><i class="fa fa-check"></i><b>2.3</b> Astuces et tours de passe-passe</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="basics.html"><a href="basics.html#knitr"><i class="fa fa-check"></i><b>2.3.1</b> Knitr</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basics.html"><a href="basics.html#raccourcis-clavier-rstudio"><i class="fa fa-check"></i><b>2.3.2</b> Raccourcis clavier RStudio</a></li>
+<li class="chapter" data-level="2.3.3" data-path="basics.html"><a href="basics.html#taille-des-figures-et-bien-plus-encore"><i class="fa fa-check"></i><b>2.3.3</b> Taille des figures (et bien plus encore)</a></li>
+<li class="chapter" data-level="2.3.4" data-path="basics.html"><a href="basics.html#visualiser-des-graphiques-dans-des-fenetres-pour-graphique"><i class="fa fa-check"></i><b>2.3.4</b> Visualiser des graphiques dans des fenêtres pour graphique</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basics.html"><a href="basics.html#rendu-de-devoirs"><i class="fa fa-check"></i><b>2.4</b> Rendu de devoirs</a></li>
+<li class="chapter" data-level="2.5" data-path="basics.html"><a href="basics.html#demander-de-laide"><i class="fa fa-check"></i><b>2.5</b> Demander de l’aide</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="basics.html"><a href="basics.html#choses-a-essayer"><i class="fa fa-check"></i><b>2.5.1</b> Choses à essayer</a></li>
+<li class="chapter" data-level="2.5.2" data-path="basics.html"><a href="basics.html#a-laide"><i class="fa fa-check"></i><b>2.5.2</b> A l’aide!</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>3</b> Final Project Assignment</a><ul>
+<li class="chapter" data-level="3.1" data-path="project.html"><a href="project.html#vue-densemble"><i class="fa fa-check"></i><b>3.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="3.2" data-path="project.html"><a href="project.html#info-generale"><i class="fa fa-check"></i><b>3.2</b> Info Generale</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="project.html"><a href="project.html#objectif"><i class="fa fa-check"></i><b>3.2.1</b> Objectif</a></li>
+<li class="chapter" data-level="3.2.2" data-path="project.html"><a href="project.html#sujets"><i class="fa fa-check"></i><b>3.2.2</b> Sujets</a></li>
+<li class="chapter" data-level="3.2.3" data-path="project.html"><a href="project.html#donnees"><i class="fa fa-check"></i><b>3.2.3</b> Données</a></li>
+<li class="chapter" data-level="3.2.4" data-path="project.html"><a href="project.html#code"><i class="fa fa-check"></i><b>3.2.4</b> Code</a></li>
+<li class="chapter" data-level="3.2.5" data-path="project.html"><a href="project.html#analyse"><i class="fa fa-check"></i><b>3.2.5</b> Analyse</a></li>
+<li class="chapter" data-level="3.2.6" data-path="project.html"><a href="project.html#feedback"><i class="fa fa-check"></i><b>3.2.6</b> Feedback</a></li>
+<li class="chapter" data-level="3.2.7" data-path="project.html"><a href="project.html#examen-par-des-pairs"><i class="fa fa-check"></i><b>3.2.7</b> Examen par des pairs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="project.html"><a href="project.html#format-du-rapport"><i class="fa fa-check"></i><b>3.3</b> Format du rapport</a></li>
+<li class="chapter" data-level="3.4" data-path="project.html"><a href="project.html#schema"><i class="fa fa-check"></i><b>3.4</b> Schéma</a><ul>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#i.-introduction"><i class="fa fa-check"></i>I. Introduction</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#ii.-description-des-donnees-et-de-leur-source"><i class="fa fa-check"></i>II. Description des données et de leur source</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#iii.-description-des-donnees-importees-nettoyees-transformees"><i class="fa fa-check"></i>III. Description des données importées / nettoyées / transformées</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#iv.-analyse-des-donnees-manquantes"><i class="fa fa-check"></i>IV. Analyse des données manquantes</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#v.-resultats"><i class="fa fa-check"></i>V. Resultats</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#vi.-partie-interactive"><i class="fa fa-check"></i>VI. Partie Interactive</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#vii.-conclusion"><i class="fa fa-check"></i>VII. Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="project.html"><a href="project.html#style-de-presentation"><i class="fa fa-check"></i><b>3.5</b> Style de presentation</a></li>
+<li class="chapter" data-level="3.6" data-path="project.html"><a href="project.html#grading"><i class="fa fa-check"></i><b>3.6</b> Grading</a></li>
+<li class="chapter" data-level="3.7" data-path="project.html"><a href="project.html#resources"><i class="fa fa-check"></i><b>3.7</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="contribute.html"><a href="contribute.html"><i class="fa fa-check"></i><b>4</b> Contribuez à cette ressour e</a><ul>
+<li class="chapter" data-level="4.1" data-path="contribute.html"><a href="contribute.html#pourquoi-contribuer"><i class="fa fa-check"></i><b>4.1</b> Pourquoi contribuer?</a></li>
+<li class="chapter" data-level="4.2" data-path="contribute.html"><a href="contribute.html#que-contribuer"><i class="fa fa-check"></i><b>4.2</b> Que contribuer?</a></li>
+<li class="chapter" data-level="4.3" data-path="contribute.html"><a href="contribute.html#comment-contribuer"><i class="fa fa-check"></i><b>4.3</b> Comment contribuer</a></li>
+<li class="chapter" data-level="4.4" data-path="contribute.html"><a href="contribute.html#soumettez-une-issue"><i class="fa fa-check"></i><b>4.4</b> Soumettez une “issue”</a></li>
+<li class="chapter" data-level="4.5" data-path="contribute.html"><a href="contribute.html#tutoriel-github"><i class="fa fa-check"></i><b>4.5</b> Tutoriel GitHub</a><ul>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-1-trouver-quelquechose-a-changer"><i class="fa fa-check"></i>Etape 1: Trouver quelquechose à changer</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-2-cliquez-sur-le-bouton-edit"><i class="fa fa-check"></i>Etape 2: Cliquez sur le bouton edit</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-3-forkez-le-depot"><i class="fa fa-check"></i>Etape 3: Forkez le dépôt</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#step-4-corrigez-lerreur"><i class="fa fa-check"></i>Step 4: Corrigez l’erreur</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-5-comparer-des-changements"><i class="fa fa-check"></i>Etape 5: Comparer des changements</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-6-ouvrez-une-requete-pull"><i class="fa fa-check"></i>Etape 6: Ouvrez une requête pull</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#et-maintenant"><i class="fa fa-check"></i>Et maintenant?</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#soyons-prevoyants-la-prochaine-modification"><i class="fa fa-check"></i>Soyons prévoyants: la prochaine modification</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="contribute.html"><a href="contribute.html#ressources"><i class="fa fa-check"></i><b>4.6</b> Ressources</a></li>
+</ul></li>
+<li class="part"><span><b>II Continuous Variables</b></span></li>
+<li class="chapter" data-level="5" data-path="histo.html"><a href="histo.html"><i class="fa fa-check"></i><b>5</b> Diagramme: Histogrammes</a><ul>
+<li class="chapter" data-level="5.1" data-path="histo.html"><a href="histo.html#avant-propos-1"><i class="fa fa-check"></i><b>5.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="5.2" data-path="histo.html"><a href="histo.html#tldr"><i class="fa fa-check"></i><b>5.2</b> tl;dr</a></li>
+<li class="chapter" data-level="5.3" data-path="histo.html"><a href="histo.html#simple-examples"><i class="fa fa-check"></i><b>5.3</b> Simple examples</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="histo.html"><a href="histo.html#histogramme-de-base-en-r"><i class="fa fa-check"></i><b>5.3.1</b> Histogramme de base en R</a></li>
+<li class="chapter" data-level="5.3.2" data-path="histo.html"><a href="histo.html#histogramme-avec-ggplot2"><i class="fa fa-check"></i><b>5.3.2</b> Histogramme avec ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="histo.html"><a href="histo.html#theorie"><i class="fa fa-check"></i><b>5.4</b> Théorie</a></li>
+<li class="chapter" data-level="5.5" data-path="histo.html"><a href="histo.html#types-dhistogrammes"><i class="fa fa-check"></i><b>5.5</b> Types d’histogrammes</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="histo.html"><a href="histo.html#frequence-ou-compte"><i class="fa fa-check"></i><b>5.5.1</b> Frequence ou compte</a></li>
+<li class="chapter" data-level="5.5.2" data-path="histo.html"><a href="histo.html#frequence-relative"><i class="fa fa-check"></i><b>5.5.2</b> Frequence relative</a></li>
+<li class="chapter" data-level="5.5.3" data-path="histo.html"><a href="histo.html#frequence-cumulee"><i class="fa fa-check"></i><b>5.5.3</b> Frequence cumulée</a></li>
+<li class="chapter" data-level="5.5.4" data-path="histo.html"><a href="histo.html#densite"><i class="fa fa-check"></i><b>5.5.4</b> Densité</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="histo.html"><a href="histo.html#parametres"><i class="fa fa-check"></i><b>5.6</b> Paramètres</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="histo.html"><a href="histo.html#limite-droite-et-gauches-des-batons"><i class="fa fa-check"></i><b>5.6.1</b> Limite droite et gauches des bâtons</a></li>
+<li class="chapter" data-level="5.6.2" data-path="histo.html"><a href="histo.html#nombre-de-batons"><i class="fa fa-check"></i><b>5.6.2</b> Nombre de bâtons</a></li>
+<li class="chapter" data-level="5.6.3" data-path="histo.html"><a href="histo.html#alignement-des-batones"><i class="fa fa-check"></i><b>5.6.3</b> Alignement des bâtones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="histo.html"><a href="histo.html#histogramme-interactif-avec-ggvis"><i class="fa fa-check"></i><b>5.7</b> Histogramme interactif avec <code>ggvis</code></a><ul>
+<li class="chapter" data-level="5.7.1" data-path="histo.html"><a href="histo.html#changer-la-largeur-de-bande-de-facon-interactive"><i class="fa fa-check"></i><b>5.7.1</b> Changer la largeur de bande de façon interactive</a></li>
+<li class="chapter" data-level="5.7.2" data-path="histo.html"><a href="histo.html#gdp"><i class="fa fa-check"></i><b>5.7.2</b> GDP</a></li>
+<li class="chapter" data-level="5.7.3" data-path="histo.html"><a href="histo.html#changer-le-centre-de-facon-interactive"><i class="fa fa-check"></i><b>5.7.3</b> Changer le centre de façon interactive</a></li>
+<li class="chapter" data-level="5.7.4" data-path="histo.html"><a href="histo.html#changer-le-centre-avec-affichage-des-valeurs"><i class="fa fa-check"></i><b>5.7.4</b> Changer le centre (avec affichage des valeurs)</a></li>
+<li class="chapter" data-level="5.7.5" data-path="histo.html"><a href="histo.html#changer-les-limites-droites-et-gauches-de-facon-interactive"><i class="fa fa-check"></i><b>5.7.5</b> Changer les limites droites et gauches de façon interactive</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="histo.html"><a href="histo.html#ressources-externes"><i class="fa fa-check"></i><b>5.8</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="box.html"><a href="box.html"><i class="fa fa-check"></i><b>6</b> Chart: Boxplot</a><ul>
+<li class="chapter" data-level="6.1" data-path="box.html"><a href="box.html#tldr-1"><i class="fa fa-check"></i><b>6.1</b> tl;dr</a></li>
+<li class="chapter" data-level="6.2" data-path="box.html"><a href="box.html#exemples-simples"><i class="fa fa-check"></i><b>6.2</b> Exemples simples</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="box.html"><a href="box.html#boxplots-unique"><i class="fa fa-check"></i><b>6.2.1</b> Boxplots unique</a></li>
+<li class="chapter" data-level="6.2.2" data-path="box.html"><a href="box.html#boxplots-multiples-utilisant-ggplot2"><i class="fa fa-check"></i><b>6.2.2</b> Boxplots multiples utilisant ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="box.html"><a href="box.html#theorie-1"><i class="fa fa-check"></i><b>6.3</b> Théorie</a></li>
+<li class="chapter" data-level="6.4" data-path="box.html"><a href="box.html#quand-lutiliser"><i class="fa fa-check"></i><b>6.4</b> Quand l’utiliser</a></li>
+<li class="chapter" data-level="6.5" data-path="box.html"><a href="box.html#considerations"><i class="fa fa-check"></i><b>6.5</b> Considérations</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="box.html"><a href="box.html#orientation-retournee"><i class="fa fa-check"></i><b>6.5.1</b> Orientation retournée</a></li>
+<li class="chapter" data-level="6.5.2" data-path="box.html"><a href="box.html#pas-pour-des-donnees-categorielles"><i class="fa fa-check"></i><b>6.5.2</b> PAS pour des données catégorielles</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="box.html"><a href="box.html#ressources-externes-1"><i class="fa fa-check"></i><b>6.6</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="violin.html"><a href="violin.html"><i class="fa fa-check"></i><b>7</b> Diagramme : Violin Plot</a><ul>
+<li class="chapter" data-level="7.1" data-path="violin.html"><a href="violin.html#avant-propos-2"><i class="fa fa-check"></i><b>7.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="7.2" data-path="violin.html"><a href="violin.html#quelques-exemples-en-r"><i class="fa fa-check"></i><b>7.2</b> Quelques exemples en R</a></li>
+<li class="chapter" data-level="7.3" data-path="violin.html"><a href="violin.html#ajout-de-quelques-statistiques-au-violin-plot"><i class="fa fa-check"></i><b>7.3</b> Ajout de quelques statistiques au violin plot</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="violin.html"><a href="violin.html#ajout-de-la-mediane-et-de-lintervalle-inter-quartile"><i class="fa fa-check"></i><b>7.3.1</b> Ajout de la médiane et de l’intervalle inter-quartile</a></li>
+<li class="chapter" data-level="7.3.2" data-path="violin.html"><a href="violin.html#affichage-des-donnees-avec-des-points"><i class="fa fa-check"></i><b>7.3.2</b> Affichage des données avec des points</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="violin.html"><a href="violin.html#description"><i class="fa fa-check"></i><b>7.4</b> Description</a></li>
+<li class="chapter" data-level="7.5" data-path="violin.html"><a href="violin.html#quand-lutiliser-1"><i class="fa fa-check"></i><b>7.5</b> Quand l’utiliser ?</a></li>
+<li class="chapter" data-level="7.6" data-path="violin.html"><a href="violin.html#ressources-externes-2"><i class="fa fa-check"></i><b>7.6</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ridgeline.html"><a href="ridgeline.html"><i class="fa fa-check"></i><b>8</b> Diagramme : Ridgeline Plots</a><ul>
+<li class="chapter" data-level="8.1" data-path="ridgeline.html"><a href="ridgeline.html#avant-propos-3"><i class="fa fa-check"></i><b>8.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="8.2" data-path="ridgeline.html"><a href="ridgeline.html#tldr-2"><i class="fa fa-check"></i><b>8.2</b> tl;dr</a></li>
+<li class="chapter" data-level="8.3" data-path="ridgeline.html"><a href="ridgeline.html#exemple-simple"><i class="fa fa-check"></i><b>8.3</b> Exemple simple</a></li>
+<li class="chapter" data-level="8.4" data-path="ridgeline.html"><a href="ridgeline.html#ridgeline-plots-avec-ggridge"><i class="fa fa-check"></i><b>8.4</b> Ridgeline Plots avec ggridge</a></li>
+<li class="chapter" data-level="8.5" data-path="ridgeline.html"><a href="ridgeline.html#quand-utiliser"><i class="fa fa-check"></i><b>8.5</b> Quand utiliser ?</a></li>
+<li class="chapter" data-level="8.6" data-path="ridgeline.html"><a href="ridgeline.html#considerations-1"><i class="fa fa-check"></i><b>8.6</b> Considerations</a></li>
+<li class="chapter" data-level="8.7" data-path="ridgeline.html"><a href="ridgeline.html#ressources-externes-3"><i class="fa fa-check"></i><b>8.7</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="qqplot.html"><a href="qqplot.html"><i class="fa fa-check"></i><b>9</b> Diagramme : QQ-Plot</a><ul>
+<li class="chapter" data-level="9.1" data-path="qqplot.html"><a href="qqplot.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="qqplot.html"><a href="qqplot.html#interpretation-des-qqplots"><i class="fa fa-check"></i><b>9.2</b> Interpretation des qqplots</a></li>
+<li class="chapter" data-level="9.3" data-path="qqplot.html"><a href="qqplot.html#normal-ou-pas-example-avec-qqnorm"><i class="fa fa-check"></i><b>9.3</b> Normal ou pas (example avec qqnorm)</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="qqplot.html"><a href="qqplot.html#qqplot-normal"><i class="fa fa-check"></i><b>9.3.1</b> qqplot normal</a></li>
+<li class="chapter" data-level="9.3.2" data-path="qqplot.html"><a href="qqplot.html#qqplot-non-normal"><i class="fa fa-check"></i><b>9.3.2</b> qqplot non-normal</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="qqplot.html"><a href="qqplot.html#differents-genre-de-qqplots"><i class="fa fa-check"></i><b>9.4</b> Différents genre de qqplots</a></li>
+<li class="chapter" data-level="9.5" data-path="qqplot.html"><a href="qqplot.html#qqplot-avec-ggplot"><i class="fa fa-check"></i><b>9.5</b> qqplot avec ggplot</a></li>
+<li class="chapter" data-level="9.6" data-path="qqplot.html"><a href="qqplot.html#references"><i class="fa fa-check"></i><b>9.6</b> References</a></li>
+</ul></li>
+<li class="part"><span><b>III Categorical Variables</b></span></li>
+<li class="chapter" data-level="10" data-path="bar.html"><a href="bar.html"><i class="fa fa-check"></i><b>10</b> Diagramme : Bar Chart</a><ul>
+<li class="chapter" data-level="10.1" data-path="bar.html"><a href="bar.html#avant-propos-4"><i class="fa fa-check"></i><b>10.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="10.2" data-path="bar.html"><a href="bar.html#tldr-3"><i class="fa fa-check"></i><b>10.2</b> tl;dr</a></li>
+<li class="chapter" data-level="10.3" data-path="bar.html"><a href="bar.html#exemples-simples-1"><i class="fa fa-check"></i><b>10.3</b> Exemples simples</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="bar.html"><a href="bar.html#bar-chart-avec-la-base-r"><i class="fa fa-check"></i><b>10.3.1</b> Bar chart avec la base R</a></li>
+<li class="chapter" data-level="10.3.2" data-path="bar.html"><a href="bar.html#bar-chart-avec-ggplot2"><i class="fa fa-check"></i><b>10.3.2</b> Bar chart avec ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="bar.html"><a href="bar.html#theorie-2"><i class="fa fa-check"></i><b>10.4</b> Théorie</a></li>
+<li class="chapter" data-level="10.5" data-path="bar.html"><a href="bar.html#quand-utiliser-1"><i class="fa fa-check"></i><b>10.5</b> Quand utiliser ?</a></li>
+<li class="chapter" data-level="10.6" data-path="ridgeline.html"><a href="ridgeline.html#considerations-1"><i class="fa fa-check"></i><b>10.6</b> Considérations</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="bar.html"><a href="bar.html#pas-pour-les-donnees-continues.."><i class="fa fa-check"></i><b>10.6.1</b> Pas pour les données continues..</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="bar.html"><a href="bar.html#modifications"><i class="fa fa-check"></i><b>10.7</b> Modifications</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="bar.html"><a href="bar.html#inversion-des-barres"><i class="fa fa-check"></i><b>10.7.1</b> Inversion des barres</a></li>
+<li class="chapter" data-level="10.7.2" data-path="bar.html"><a href="bar.html#reordonner-les-barres"><i class="fa fa-check"></i><b>10.7.2</b> Reordonner les barres</a></li>
+<li class="chapter" data-level="10.7.3" data-path="bar.html"><a href="bar.html#facet-wrap"><i class="fa fa-check"></i><b>10.7.3</b> Facet Wrap</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="bar.html"><a href="bar.html#ressources-externes-4"><i class="fa fa-check"></i><b>10.8</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="cleveland.html"><a href="cleveland.html"><i class="fa fa-check"></i><b>11</b> Diagramme : Cleveland Dot Plot</a><ul>
+<li class="chapter" data-level="11.1" data-path="cleveland.html"><a href="cleveland.html#avant-propos-5"><i class="fa fa-check"></i><b>11.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="11.2" data-path="cleveland.html"><a href="cleveland.html#multiple-dot-plots"><i class="fa fa-check"></i><b>11.2</b> Multiple dot plots</a></li>
+</ul></li>
+<li class="part"><span><b>IV Multivariate Continuous</b></span></li>
+<li class="chapter" data-level="12" data-path="scatter.html"><a href="scatter.html"><i class="fa fa-check"></i><b>12</b> Diagramme : Scatterplot</a><ul>
+<li class="chapter" data-level="12.1" data-path="scatter.html"><a href="scatter.html#avant-propos-6"><i class="fa fa-check"></i><b>12.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="12.2" data-path="scatter.html"><a href="scatter.html#tldr-4"><i class="fa fa-check"></i><b>12.2</b> tl;dr</a></li>
+<li class="chapter" data-level="12.3" data-path="scatter.html"><a href="scatter.html#exemples-simples-2"><i class="fa fa-check"></i><b>12.3</b> Exemples simples</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="scatter.html"><a href="scatter.html#scatterplot-de-base-en-r"><i class="fa fa-check"></i><b>12.3.1</b> Scatterplot de base en R</a></li>
+<li class="chapter" data-level="12.3.2" data-path="scatter.html"><a href="scatter.html#scatterplot-avec-ggplot2"><i class="fa fa-check"></i><b>12.3.2</b> Scatterplot avec ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="scatter.html"><a href="scatter.html#theorie-3"><i class="fa fa-check"></i><b>12.4</b> Théorie</a></li>
+<li class="chapter" data-level="12.5" data-path="scatter.html"><a href="scatter.html#quand-utiliser-2"><i class="fa fa-check"></i><b>12.5</b> Quand utiliser ?</a></li>
+<li class="chapter" data-level="12.6" data-path="scatter.html"><a href="scatter.html#considerations-2"><i class="fa fa-check"></i><b>12.6</b> Considérations</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="scatter.html"><a href="scatter.html#chevauchement-des-donnees."><i class="fa fa-check"></i><b>12.6.1</b> Chevauchement des données.</a></li>
+<li class="chapter" data-level="12.6.2" data-path="scatter.html"><a href="scatter.html#changement-dechelle"><i class="fa fa-check"></i><b>12.6.2</b> Changement d’échelle</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="scatter.html"><a href="scatter.html#modifications-1"><i class="fa fa-check"></i><b>12.7</b> Modifications</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="scatter.html"><a href="scatter.html#lignes-de-contours"><i class="fa fa-check"></i><b>12.7.1</b> Lignes de contours</a></li>
+<li class="chapter" data-level="12.7.2" data-path="scatter.html"><a href="scatter.html#matrices-de-scatterplot"><i class="fa fa-check"></i><b>12.7.2</b> Matrices de scatterplot</a></li>
+</ul></li>
+<li class="chapter" data-level="12.8" data-path="scatter.html"><a href="scatter.html#ressources-externes-5"><i class="fa fa-check"></i><b>12.8</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="iris.html"><a href="iris.html"><i class="fa fa-check"></i><b>13</b> Walkthrough: Iris Scatterplot</a><ul>
+<li class="chapter" data-level="13.1" data-path="iris.html"><a href="iris.html#avant-propos-7"><i class="fa fa-check"></i><b>13.1</b> Avant-propos</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="iris.html"><a href="iris.html#tldr-5"><i class="fa fa-check"></i><b>13.1.1</b> tl;dr</a></li>
+<li class="chapter" data-level="13.1.2" data-path="iris.html"><a href="iris.html#packages"><i class="fa fa-check"></i><b>13.1.2</b> Packages</a></li>
+<li class="chapter" data-level="13.1.3" data-path="iris.html"><a href="iris.html#techniques"><i class="fa fa-check"></i><b>13.1.3</b> Techniques</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="iris.html"><a href="iris.html#petite-note-sur-comment-le-faire-sans-effort"><i class="fa fa-check"></i><b>13.2</b> Petite note sur comment le faire sans effort</a></li>
+<li class="chapter" data-level="13.3" data-path="iris.html"><a href="iris.html#visualisation-des-donnees"><i class="fa fa-check"></i><b>13.3</b> Visualisation des données</a></li>
+<li class="chapter" data-level="13.4" data-path="iris.html"><a href="iris.html#afficher-les-donnees"><i class="fa fa-check"></i><b>13.4</b> Afficher les données</a></li>
+<li class="chapter" data-level="13.5" data-path="iris.html"><a href="iris.html#markdown-etiquette"><i class="fa fa-check"></i><b>13.5</b> Markdown etiquette</a></li>
+<li class="chapter" data-level="13.6" data-path="iris.html"><a href="iris.html#chevauchement-de-donnees"><i class="fa fa-check"></i><b>13.6</b> Chevauchement de données</a><ul>
+<li class="chapter" data-level="13.6.1" data-path="iris.html"><a href="iris.html#premierement-la-legende"><i class="fa fa-check"></i><b>13.6.1</b> Premièrement : la légende</a></li>
+<li class="chapter" data-level="13.6.2" data-path="iris.html"><a href="iris.html#deuxiement-le-jittering"><i class="fa fa-check"></i><b>13.6.2</b> Deuxièment : le jittering</a></li>
+<li class="chapter" data-level="13.6.3" data-path="iris.html"><a href="iris.html#parenthese-exemple-de-cas-ou-le-alpha-blending-est-utile"><i class="fa fa-check"></i><b>13.6.3</b> <em>Parenthèse</em> : Exemple de cas où le alpha blending est utile</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="iris.html"><a href="iris.html#remanier-pour-presenter"><i class="fa fa-check"></i><b>13.7</b> Remanier pour présenter</a></li>
+<li class="chapter" data-level="13.8" data-path="iris.html"><a href="iris.html#modifier-lapparence"><i class="fa fa-check"></i><b>13.8</b> Modifier l’apparence</a></li>
+<li class="chapter" data-level="13.9" data-path="iris.html"><a href="iris.html#ajouter-des-themes"><i class="fa fa-check"></i><b>13.9</b> Ajouter des themes</a></li>
+<li class="chapter" data-level="13.10" data-path="iris.html"><a href="iris.html#pour-aller-plus-loin"><i class="fa fa-check"></i><b>13.10</b> Pour aller plus loin</a></li>
+<li class="chapter" data-level="13.11" data-path="iris.html"><a href="iris.html#liens-utiles"><i class="fa fa-check"></i><b>13.11</b> Liens utiles</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html"><i class="fa fa-check"></i><b>14</b> Chart: Parallel Coordinate Plots</a><ul>
+<li class="chapter" data-level="14.1" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#vue-densemble-1"><i class="fa fa-check"></i><b>14.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="14.2" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#tldr-6"><i class="fa fa-check"></i><b>14.2</b> tl;dr</a></li>
+<li class="chapter" data-level="14.3" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#examples-simples"><i class="fa fa-check"></i><b>14.3</b> Examples simples</a></li>
+<li class="chapter" data-level="14.4" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#theorie-4"><i class="fa fa-check"></i><b>14.4</b> Theorie</a></li>
+<li class="chapter" data-level="14.5" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#quand-les-utiliser"><i class="fa fa-check"></i><b>14.5</b> Quand les utiliser</a></li>
+<li class="chapter" data-level="14.6" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#considerations-3"><i class="fa fa-check"></i><b>14.6</b> Considerations</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#quand-utiliser-le-clustering"><i class="fa fa-check"></i><b>14.6.1</b> Quand utiliser le clustering?</a></li>
+<li class="chapter" data-level="14.6.2" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#choix-du-parametre-alpha"><i class="fa fa-check"></i><b>14.6.2</b> Choix du paramètre alpha</a></li>
+<li class="chapter" data-level="14.6.3" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#scales"><i class="fa fa-check"></i><b>14.6.3</b> Scales</a></li>
+<li class="chapter" data-level="14.6.4" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#ordre-des-variables"><i class="fa fa-check"></i><b>14.6.4</b> Ordre des variables</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#modifications-2"><i class="fa fa-check"></i><b>14.7</b> Modifications</a><ul>
+<li class="chapter" data-level="14.7.1" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#permutation-des-coordonnees"><i class="fa fa-check"></i><b>14.7.1</b> Permutation des coordonnées</a></li>
+<li class="chapter" data-level="14.7.2" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#faire-appparaitre-des-tendances"><i class="fa fa-check"></i><b>14.7.2</b> Faire appparaître des tendances</a></li>
+<li class="chapter" data-level="14.7.3" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#utilisation-de-splines"><i class="fa fa-check"></i><b>14.7.3</b> Utilisation de splines</a></li>
+<li class="chapter" data-level="14.7.4" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#ajout-de-boxplot-au-graphique"><i class="fa fa-check"></i><b>14.7.4</b> Ajout de boxplot au graphique</a></li>
+</ul></li>
+<li class="chapter" data-level="14.8" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#autres-packages"><i class="fa fa-check"></i><b>14.8</b> Autres Packages</a></li>
+<li class="chapter" data-level="14.9" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#ressources-externes-6"><i class="fa fa-check"></i><b>14.9</b> Ressources Externes</a></li>
+</ul></li>
+<li class="part"><span><b>V Multivariate Categorical</b></span></li>
+<li class="chapter" data-level="15" data-path="mosaic.html"><a href="mosaic.html"><i class="fa fa-check"></i><b>15</b> Diagramme : Mosaic</a><ul>
+<li class="chapter" data-level="15.1" data-path="mosaic.html"><a href="mosaic.html#vue-densemble-2"><i class="fa fa-check"></i><b>15.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="15.2" data-path="mosaic.html"><a href="mosaic.html#tldr-7"><i class="fa fa-check"></i><b>15.2</b> tl;dr</a></li>
+<li class="chapter" data-level="15.3" data-path="mosaic.html"><a href="mosaic.html#lordre-des-coupes"><i class="fa fa-check"></i><b>15.3</b> L’ordre des coupes</a></li>
+<li class="chapter" data-level="15.4" data-path="mosaic.html"><a href="mosaic.html#direction-des-coupes"><i class="fa fa-check"></i><b>15.4</b> Direction des coupes</a></li>
+<li class="chapter" data-level="15.5" data-path="mosaic.html"><a href="mosaic.html#couleur"><i class="fa fa-check"></i><b>15.5</b> Couleur</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="mosaic.html"><a href="mosaic.html#couleur-de-fond"><i class="fa fa-check"></i><b>15.5.1</b> Couleur de fond</a></li>
+<li class="chapter" data-level="15.5.2" data-path="mosaic.html"><a href="mosaic.html#couleur-de-bordure-il-faut-egalement-definir-la-couleur-de-fond"><i class="fa fa-check"></i><b>15.5.2</b> Couleur de bordure (il faut également définir la couleur de fond(?))</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="mosaic.html"><a href="mosaic.html#etiquettes"><i class="fa fa-check"></i><b>15.6</b> Etiquettes</a><ul>
+<li class="chapter" data-level="15.6.1" data-path="mosaic.html"><a href="mosaic.html#faire-pivoter-les-etiquettes"><i class="fa fa-check"></i><b>15.6.1</b> Faire pivoter les étiquettes</a></li>
+<li class="chapter" data-level="15.6.2" data-path="mosaic.html"><a href="mosaic.html#alleger-les-etiquettes"><i class="fa fa-check"></i><b>15.6.2</b> Alléger les étiquettes</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="mosaic.html"><a href="mosaic.html#agencement-des-cellules"><i class="fa fa-check"></i><b>15.7</b> Agencement des cellules</a><ul>
+<li class="chapter" data-level="15.7.1" data-path="mosaic.html"><a href="mosaic.html#mosaique-en-utilisant-vcddoubledecker"><i class="fa fa-check"></i><b>15.7.1</b> Mosaïque en utilisant vcd::doubledecker</a></li>
+</ul></li>
+<li class="chapter" data-level="15.8" data-path="mosaic.html"><a href="mosaic.html#mosaique-en-utilisant-ggplot"><i class="fa fa-check"></i><b>15.8</b> Mosaique en utilisant ggplot</a></li>
+<li class="chapter" data-level="15.9" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#theorie-4"><i class="fa fa-check"></i><b>15.9</b> Théorie</a></li>
+<li class="chapter" data-level="15.10" data-path="mosaic.html"><a href="mosaic.html#quand-lutiliser-2"><i class="fa fa-check"></i><b>15.10</b> Quand l’utiliser</a></li>
+<li class="chapter" data-level="15.11" data-path="mosaic.html"><a href="mosaic.html#considerations-4"><i class="fa fa-check"></i><b>15.11</b> Considerations</a><ul>
+<li class="chapter" data-level="15.11.1" data-path="mosaic.html"><a href="mosaic.html#etiquettes-1"><i class="fa fa-check"></i><b>15.11.1</b> Etiquettes</a></li>
+<li class="chapter" data-level="15.11.2" data-path="mosaic.html"><a href="mosaic.html#aspect-ratio"><i class="fa fa-check"></i><b>15.11.2</b> Aspect Ratio</a></li>
+<li class="chapter" data-level="15.11.3" data-path="mosaic.html"><a href="mosaic.html#espace-entre-les-rectangles"><i class="fa fa-check"></i><b>15.11.3</b> Espace entre les rectangles</a></li>
+<li class="chapter" data-level="15.11.4" data-path="mosaic.html"><a href="mosaic.html#couleur-1"><i class="fa fa-check"></i><b>15.11.4</b> Couleur</a></li>
+</ul></li>
+<li class="chapter" data-level="15.12" data-path="mosaic.html"><a href="mosaic.html#ressources-externes-7"><i class="fa fa-check"></i><b>15.12</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="heatmap.html"><a href="heatmap.html"><i class="fa fa-check"></i><b>16</b> Diagramme: Carte Thermique</a><ul>
+<li class="chapter" data-level="16.1" data-path="heatmap.html"><a href="heatmap.html#vue-densemble-3"><i class="fa fa-check"></i><b>16.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="16.2" data-path="heatmap.html"><a href="heatmap.html#tldr-8"><i class="fa fa-check"></i><b>16.2</b> tl;dr</a></li>
+<li class="chapter" data-level="16.3" data-path="heatmap.html"><a href="heatmap.html#exemples-simples-3"><i class="fa fa-check"></i><b>16.3</b> Exemples simples</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="heatmap.html"><a href="heatmap.html#carte-thermique-de-compartiments-dhistogrammes-en-2d-bin-count"><i class="fa fa-check"></i><b>16.3.1</b> Carte thermique de compartiments d’histogrammes en 2D (bin count)</a></li>
+<li class="chapter" data-level="16.3.2" data-path="heatmap.html"><a href="heatmap.html#carte-thermique-dun-dataframe"><i class="fa fa-check"></i><b>16.3.2</b> Carte thermique d’un Dataframe</a></li>
+<li class="chapter" data-level="16.3.3" data-path="heatmap.html"><a href="heatmap.html#modifications-3"><i class="fa fa-check"></i><b>16.3.3</b> Modifications</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="heatmap.html"><a href="heatmap.html#theorie-5"><i class="fa fa-check"></i><b>16.4</b> Theorie</a></li>
+<li class="chapter" data-level="16.5" data-path="heatmap.html"><a href="heatmap.html#ressources-externes-8"><i class="fa fa-check"></i><b>16.5</b> Ressources Externes</a></li>
+</ul></li>
+<li class="part"><span><b>VI Special Data Types</b></span></li>
+<li class="chapter" data-level="17" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>17</b> Spatial Data</a><ul>
+<li class="chapter" data-level="17.1" data-path="maps.html"><a href="maps.html#les-choropleth-maps"><i class="fa fa-check"></i><b>17.1</b> Les choropleth maps</a></li>
+<li class="chapter" data-level="17.2" data-path="maps.html"><a href="maps.html#square-bins"><i class="fa fa-check"></i><b>17.2</b> Square bins</a></li>
+<li class="chapter" data-level="17.3" data-path="maps.html"><a href="maps.html#donnees-sur-la-longitude-latitude"><i class="fa fa-check"></i><b>17.3</b> Données sur la Longitude / Latitude</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>18</b> Interactive Geographic Data</a><ul>
+<li class="chapter" data-level="18.1" data-path="leaflet.html"><a href="leaflet.html#vue-densemble-4"><i class="fa fa-check"></i><b>18.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="18.2" data-path="leaflet.html"><a href="leaflet.html#breve-description-du-jeu-de-donnees"><i class="fa fa-check"></i><b>18.2</b> Brève description du jeu de données</a></li>
+<li class="chapter" data-level="18.3" data-path="leaflet.html"><a href="leaflet.html#plotting-markers"><i class="fa fa-check"></i><b>18.3</b> Plotting Markers</a></li>
+<li class="chapter" data-level="18.4" data-path="leaflet.html"><a href="leaflet.html#heatmaps-dynamiques"><i class="fa fa-check"></i><b>18.4</b> Heatmaps dynamiques</a></li>
+<li class="chapter" data-level="18.5" data-path="leaflet.html"><a href="leaflet.html#clustering-dynamique"><i class="fa fa-check"></i><b>18.5</b> Clustering dynamique</a></li>
+<li class="chapter" data-level="18.6" data-path="leaflet.html"><a href="leaflet.html#afficher-les-groupes"><i class="fa fa-check"></i><b>18.6</b> Afficher les groupes</a></li>
+<li class="chapter" data-level="18.7" data-path="leaflet.html"><a href="leaflet.html#afficher-des-donnees-categorielles"><i class="fa fa-check"></i><b>18.7</b> Afficher des données catégorielles</a></li>
+<li class="chapter" data-level="18.8" data-path="leaflet.html"><a href="leaflet.html#external-resources"><i class="fa fa-check"></i><b>18.8</b> External Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>19</b> Interactive Networks</a><ul>
+<li class="chapter" data-level="19.1" data-path="network.html"><a href="network.html#visnetwork-interactive"><i class="fa fa-check"></i><b>19.1</b> visNetwork (interactive)</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="network.html"><a href="network.html#lexemple-service-minimum"><i class="fa fa-check"></i><b>19.1.1</b> L’exemple service minimum</a></li>
+<li class="chapter" data-level="19.1.2" data-path="network.html"><a href="network.html#performance"><i class="fa fa-check"></i><b>19.1.2</b> Performance</a></li>
+<li class="chapter" data-level="19.1.3" data-path="network.html"><a href="network.html#des-outils-de-configuration-utiles"><i class="fa fa-check"></i><b>19.1.3</b> Des outils de configuration utiles</a></li>
+<li class="chapter" data-level="19.1.4" data-path="network.html"><a href="network.html#colorer-les-noeuds"><i class="fa fa-check"></i><b>19.1.4</b> Colorer les noeuds</a></li>
+<li class="chapter" data-level="19.1.5" data-path="network.html"><a href="network.html#noeuds-orientes-fleches"><i class="fa fa-check"></i><b>19.1.5</b> Noeuds orientés (flèches)</a></li>
+<li class="chapter" data-level="19.1.6" data-path="network.html"><a href="network.html#desactiver-le-mouvement-du-graphe"><i class="fa fa-check"></i><b>19.1.6</b> Désactiver le mouvement du graphe</a></li>
+<li class="chapter" data-level="19.1.7" data-path="network.html"><a href="network.html#griser-les-noeuds-loins-de-celui-selectionne-par-definition-du-degre"><i class="fa fa-check"></i><b>19.1.7</b> Griser les noeuds loins de celui selectionné (par définition du degré)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html"><i class="fa fa-check"></i><b>20</b> Séries temporelles</a><ul>
+<li class="chapter" data-level="20.1" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#vue-densemble-5"><i class="fa fa-check"></i><b>20.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="20.2" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#series-temporelles-simplesmultiples"><i class="fa fa-check"></i><b>20.2</b> Séries temporelles simples/multiples</a></li>
+<li class="chapter" data-level="20.3" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#tendance-generale"><i class="fa fa-check"></i><b>20.3</b> Tendance générale</a></li>
+<li class="chapter" data-level="20.4" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#tendance-saisonniere"><i class="fa fa-check"></i><b>20.4</b> Tendance saisonnière</a></li>
+<li class="chapter" data-level="20.5" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#frequence-des-donnees"><i class="fa fa-check"></i><b>20.5</b> Fréquence des données</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="tidyquant.html"><a href="tidyquant.html"><i class="fa fa-check"></i><b>21</b> Stock data with tidyquant</a><ul>
+<li class="chapter" data-level="21.1" data-path="tidyquant.html"><a href="tidyquant.html#vue-densemble-6"><i class="fa fa-check"></i><b>21.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="21.2" data-path="tidyquant.html"><a href="tidyquant.html#quest-ce-que-tidyquant"><i class="fa fa-check"></i><b>21.2</b> Qu’est ce que tidyquant ?</a></li>
+<li class="chapter" data-level="21.3" data-path="tidyquant.html"><a href="tidyquant.html#installer-tidyquant"><i class="fa fa-check"></i><b>21.3</b> Installer tidyquant</a></li>
+<li class="chapter" data-level="21.4" data-path="tidyquant.html"><a href="tidyquant.html#simple-timeseries"><i class="fa fa-check"></i><b>21.4</b> Simple timeseries</a></li>
+<li class="chapter" data-level="21.5" data-path="tidyquant.html"><a href="tidyquant.html#timeseries-multiples"><i class="fa fa-check"></i><b>21.5</b> Timeseries multiples</a></li>
+<li class="chapter" data-level="21.6" data-path="tidyquant.html"><a href="tidyquant.html#ressources-externes-9"><i class="fa fa-check"></i><b>21.6</b> Ressources externes</a></li>
+</ul></li>
+<li class="part"><span><b>VII Travailler avec des données</b></span></li>
+<li class="chapter" data-level="22" data-path="import.html"><a href="import.html"><i class="fa fa-check"></i><b>22</b> Importer des données</a><ul>
+<li class="chapter" data-level="22.1" data-path="import.html"><a href="import.html#vue-densemble-7"><i class="fa fa-check"></i><b>22.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="22.2" data-path="import.html"><a href="import.html#importer-des-datasets-deja-implementes-dans-r"><i class="fa fa-check"></i><b>22.2</b> Importer des datasets déjà implémentés dans R</a></li>
+<li class="chapter" data-level="22.3" data-path="import.html"><a href="import.html#importer-des-donnees-stockees-localement"><i class="fa fa-check"></i><b>22.3</b> Importer des données stockées localement</a><ul>
+<li class="chapter" data-level="22.3.1" data-path="import.html"><a href="import.html#importer-des-fichiers-textes"><i class="fa fa-check"></i><b>22.3.1</b> Importer des fichiers textes</a></li>
+<li class="chapter" data-level="22.3.2" data-path="import.html"><a href="import.html#importer-des-fichiers-csv"><i class="fa fa-check"></i><b>22.3.2</b> Importer des fichiers CSV</a></li>
+<li class="chapter" data-level="22.3.3" data-path="import.html"><a href="import.html#importer-un-fichier-json"><i class="fa fa-check"></i><b>22.3.3</b> Importer un fichier JSON</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="import.html"><a href="import.html#importer-des-donnees-web"><i class="fa fa-check"></i><b>22.4</b> Importer des données web</a><ul>
+<li class="chapter" data-level="22.4.1" data-path="import.html"><a href="import.html#lire-un-fichier-directement-dans-notre-environnement-de-travail"><i class="fa fa-check"></i><b>22.4.1</b> Lire un fichier directement dans notre environnement de travail</a></li>
+<li class="chapter" data-level="22.4.2" data-path="import.html"><a href="import.html#scraper-une-table-html-en-utilisant-rvest"><i class="fa fa-check"></i><b>22.4.2</b> Scraper une table HTML en utilisant <code>rvest</code></a></li>
+</ul></li>
+<li class="chapter" data-level="22.5" data-path="import.html"><a href="import.html#importer-des-donnees-a-partir-de-bases-de-donnees"><i class="fa fa-check"></i><b>22.5</b> Importer des données à partir de bases de données</a></li>
+<li class="chapter" data-level="22.6" data-path="import.html"><a href="import.html#plus-de-ressources"><i class="fa fa-check"></i><b>22.6</b> Plus de ressources</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>23</b> Revue détaillée : Tidy Data &amp; dplyr</a><ul>
+<li class="chapter" data-level="23.1" data-path="tidy.html"><a href="tidy.html#vue-densemble-8"><i class="fa fa-check"></i><b>23.1</b> Vue d’ensemble</a><ul>
+<li class="chapter" data-level="23.1.1" data-path="tidy.html"><a href="tidy.html#les-packages"><i class="fa fa-check"></i><b>23.1.1</b> Les packages</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="tidy.html"><a href="tidy.html#installer-les-packages"><i class="fa fa-check"></i><b>23.2</b> Installer les packages</a></li>
+<li class="chapter" data-level="23.3" data-path="tidy.html"><a href="tidy.html#voir-les-donnees"><i class="fa fa-check"></i><b>23.3</b> Voir les données</a></li>
+<li class="chapter" data-level="23.4" data-path="tidy.html"><a href="tidy.html#quest-ce-quune-tidy-data"><i class="fa fa-check"></i><b>23.4</b> Qu’est ce qu’une Tidy data?</a></li>
+<li class="chapter" data-level="23.5" data-path="tidy.html"><a href="tidy.html#tibbles"><i class="fa fa-check"></i><b>23.5</b> Tibbles</a></li>
+<li class="chapter" data-level="23.6" data-path="tidy.html"><a href="tidy.html#test-pour-les-valeurs-manquantes"><i class="fa fa-check"></i><b>23.6</b> Test pour les valeurs manquantes</a></li>
+<li class="chapter" data-level="23.7" data-path="tidy.html"><a href="tidy.html#remplacer-les-valeurs-manquantes"><i class="fa fa-check"></i><b>23.7</b> Remplacer les valeurs manquantes</a></li>
+<li class="chapter" data-level="23.8" data-path="tidy.html"><a href="tidy.html#vocabulaire-de-la-manipulation-de-donnees"><i class="fa fa-check"></i><b>23.8</b> Vocabulaire de la manipulation de données</a></li>
+<li class="chapter" data-level="23.9" data-path="tidy.html"><a href="tidy.html#renommage"><i class="fa fa-check"></i><b>23.9</b> Renommage</a></li>
+<li class="chapter" data-level="23.10" data-path="tidy.html"><a href="tidy.html#select"><i class="fa fa-check"></i><b>23.10</b> Select</a></li>
+<li class="chapter" data-level="23.11" data-path="tidy.html"><a href="tidy.html#mutate"><i class="fa fa-check"></i><b>23.11</b> Mutate</a></li>
+<li class="chapter" data-level="23.12" data-path="tidy.html"><a href="tidy.html#filter"><i class="fa fa-check"></i><b>23.12</b> Filter</a></li>
+<li class="chapter" data-level="23.13" data-path="tidy.html"><a href="tidy.html#arrange"><i class="fa fa-check"></i><b>23.13</b> Arrange</a></li>
+<li class="chapter" data-level="23.14" data-path="tidy.html"><a href="tidy.html#summarize-group-by"><i class="fa fa-check"></i><b>23.14</b> Summarize &amp; Group By</a></li>
+<li class="chapter" data-level="23.15" data-path="tidy.html"><a href="tidy.html#pipe-operator"><i class="fa fa-check"></i><b>23.15</b> Pipe Operator</a></li>
+<li class="chapter" data-level="23.16" data-path="tidy.html"><a href="tidy.html#nettoyer-les-donnees-transformees"><i class="fa fa-check"></i><b>23.16</b> Nettoyer les données transformées</a></li>
+<li class="chapter" data-level="23.17" data-path="tidy.html"><a href="tidy.html#liens-utiles-1"><i class="fa fa-check"></i><b>23.17</b> Liens utiles</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i><b>24</b> Données manquantes</a><ul>
+<li class="chapter" data-level="24.1" data-path="missing.html"><a href="missing.html#vue-densemble-9"><i class="fa fa-check"></i><b>24.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="24.2" data-path="missing.html"><a href="missing.html#tldr-9"><i class="fa fa-check"></i><b>24.2</b> tl;dr</a></li>
+<li class="chapter" data-level="24.3" data-path="missing.html"><a href="missing.html#que-sont-les-nas"><i class="fa fa-check"></i><b>24.3</b> Que sont les NAs?</a></li>
+<li class="chapter" data-level="24.4" data-path="missing.html"><a href="missing.html#types-de-donnees-manquantes"><i class="fa fa-check"></i><b>24.4</b> Types de Données Manquantes</a></li>
+<li class="chapter" data-level="24.5" data-path="missing.html"><a href="missing.html#patterns-manquants"><i class="fa fa-check"></i><b>24.5</b> Patterns manquants</a><ul>
+<li class="chapter" data-level="24.5.1" data-path="missing.html"><a href="missing.html#patterns-manquants-par-colonne"><i class="fa fa-check"></i><b>24.5.1</b> Patterns manquants par colonne</a></li>
+<li class="chapter" data-level="24.5.2" data-path="missing.html"><a href="missing.html#patterns-manquants-par-rang"><i class="fa fa-check"></i><b>24.5.2</b> Patterns manquants par rang</a></li>
+</ul></li>
+<li class="chapter" data-level="24.6" data-path="missing.html"><a href="missing.html#traiter-les-valeurs-manquantes"><i class="fa fa-check"></i><b>24.6</b> Traiter les valeurs manquantes</a><ul>
+<li class="chapter" data-level="24.6.1" data-path="missing.html"><a href="missing.html#supression-des-rangs-comprenant-des-nas"><i class="fa fa-check"></i><b>24.6.1</b> Supression des rangs comprenant des NAs</a></li>
+<li class="chapter" data-level="24.6.2" data-path="missing.html"><a href="missing.html#technique-de-prediction"><i class="fa fa-check"></i><b>24.6.2</b> Technique de prédiction</a></li>
+<li class="chapter" data-level="24.6.3" data-path="missing.html"><a href="missing.html#prediction-par-modele"><i class="fa fa-check"></i><b>24.6.3</b> Prédiction par modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="24.7" data-path="missing.html"><a href="missing.html#external-resources-1"><i class="fa fa-check"></i><b>24.7</b> External Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>25</b> Outliers</a><ul>
+<li class="chapter" data-level="25.1" data-path="outliers.html"><a href="outliers.html#vue-densemble-10"><i class="fa fa-check"></i><b>25.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="25.2" data-path="outliers.html"><a href="outliers.html#tldr-10"><i class="fa fa-check"></i><b>25.2</b> tl;dr</a></li>
+<li class="chapter" data-level="25.3" data-path="outliers.html"><a href="outliers.html#que-sont-outliers"><i class="fa fa-check"></i><b>25.3</b> Que sont outliers?</a></li>
+<li class="chapter" data-level="25.4" data-path="outliers.html"><a href="outliers.html#types-doutliers"><i class="fa fa-check"></i><b>25.4</b> Types d’outliers</a><ul>
+<li class="chapter" data-level="25.4.1" data-path="outliers.html"><a href="outliers.html#outliers-univariable"><i class="fa fa-check"></i><b>25.4.1</b> Outliers univariable</a></li>
+<li class="chapter" data-level="25.4.2" data-path="outliers.html"><a href="outliers.html#les-outliers-multivariables"><i class="fa fa-check"></i><b>25.4.2</b> Les outliers multivariables</a></li>
+<li class="chapter" data-level="25.4.3" data-path="outliers.html"><a href="outliers.html#les-outliers-categoriels"><i class="fa fa-check"></i><b>25.4.3</b> Les outliers catégoriels</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="outliers.html"><a href="outliers.html#gerer-les-outliers"><i class="fa fa-check"></i><b>25.5</b> Gérer les outliers</a><ul>
+<li class="chapter" data-level="25.5.1" data-path="outliers.html"><a href="outliers.html#sans-information"><i class="fa fa-check"></i><b>25.5.1</b> Sans information</a></li>
+<li class="chapter" data-level="25.5.2" data-path="outliers.html"><a href="outliers.html#plus-informatif"><i class="fa fa-check"></i><b>25.5.2</b> Plus informatif</a></li>
+</ul></li>
+<li class="chapter" data-level="25.6" data-path="outliers.html"><a href="outliers.html#ressources-externes-10"><i class="fa fa-check"></i><b>25.6</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="dates.html"><a href="dates.html"><i class="fa fa-check"></i><b>26</b> Dates dans R</a><ul>
+<li class="chapter" data-level="26.1" data-path="dates.html"><a href="dates.html#introduction-1"><i class="fa fa-check"></i><b>26.1</b> Introduction</a></li>
+<li class="chapter" data-level="26.2" data-path="dates.html"><a href="dates.html#convertir-en-la-classe-date"><i class="fa fa-check"></i><b>26.2</b> Convertir en la classe <code>Date</code></a></li>
+<li class="chapter" data-level="26.3" data-path="dates.html"><a href="dates.html#travaillez-avec-la-classe-date"><i class="fa fa-check"></i><b>26.3</b> Travaillez avec la classe <code>Date</code></a></li>
+<li class="chapter" data-level="26.4" data-path="dates.html"><a href="dates.html#tracez-des-graphes-avec-une-variable-de-classe-date"><i class="fa fa-check"></i><b>26.4</b> Tracez des graphes avec une variable de classe <code>Date</code></a><ul>
+<li class="chapter" data-level="26.4.1" data-path="dates.html"><a href="dates.html#base-r"><i class="fa fa-check"></i><b>26.4.1</b> base R</a></li>
+<li class="chapter" data-level="26.4.2" data-path="dates.html"><a href="dates.html#ggplot2"><i class="fa fa-check"></i><b>26.4.2</b> ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="26.5" data-path="dates.html"><a href="dates.html#date-and-time-classes"><i class="fa fa-check"></i><b>26.5</b> Date and time classes</a></li>
+</ul></li>
+<li class="part"><span><b>VIII Other Topics</b></span></li>
+<li class="chapter" data-level="27" data-path="percept.html"><a href="percept.html"><i class="fa fa-check"></i><b>27</b> Perception/Couleur</a><ul>
+<li class="chapter" data-level="27.1" data-path="percept.html"><a href="percept.html#vue-densemble-11"><i class="fa fa-check"></i><b>27.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="27.2" data-path="percept.html"><a href="percept.html#perception"><i class="fa fa-check"></i><b>27.2</b> Perception</a></li>
+<li class="chapter" data-level="27.3" data-path="percept.html"><a href="percept.html#couleur-2"><i class="fa fa-check"></i><b>27.3</b> Couleur</a></li>
+<li class="chapter" data-level="27.4" data-path="percept.html"><a href="percept.html#astuces-pour-utiliser-les-couleurs-avec-ggplot2"><i class="fa fa-check"></i><b>27.4</b> Astuces pour utiliser les couleurs avec <code>ggplot2</code></a><ul>
+<li class="chapter" data-level="27.4.1" data-path="percept.html"><a href="percept.html#donnees-continues"><i class="fa fa-check"></i><b>27.4.1</b> Données continues</a></li>
+<li class="chapter" data-level="27.4.2" data-path="percept.html"><a href="percept.html#donnees-discretes"><i class="fa fa-check"></i><b>27.4.2</b> Données discrètes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i><b>28</b> Thèmes et Palettes</a><ul>
+<li class="chapter" data-level="28.1" data-path="themes.html"><a href="themes.html#vue-densemble-12"><i class="fa fa-check"></i><b>28.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="28.2" data-path="themes.html"><a href="themes.html#themes-ggplot2"><i class="fa fa-check"></i><b>28.2</b> Thèmes ggplot2</a><ul>
+<li class="chapter" data-level="28.2.1" data-path="themes.html"><a href="themes.html#exemples-de-themes-ggplot"><i class="fa fa-check"></i><b>28.2.1</b> exemples de thèmes ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="28.3" data-path="themes.html"><a href="themes.html#rcolorbrewer"><i class="fa fa-check"></i><b>28.3</b> RColorBrewer</a></li>
+<li class="chapter" data-level="28.4" data-path="themes.html"><a href="themes.html#ggthemes"><i class="fa fa-check"></i><b>28.4</b> ggthemes</a><ul>
+<li class="chapter" data-level="28.4.1" data-path="themes.html"><a href="themes.html#exemples-de-ggthemes"><i class="fa fa-check"></i><b>28.4.1</b> exemples de ggthemes</a></li>
+</ul></li>
+<li class="chapter" data-level="28.5" data-path="themes.html"><a href="themes.html#ggthemr"><i class="fa fa-check"></i><b>28.5</b> ggthemr</a><ul>
+<li class="chapter" data-level="28.5.1" data-path="themes.html"><a href="themes.html#exemples-ggthemr"><i class="fa fa-check"></i><b>28.5.1</b> exemples ggthemr</a></li>
+</ul></li>
+<li class="chapter" data-level="28.6" data-path="themes.html"><a href="themes.html#ggsci"><i class="fa fa-check"></i><b>28.6</b> ggsci</a><ul>
+<li class="chapter" data-level="28.6.1" data-path="themes.html"><a href="themes.html#ggsci-pour-donnees-discretes"><i class="fa fa-check"></i><b>28.6.1</b> ggsci pour données discrètes</a></li>
+<li class="chapter" data-level="28.6.2" data-path="themes.html"><a href="themes.html#ggsci-pour-donnees-continues"><i class="fa fa-check"></i><b>28.6.2</b> ggsci pour données continues</a></li>
+</ul></li>
+<li class="chapter" data-level="28.7" data-path="themes.html"><a href="themes.html#ressources-externes-11"><i class="fa fa-check"></i><b>28.7</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>29</b> GitHub/git Resources</a><ul>
+<li class="chapter" data-level="29.1" data-path="github.html"><a href="github.html#vue-densemble-13"><i class="fa fa-check"></i><b>29.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="29.2" data-path="github.html"><a href="github.html#tout-dabord"><i class="fa fa-check"></i><b>29.2</b> Tout d’abord</a></li>
+<li class="chapter" data-level="29.3" data-path="github.html"><a href="github.html#le-workflow-sans-branche"><i class="fa fa-check"></i><b>29.3</b> Le workflow sans branche</a></li>
+<li class="chapter" data-level="29.4" data-path="github.html"><a href="github.html#votre-repo-avec-branche"><i class="fa fa-check"></i><b>29.4</b> Votre repo avec branche</a></li>
+<li class="chapter" data-level="29.5" data-path="github.html"><a href="github.html#ere-pr-sur-un-autre-repo-avec-branching"><i class="fa fa-check"></i><b>29.5</b> 1ère PR sur un autre repo avec branching</a><ul>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-1-fork-le-repo-upstream-une-seule-fois"><i class="fa fa-check"></i>Etape 1: ‘Fork’ le repo ‘upstream’ (une seule fois)</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-2-clonez-le-repo-dorigine-et-creez-un-repo-local-une-fois"><i class="fa fa-check"></i>Etape 2: Clonez le repo d’origine et créez un repo local (une fois)</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-3-configurez-le-repo-remote-qui-est-relie-au-repo-upstream-une-fois"><i class="fa fa-check"></i>Etape 3: Configurez le repo ‘remote’ qui est relié au repo ‘upstream’ (une fois)</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-4-branch"><i class="fa fa-check"></i>Etape 4: Branch</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-5-travaillez-commit-et-push"><i class="fa fa-check"></i>Etape 5: Travaillez, commit et push</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-6-envoyer-une-pull-request"><i class="fa fa-check"></i>Etape 6: Envoyer une pull request</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-7-fusionner-la-pull-request"><i class="fa fa-check"></i>Etape 7: Fusionner la pull request</a></li>
+</ul></li>
+<li class="chapter" data-level="29.6" data-path="github.html"><a href="github.html#eme-neme-pr-sur-un-autre-repo-avec-branching"><i class="fa fa-check"></i><b>29.6</b> 2ème-<em>n</em>ème PR sur un autre repo avec branching</a><ul>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#step-1-synchroniser"><i class="fa fa-check"></i>Step 1: Synchroniser</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-2-supprimer-lancienne-branche"><i class="fa fa-check"></i>Etape 2: Supprimer l’ancienne branche</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-3-mettre-a-jour-votre-fork-sur-github"><i class="fa fa-check"></i>Etape 3: Mettre à jour votre fork sur GitHub</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etapes-4-7-voir-ci-dessus"><i class="fa fa-check"></i>Etapes 4-7: Voir ci-dessus</a></li>
+</ul></li>
+<li class="chapter" data-level="29.7" data-path="github.html"><a href="github.html#infos-git-qui-peuvent-etre-utiles"><i class="fa fa-check"></i><b>29.7</b> Infos Git qui peuvent être utiles</a><ul>
+<li class="chapter" data-level="29.7.1" data-path="github.html"><a href="github.html#supprimer-le-dernier-commit"><i class="fa fa-check"></i><b>29.7.1</b> Supprimer le dernier commit</a></li>
+<li class="chapter" data-level="29.7.2" data-path="github.html"><a href="github.html#supprimer-tous-les-changements-depuis-le-dernier-commit"><i class="fa fa-check"></i><b>29.7.2</b> Supprimer tous les changements depuis le dernier commit</a></li>
+<li class="chapter" data-level="29.7.3" data-path="github.html"><a href="github.html#oublier-de-creer-une-nouvelle-branche-sans-commit"><i class="fa fa-check"></i><b>29.7.3</b> Oublier de créer une nouvelle branche (sans commit)</a></li>
+<li class="chapter" data-level="29.7.4" data-path="github.html"><a href="github.html#annuler-la-supression-dune-branche"><i class="fa fa-check"></i><b>29.7.4</b> Annuler la supression d’une branche</a></li>
+</ul></li>
+<li class="chapter" data-level="29.8" data-path="github.html"><a href="github.html#autres-ressources"><i class="fa fa-check"></i><b>29.8</b> Autres ressources</a><ul>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#obtenir-de-laide"><i class="fa fa-check"></i>Obtenir de l’aide</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#ramification"><i class="fa fa-check"></i>Ramification</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#ressources-additionnelles"><i class="fa fa-check"></i>Ressources additionnelles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="publish.html"><a href="publish.html"><i class="fa fa-check"></i><b>30</b> Publishing Resources</a><ul>
+<li class="chapter" data-level="30.1" data-path="publish.html"><a href="publish.html#vue-densemble-14"><i class="fa fa-check"></i><b>30.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="30.2" data-path="publish.html"><a href="publish.html#tldr-11"><i class="fa fa-check"></i><b>30.2</b> tl;dr</a></li>
+<li class="chapter" data-level="30.3" data-path="publish.html"><a href="publish.html#bookdown"><i class="fa fa-check"></i><b>30.3</b> Bookdown</a></li>
+<li class="chapter" data-level="30.4" data-path="publish.html"><a href="publish.html#les-essentiels"><i class="fa fa-check"></i><b>30.4</b> Les essentiels</a></li>
+<li class="chapter" data-level="30.5" data-path="publish.html"><a href="publish.html#ajouter-un-nom-de-domaine-personnalise"><i class="fa fa-check"></i><b>30.5</b> Ajouter un nom de domaine personnalisé</a></li>
+<li class="chapter" data-level="30.6" data-path="publish.html"><a href="publish.html#faire-une-page-404-personnalisee"><i class="fa fa-check"></i><b>30.6</b> Faire une page 404 personnalisée</a></li>
+<li class="chapter" data-level="30.7" data-path="publish.html"><a href="publish.html#choper-travis"><i class="fa fa-check"></i><b>30.7</b> Choper Travis</a><ul>
+<li class="chapter" data-level="30.7.1" data-path="publish.html"><a href="publish.html#ajouter-les-fichiers-de-travis-au-repo-github"><i class="fa fa-check"></i><b>30.7.1</b> Ajouter les fichiers de Travis au repo GitHub</a></li>
+<li class="chapter" data-level="30.7.2" data-path="publish.html"><a href="publish.html#ajouter-le-service-de-travis"><i class="fa fa-check"></i><b>30.7.2</b> Ajouter le service de Travis</a></li>
+</ul></li>
+<li class="chapter" data-level="30.8" data-path="publish.html"><a href="publish.html#notes-sur-notre-workflow"><i class="fa fa-check"></i><b>30.8</b> Notes sur notre workflow</a><ul>
+<li class="chapter" data-level="30.8.1" data-path="publish.html"><a href="publish.html#section"><i class="fa fa-check"></i><b>30.8.1</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="30.9" data-path="publish.html"><a href="publish.html#autres-ressources-1"><i class="fa fa-check"></i><b>30.9</b> Autres ressources</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>31</b> Workflow Notes</a></li>
+<li class="chapter" data-level="32" data-path="general.html"><a href="general.html"><i class="fa fa-check"></i><b>32</b> Ressources générales</a><ul>
+<li class="chapter" data-level="32.1" data-path="general.html"><a href="general.html#livres"><i class="fa fa-check"></i><b>32.1</b> Livres</a></li>
+<li class="chapter" data-level="32.2" data-path="general.html"><a href="general.html#cheatsheets"><i class="fa fa-check"></i><b>32.2</b> Cheatsheets</a></li>
+<li class="chapter" data-level="32.3" data-path="general.html"><a href="general.html#articles"><i class="fa fa-check"></i><b>32.3</b> Articles</a></li>
+<li class="chapter" data-level="32.4" data-path="general.html"><a href="general.html#meetups"><i class="fa fa-check"></i><b>32.4</b> Meetups</a></li>
+<li class="chapter" data-level="32.5" data-path="general.html"><a href="general.html#twitter"><i class="fa fa-check"></i><b>32.5</b> Twitter</a></li>
+<li class="chapter" data-level="32.6" data-path="general.html"><a href="general.html#data"><i class="fa fa-check"></i><b>32.6</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="chapter-index.html"><a href="chapter-index.html"><i class="fa fa-check"></i><b>33</b> Chapter Index by Resource Type</a><ul>
+<li class="chapter" data-level="33.1" data-path="chapter-index.html"><a href="chapter-index.html#vue-densemble-15"><i class="fa fa-check"></i><b>33.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="33.2" data-path="chapter-index.html"><a href="chapter-index.html#index"><i class="fa fa-check"></i><b>33.2</b> Index</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">edav.info/</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!-- 
+Header 
+  - included at the top (head) of every page
+  - EDAV logo back to index.html
+  - smiles on hover :)
+-->
+
+<!-- Free Font Awesome Stylesheet -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+<!-- JS -->
+<script>
+function hover(element) {
+  element.setAttribute('src', 'images/icons/edav_resource_url.png');
+}
+
+function unhover(element) {
+  element.setAttribute('src', 'images/icons/edav_resource_url_no_smile.png');
+}
+</script>
+
+<!-- Anchor point for scroll-top button -->
+<a id="top"></a>
+
+<!-- URL Logo -->
+<center>
+<br><br>
+<a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
+</center>
+<div id="tidy" class="section level1">
+<h1><span class="header-section-number">23</span> Revue détaillée : Tidy Data &amp; dplyr</h1>
+<p><img src="images/banners/banner_tidy_data_dplyr.png" />
+<em>Ce chapitre est à l’origine une contribution communautaire de <a href="https://github.com/akshatapatel" target="_blank">akshatapatel</a></em></p>
+<p><em>En cours de progression. Toute amélioration est la bienvenue. Si vous souhaitez participer rendez vous sur <a href="contribute.html">contribuer au repo</a>.</em></p>
+<div id="vue-densemble-8" class="section level2">
+<h2><span class="header-section-number">23.1</span> Vue d’ensemble</h2>
+<p>Cet exemple présente certains travaux avec le jeu de données <code>biopsy</code> en utilisant les fonctions de <code>dplyr</code> pour obtenir un tidy dataset.</p>
+<div id="les-packages" class="section level3">
+<h3><span class="header-section-number">23.1.1</span> Les packages</h3>
+<ul>
+<li><a href="https://www.rdocumentation.org/packages/dplyr" target="_blank"><code>dplyr</code></a></li>
+<li><a href="https://www.rdocumentation.org/packages/MASS/versions/7.3-51.1" target="_blank"><code>MASS</code></a></li>
+<li><a href="https://www.rdocumentation.org/packages/tidyr/versions/0.8.2" target="_blank"><code>tidyr</code></a></li>
+</ul>
+</div>
+</div>
+<div id="installer-les-packages" class="section level2">
+<h2><span class="header-section-number">23.2</span> Installer les packages</h2>
+<p>Écrivez le statements suivant dans le console:</p>
+<ul>
+<li><code>install.packages('dplyr')</code></li>
+<li><code>install.packages('ggplot2')</code></li>
+<li><code>install.packages('tidyr')</code></li>
+<li><code>install.packages('MASS')</code></li>
+</ul>
+<p><strong>Remarque</strong>: Les trois premiers packages font partie de <strong>tidyverse</strong>, une collection de packages utiles dans R, qui peuvent tous être installés à l’aide de <code>install.packages('tidyverse')</code>.</p>
+<p><code>dplyr</code> est utilisé pour le formattage et la transformation des données dans un dataframe. Le “d” dans “dplyr” signifie “dataframes” qui est la structure de données la plus utilisée pour stocker des jeux de données dans R.</p>
+</div>
+<div id="voir-les-donnees" class="section level2">
+<h2><span class="header-section-number">23.3</span> Voir les données</h2>
+<p>Commençons par charger le package afin que nous puissions obtenir les données dans des dataframes :</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="co">#loading the dplyr library</span></a>
+<a class="sourceLine" id="cb199-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb199-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb199-4" data-line-number="4"><span class="co">#loading data from MASS:biopsy</span></a>
+<a class="sourceLine" id="cb199-5" data-line-number="5"><span class="kw">library</span>(MASS)</a>
+<a class="sourceLine" id="cb199-6" data-line-number="6"><span class="kw">class</span>(biopsy)</a></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co">#glimpse is a part of the dplyr package</span></a>
+<a class="sourceLine" id="cb201-2" data-line-number="2"><span class="kw">glimpse</span>(biopsy)</a></code></pre></div>
+<pre><code>## Observations: 699
+## Variables: 11
+## $ ID    &lt;chr&gt; &quot;1000025&quot;, &quot;1002945&quot;, &quot;1015425&quot;, &quot;1016277&quot;, &quot;1017023&quot;, &quot;10…
+## $ V1    &lt;int&gt; 5, 5, 3, 6, 4, 8, 1, 2, 2, 4, 1, 2, 5, 1, 8, 7, 4, 4, 10, …
+## $ V2    &lt;int&gt; 1, 4, 1, 8, 1, 10, 1, 1, 1, 2, 1, 1, 3, 1, 7, 4, 1, 1, 7, …
+## $ V3    &lt;int&gt; 1, 4, 1, 8, 1, 10, 1, 2, 1, 1, 1, 1, 3, 1, 5, 6, 1, 1, 7, …
+## $ V4    &lt;int&gt; 1, 5, 1, 1, 3, 8, 1, 1, 1, 1, 1, 1, 3, 1, 10, 4, 1, 1, 6, …
+## $ V5    &lt;int&gt; 2, 7, 2, 3, 2, 7, 2, 2, 2, 2, 1, 2, 2, 2, 7, 6, 2, 2, 4, 2…
+## $ V6    &lt;int&gt; 1, 10, 2, 4, 1, 10, 10, 1, 1, 1, 1, 1, 3, 3, 9, 1, 1, 1, 1…
+## $ V7    &lt;int&gt; 3, 3, 3, 3, 3, 9, 3, 3, 1, 2, 3, 2, 4, 3, 5, 4, 2, 3, 4, 3…
+## $ V8    &lt;int&gt; 1, 2, 1, 7, 1, 7, 1, 1, 1, 1, 1, 1, 4, 1, 5, 3, 1, 1, 1, 1…
+## $ V9    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 4, 1, 1, 1, 2, 1…
+## $ class &lt;fct&gt; benign, benign, benign, benign, benign, malignant, benign,…</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">head</span>(biopsy)</a></code></pre></div>
+<pre><code>##        ID V1 V2 V3 V4 V5 V6 V7 V8 V9     class
+## 1 1000025  5  1  1  1  2  1  3  1  1    benign
+## 2 1002945  5  4  4  5  7 10  3  2  1    benign
+## 3 1015425  3  1  1  1  2  2  3  1  1    benign
+## 4 1016277  6  8  8  1  3  4  3  7  1    benign
+## 5 1017023  4  1  1  3  2  1  3  1  1    benign
+## 6 1017122  8 10 10  8  7 10  9  7  1 malignant</code></pre>
+</div>
+<div id="quest-ce-quune-tidy-data" class="section level2">
+<h2><span class="header-section-number">23.4</span> Qu’est ce qu’une Tidy data?</h2>
+<p><strong>Qu’est-ce que cela signifie pour vos données d’être <em>tidy</em> ?</strong></p>
+<p><strong>Tidy data</strong> est un format normalisé et constitue une manière cohérente d’organiser vos données dans R.</p>
+<p>Voici la définition d’une Tidy Data donnée par Hadley Wickham :</p>
+<blockquote>
+<p>Un ensemble de données est ordonné our desordonné selon la manière dont les lignes, les colonnes et les tableaux correspondent aux observations, aux variables et aux types. Une tidy data :</p>
+<ul>
+<li><p>Chaque variable forme une colonne.</p></li>
+<li><p>Chaque observation forme une ligne.</p></li>
+<li><p>Chaque unité d’observation est une valeur dans la table.</p></li>
+</ul>
+<p><em>Voir <a href="https://r4ds.had.co.nz/tidy-data.html" target="_blank">r4ds on tidy data</a> pour plus d’info.</em></p>
+</blockquote>
+<p><strong>Quels sont les avantages des tidy data?</strong></p>
+<ul>
+<li><p>Uniformité : il est plus facile d’apprendre les outils pour travailler avec ces données car elles sont stockées de façon cohérentes.</p></li>
+<li><p>La plupart des fonctions de base en R utilisent des vecteurs de valeurs. Ainsi, avoir des variables en tant que colonnes/vecteurs permet à la nature vectorielle de R de briller.</p></li>
+</ul>
+<p><strong>Pouvez-vous observer et dire pourquoi ces données sont en désordre ?</strong></p>
+<ul>
+<li><p>Les noms de colonnes tels que V1, V2 ne sont pas intuitifs dans leur contexte; c’est bon signe que la donnée est untidy.</p></li>
+<li><p>Ce ne sont pas des variables différentes, mais des valeurs d’une variable commune.</p></li>
+</ul>
+<p>Nous allons maintenant voir comment transformer nos données en utilisant les fonctions de <code>dplyr</code> et ensuite voir comment comment rendre plus propre ces données.</p>
+</div>
+<div id="tibbles" class="section level2">
+<h2><span class="header-section-number">23.5</span> Tibbles</h2>
+<p>Un <strong>tibble</strong> est une structure moderne du dataframe.</p>
+<p>Ceci est particulièrement utile pour les grands ensembles de données car <em>il n’imprime que les premières lignes</em>. Cela vous aide à faire face plus tôt aux problèmes, ce qui vous permet de nettoyer le code.</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="co"># Converting a df to a tibble</span></a>
+<a class="sourceLine" id="cb205-2" data-line-number="2">biopsy &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(biopsy)</a>
+<a class="sourceLine" id="cb205-3" data-line-number="3">biopsy</a></code></pre></div>
+<pre><code>## # A tibble: 699 x 11
+##    ID         V1    V2    V3    V4    V5    V6    V7    V8    V9 class    
+##    &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    
+##  1 1000025     5     1     1     1     2     1     3     1     1 benign   
+##  2 1002945     5     4     4     5     7    10     3     2     1 benign   
+##  3 1015425     3     1     1     1     2     2     3     1     1 benign   
+##  4 1016277     6     8     8     1     3     4     3     7     1 benign   
+##  5 1017023     4     1     1     3     2     1     3     1     1 benign   
+##  6 1017122     8    10    10     8     7    10     9     7     1 malignant
+##  7 1018099     1     1     1     1     2    10     3     1     1 benign   
+##  8 1018561     2     1     2     1     2     1     3     1     1 benign   
+##  9 1033078     2     1     1     1     2     1     1     1     5 benign   
+## 10 1033078     4     2     1     1     2     1     2     1     1 benign   
+## # … with 689 more rows</code></pre>
+</div>
+<div id="test-pour-les-valeurs-manquantes" class="section level2">
+<h2><span class="header-section-number">23.6</span> Test pour les valeurs manquantes</h2>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="co"># Number of missing values in each column in the data frame</span></a>
+<a class="sourceLine" id="cb207-2" data-line-number="2"><span class="kw">colSums</span>(<span class="kw">is.na</span>(biopsy))</a></code></pre></div>
+<pre><code>##    ID    V1    V2    V3    V4    V5    V6    V7    V8    V9 class 
+##     0     0     0     0     0     0    16     0     0     0     0</code></pre>
+<p>Le jeu de données contient des valeurs manquantes qui doivent être traitées.</p>
+</div>
+<div id="remplacer-les-valeurs-manquantes" class="section level2">
+<h2><span class="header-section-number">23.7</span> Remplacer les valeurs manquantes</h2>
+<p>Une façon de traiter les valeurs manquantes consiste à les recoder avec la moyenne de toutes les autres valeurs de cette colonne :</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="co">#change all the NAs to mean of the column</span></a>
+<a class="sourceLine" id="cb209-2" data-line-number="2">biopsy<span class="op">$</span>V6[<span class="kw">is.na</span>(biopsy<span class="op">$</span>V6)] &lt;-<span class="st"> </span><span class="kw">mean</span>(biopsy<span class="op">$</span>V6, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb209-3" data-line-number="3"><span class="kw">colSums</span>(<span class="kw">is.na</span>(biopsy))</a></code></pre></div>
+<pre><code>##    ID    V1    V2    V3    V4    V5    V6    V7    V8    V9 class 
+##     0     0     0     0     0     0     0     0     0     0     0</code></pre>
+<p>Consultez notre chapitre sur <a href="missingTS.html">time series avec données manquantes</a> pour plus d’informations sur la gestion des données manquantes.</p>
+</div>
+<div id="vocabulaire-de-la-manipulation-de-donnees" class="section level2">
+<h2><span class="header-section-number">23.8</span> Vocabulaire de la manipulation de données</h2>
+<p>Voici le vocabulaire et les functions les plus couramment utilisés qui aident à manipuler les données et les résumer :</p>
+<ul>
+<li>Rename</li>
+<li>Select</li>
+<li>Mutate</li>
+<li>Filter</li>
+<li>Arrange</li>
+<li>Summarize</li>
+<li>Group_by</li>
+</ul>
+<p>Les fonctions <strong>Select</strong> et <strong>mutate</strong> manipulent les <em>variables</em> (les colonnes du dataframe). <strong>Filter</strong> et <strong>arrange</strong> manipulent les <em>observations</em> (les lignes), enfin <strong>summarize</strong> manipule les <em>groupes</em> d’observations.</p>
+<p>Toutes les fonctions de <code>dplyr</code> travaillent sur une copie des données et renvoient une copie modifiée. Ils ne changent <strong>pas</strong> le dataframe original. Si nous voulons accéder aux résultats par la suite, nous devons enregistrer la copie modifiée.</p>
+</div>
+<div id="renommage" class="section level2">
+<h2><span class="header-section-number">23.9</span> Renommage</h2>
+<p>Les noms des colonnes dans nos données biopsy sont très vagues et ne nous donnent pas signification. Nous devons modifier les noms de la colonne afin qu’une personne extérieur puisse avoir une idée des valeurs auxquelles il fait référence.</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">rename</span>(biopsy,</a>
+<a class="sourceLine" id="cb211-2" data-line-number="2">       <span class="dt">thickness =</span> V1,<span class="dt">cell_size =</span> V2,</a>
+<a class="sourceLine" id="cb211-3" data-line-number="3">       <span class="dt">cell_shape =</span> V3, <span class="dt">marg_adhesion =</span> V4,</a>
+<a class="sourceLine" id="cb211-4" data-line-number="4">       <span class="dt">epithelial_cell_size =</span> V5, <span class="dt">bare_nuclei =</span> V6,</a>
+<a class="sourceLine" id="cb211-5" data-line-number="5">       <span class="dt">chromatin =</span> V7, <span class="dt">norm_nucleoli =</span> V8, <span class="dt">mitoses =</span> V9)</a></code></pre></div>
+<pre><code>## # A tibble: 699 x 11
+##    ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##    &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+##  1 1000…         5         1          1             1                2
+##  2 1002…         5         4          4             5                7
+##  3 1015…         3         1          1             1                2
+##  4 1016…         6         8          8             1                3
+##  5 1017…         4         1          1             3                2
+##  6 1017…         8        10         10             8                7
+##  7 1018…         1         1          1             1                2
+##  8 1018…         2         1          2             1                2
+##  9 1033…         2         1          1             1                2
+## 10 1033…         4         2          1             1                2
+## # … with 689 more rows, and 5 more variables: bare_nuclei &lt;dbl&gt;,
+## #   chromatin &lt;int&gt;, norm_nucleoli &lt;int&gt;, mitoses &lt;int&gt;, class &lt;fct&gt;</code></pre>
+<p>Le tibble présenté ci-dessus n’est pas enregistré et ne peut plus être utilisé. Pour l’utiliser ensuite, nous l’enregistrons comme un nouveau tibble :</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="co">#saving the rename function output</span></a>
+<a class="sourceLine" id="cb213-2" data-line-number="2">biopsy_new&lt;-<span class="kw">rename</span>(biopsy,</a>
+<a class="sourceLine" id="cb213-3" data-line-number="3">       <span class="dt">thickness =</span> V1,<span class="dt">cell_size =</span> V2,</a>
+<a class="sourceLine" id="cb213-4" data-line-number="4">       <span class="dt">cell_shape =</span> V3, <span class="dt">marg_adhesion =</span> V4,</a>
+<a class="sourceLine" id="cb213-5" data-line-number="5">       <span class="dt">epithelial_cell_size =</span> V5, <span class="dt">bare_nuclei =</span> V6,</a>
+<a class="sourceLine" id="cb213-6" data-line-number="6">       <span class="dt">chromatin =</span> V7, <span class="dt">norm_nucleoli =</span> V8, <span class="dt">mitoses =</span> V9)</a>
+<a class="sourceLine" id="cb213-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb213-8" data-line-number="8"><span class="kw">head</span>(biopsy_new,<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 11
+##   ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##   &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+## 1 1000…         5         1          1             1                2
+## 2 1002…         5         4          4             5                7
+## 3 1015…         3         1          1             1                2
+## 4 1016…         6         8          8             1                3
+## 5 1017…         4         1          1             3                2
+## # … with 5 more variables: bare_nuclei &lt;dbl&gt;, chromatin &lt;int&gt;,
+## #   norm_nucleoli &lt;int&gt;, mitoses &lt;int&gt;, class &lt;fct&gt;</code></pre>
+<p>Le dataframe <code>biopsy_new</code> peut maintenant être utilisé pour d’autres manipulations.</p>
+</div>
+<div id="select" class="section level2">
+<h2><span class="header-section-number">23.10</span> Select</h2>
+<p><strong>Select</strong> renvoie un sous-ensemble des données. Plus précisément, seules les colonnes spécifiées sont incluses.</p>
+<p>Dans les données biopsy, nous n’avons pas besoin des variables “chromatin” et “mitoses”. Alors, éliminons-les en utilisant un signe moins:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="co">#selecting all except the columns chromatin and mitoses</span></a>
+<a class="sourceLine" id="cb215-2" data-line-number="2">biopsy_new&lt;-<span class="kw">select</span>(biopsy_new,<span class="op">-</span>chromatin,<span class="op">-</span>mitoses)</a>
+<a class="sourceLine" id="cb215-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb215-4" data-line-number="4"><span class="kw">head</span>(biopsy_new,<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 9
+##   ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##   &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+## 1 1000…         5         1          1             1                2
+## 2 1002…         5         4          4             5                7
+## 3 1015…         3         1          1             1                2
+## 4 1016…         6         8          8             1                3
+## 5 1017…         4         1          1             3                2
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## #   class &lt;fct&gt;</code></pre>
+</div>
+<div id="mutate" class="section level2">
+<h2><span class="header-section-number">23.11</span> Mutate</h2>
+<p>La fonction <strong>mutate</strong> crée de nouvelles variables à partir des variables déjà existantes et les ajoute à l’ensemble de données. Il indique que les données déjà contenues mais n’ont jamais été affichées.</p>
+<p>La variable “V6” contient les valeurs du bare nucleus de 1,00 à 10,00. Si nous voulons normaliser la variable, nous pouvons utiliser la fonction mutate :</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="co">#normalize the bare nuclei values </span></a>
+<a class="sourceLine" id="cb217-2" data-line-number="2">maximum_bare_nuclei&lt;-<span class="kw">max</span>(biopsy_new<span class="op">$</span>bare_nuclei,<span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb217-3" data-line-number="3">biopsy_new&lt;-<span class="kw">mutate</span>(biopsy_new,<span class="dt">bare_nuclei=</span>bare_nuclei<span class="op">/</span>maximum_bare_nuclei)</a>
+<a class="sourceLine" id="cb217-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb217-5" data-line-number="5"><span class="kw">head</span>(biopsy_new,<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 9
+##   ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##   &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+## 1 1000…         5         1          1             1                2
+## 2 1002…         5         4          4             5                7
+## 3 1015…         3         1          1             1                2
+## 4 1016…         6         8          8             1                3
+## 5 1017…         4         1          1             3                2
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## #   class &lt;fct&gt;</code></pre>
+</div>
+<div id="filter" class="section level2">
+<h2><span class="header-section-number">23.12</span> Filter</h2>
+<p><strong>Filter</strong> est la fonction soeur de <strong>select</strong> pour les lignes; elle renvoie une copie modifiée qui ne contient que certaines lignes.
+Cette fonction <em>filtre</em> les ligne en fonction du contenu et des conditions fournies en argument.
+La fonction filter prend le dataframe comme premier argument. L’argument suivant contient une ou plusieures conditions logiques. Les lignes/observations qui vérifient ces conditions logiques sont retourné(e)s dans le résultat.</p>
+<p>Dans notre example, on veut garder uniquement les données dont les cellules tuméreuses ont une certaine épaisseur. En pratique on garde celles dont l’épaisseur est supérieure à six, puisque la plupart des tumeurs malignes ont cette épaisseur dans le graphique d’épaisseur de cellule en fonction de la taille de cellule tuméreuse, groupé par classe :</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb219-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="kw">ggplot</span>(biopsy_new)<span class="op">+</span></a>
+<a class="sourceLine" id="cb219-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span>thickness,<span class="dt">y=</span>cell_size,<span class="dt">color=</span>class))<span class="op">+</span></a>
+<a class="sourceLine" id="cb219-5" data-line-number="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot of Clump Thickness Vs Tumor Cell Size&quot;</span>)</a></code></pre></div>
+<p><img src="tidy_data_dplyr_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1"><span class="co">#normalize the bare nuclei values </span></a>
+<a class="sourceLine" id="cb220-2" data-line-number="2">biopsy_new&lt;-<span class="kw">filter</span>(biopsy_new,thickness<span class="op">&gt;</span><span class="fl">5.5</span>)</a>
+<a class="sourceLine" id="cb220-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb220-4" data-line-number="4"><span class="kw">head</span>(biopsy_new,<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 9
+##   ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##   &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+## 1 1016…         6         8          8             1                3
+## 2 1017…         8        10         10             8                7
+## 3 1044…         8         7          5            10                7
+## 4 1047…         7         4          6             4                6
+## 5 1050…        10         7          7             6                4
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## #   class &lt;fct&gt;</code></pre>
+</div>
+<div id="arrange" class="section level2">
+<h2><span class="header-section-number">23.13</span> Arrange</h2>
+<p><strong>Arrange</strong> réordonne les lignes en fonction de leur contenu dans l’ordre croissant par défaut.</p>
+<p>Les médecins voudraient voir les données dans l’ordre de la taille de la tumeur.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" data-line-number="1"><span class="co">#arrange in the order of V2:cell size</span></a>
+<a class="sourceLine" id="cb222-2" data-line-number="2"><span class="kw">arrange</span>(biopsy_new,cell_size)</a></code></pre></div>
+<pre><code>## # A tibble: 186 x 9
+##    ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##    &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+##  1 1050…         6         1          1             1                2
+##  2 1204…         6         1          1             1                2
+##  3 1223…         6         1          3             1                2
+##  4 5435…         6         1          3             1                4
+##  5 63375         9         1          2             6                4
+##  6 7529…        10         1          1             1                2
+##  7 1276…         6         1          1             3                2
+##  8 1238…         6         1          1             3                2
+##  9 1257…         6         1          1             1                1
+## 10 1224…         6         1          1             1                2
+## # … with 176 more rows, and 3 more variables: bare_nuclei &lt;dbl&gt;,
+## #   norm_nucleoli &lt;int&gt;, class &lt;fct&gt;</code></pre>
+<p>Cela montre les données en ordre croissant de la taille de la cellule.</p>
+<p>Pour organiser les lignes dans l’ordre décroissant de V2, nous ajoutons la fonction <code>desc ()</code> à la variable avant de la passer dans arrange.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" data-line-number="1"><span class="co">#arrange in the order of V2:cell size in decreasing order</span></a>
+<a class="sourceLine" id="cb224-2" data-line-number="2"><span class="kw">arrange</span>(biopsy_new,<span class="kw">desc</span>(cell_size))</a></code></pre></div>
+<pre><code>## # A tibble: 186 x 9
+##    ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##    &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+##  1 1017…         8        10         10             8                7
+##  2 1080…        10        10         10             8                6
+##  3 1100…         6        10         10             2                8
+##  4 1103…        10        10         10             4                8
+##  5 1112…         8        10         10             1                3
+##  6 1116…         9        10         10             1               10
+##  7 1123…         6        10          2             8               10
+##  8 1168…        10        10         10            10               10
+##  9 1170…        10        10         10             8                2
+## 10 1173…        10        10         10             3               10
+## # … with 176 more rows, and 3 more variables: bare_nuclei &lt;dbl&gt;,
+## #   norm_nucleoli &lt;int&gt;, class &lt;fct&gt;</code></pre>
+<p>Comme vous pouvez le constater, plusieurs lignes ont la même valeur de <code>V2:cell_size</code>. Pour palier ce problème, vous pouvez ajouter une autre variable à utiliser pour l’ordonnencement lorsque la première variable a la même valeur.</p>
+<p>Ici nous utilisons V3 pour ordonner : par taille de cellule et pas ID :</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="co">#arrange in the order of V2:cell size</span></a>
+<a class="sourceLine" id="cb226-2" data-line-number="2">biopsy_new&lt;-<span class="kw">arrange</span>(biopsy_new,<span class="kw">desc</span>(cell_size),<span class="kw">desc</span>(cell_shape),ID)</a>
+<a class="sourceLine" id="cb226-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb226-4" data-line-number="4"><span class="kw">head</span>(biopsy_new,<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 9
+##   ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##   &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+## 1 1017…         8        10         10             8                7
+## 2 1073…        10        10         10            10                6
+## 3 1080…        10        10         10             8                6
+## 4 1100…         6        10         10             2                8
+## 5 1100…         6        10         10             2                8
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## #   class &lt;fct&gt;</code></pre>
+</div>
+<div id="summarize-group-by" class="section level2">
+<h2><span class="header-section-number">23.14</span> Summarize &amp; Group By</h2>
+<p><strong>Summarize</strong> utilise les données pour créer un nouveau dataframe avec les statistiques récapitulatives telles que le minimum, le maximum, la moyenne, etc. Ces statistiques doivent être des fonctions agrégées qui prennent un vecteur de valeurs en entrée et une valeur unique en sortie.</p>
+<p>La fonction <strong>group_by</strong> regroupe les données en fonction des valeurs des variables. Ceci, en plus de summarize, fait des observations des groupes de lignes de l’ensemble de données.</p>
+<p>Les médecins voudraient connaître la taille maximale de la cellule et son épaisseur pour chacune des classes : bénigne et maligne. Cela peut être fait en regroupant les données par classe et en recherchant le maximum des variables cherchées :</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1">biopsy_grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(biopsy_new,class)</a>
+<a class="sourceLine" id="cb228-2" data-line-number="2"><span class="kw">summarize</span>(biopsy_grouped, <span class="kw">max</span>(thickness), <span class="kw">mean</span>(cell_size), <span class="kw">var</span>(norm_nucleoli))</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 4
+##   class     `max(thickness)` `mean(cell_size)` `var(norm_nucleoli)`
+##   &lt;fct&gt;                &lt;int&gt;             &lt;dbl&gt;                &lt;dbl&gt;
+## 1 benign                   8              2.67                 5.93
+## 2 malignant               10              6.73                11.3</code></pre>
+</div>
+<div id="pipe-operator" class="section level2">
+<h2><span class="header-section-number">23.15</span> Pipe Operator</h2>
+<p>Que faire si nous voulons utiliser les différentes fonctions <strong>ensemble</strong>?</p>
+<p>Cela pourrait être fait en sauvegardant le résultat de chaque fonction dans une nouvelle variable et en l’utilisant pour la fonction suivante, comme nous l’avons fait ci-dessus. Cependant, ceci n’est pas recommandé :</p>
+<ol style="list-style-type: decimal">
+<li><p>Cela nécessite une saisie supplémentaire et un code plus long.</p></li>
+<li><p>L’espace inutile est utilisé pour sauvegarder les différentes variables. Si les données sont volumineuses, cette méthode ralentit l’analyse.</p></li>
+</ol>
+<p>L’opérateur <strong>pipe</strong> peut être utilisé à la place pour le même but. L’opérateur est placé entre l’objet et la fonction. Le pipe prend l’objet à sa gauche et le passe comme premier argument de la fonction à sa droite.</p>
+<p>Le pipe fait partie du package <code>magrittr</code>. Cependant, ce package n’a pas besoin d’être chargé car <code>dplyr</code> nous simplifie la vie et l’importe pour nous :</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1">biopsy_grouped &lt;-<span class="st"> </span>biopsy_new <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb230-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(class) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb230-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">max</span>(thickness),<span class="kw">mean</span>(cell_size),<span class="kw">var</span>(norm_nucleoli))</a>
+<a class="sourceLine" id="cb230-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb230-5" data-line-number="5"><span class="kw">head</span>(biopsy_grouped)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 4
+##   class     `max(thickness)` `mean(cell_size)` `var(norm_nucleoli)`
+##   &lt;fct&gt;                &lt;int&gt;             &lt;dbl&gt;                &lt;dbl&gt;
+## 1 benign                   8              2.67                 5.93
+## 2 malignant               10              6.73                11.3</code></pre>
+</div>
+<div id="nettoyer-les-donnees-transformees" class="section level2">
+<h2><span class="header-section-number">23.16</span> Nettoyer les données transformées</h2>
+<p>Regardez encore une fois les données désordonnées :</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1"><span class="co"># Messy Data</span></a>
+<a class="sourceLine" id="cb232-2" data-line-number="2"><span class="kw">head</span>(biopsy_new,<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 9
+##   ID    thickness cell_size cell_shape marg_adhesion epithelial_cell…
+##   &lt;chr&gt;     &lt;int&gt;     &lt;int&gt;      &lt;int&gt;         &lt;int&gt;            &lt;int&gt;
+## 1 1017…         8        10         10             8                7
+## 2 1073…        10        10         10            10                6
+## 3 1080…        10        10         10             8                6
+## 4 1100…         6        10         10             2                8
+## 5 1100…         6        10         10             2                8
+## # … with 3 more variables: bare_nuclei &lt;dbl&gt;, norm_nucleoli &lt;int&gt;,
+## #   class &lt;fct&gt;</code></pre>
+<p>La planification est nécessaire pour décider quelles colonnes nous devons garder inchangées, lesquelles modifier et quels noms doivent être donnés aux nouvelles colonnes. Les colonnes à conserver sont celles qui sont déjà tidy. Les colonnes à modifier sont celles qui ne sont pas de vraies variables mais en réalité des niveaux d’une autre variable.</p>
+<p>Ainsi, les colonnes <code>ID</code> et la <code>class</code> sont déjà tidy. Celles-ci sont conservées telles quelles.</p>
+<p>Les colonnes <code>V1:thickness</code>, <code>V2:cell_size</code>, <code>V3:cell_shape</code>, <code>V4:marg_adhesion</code>, <code>V5:epithelial_cell_size</code>, <code>V6:bare_nuclei</code>, et <code>V8:norm_nucleoli</code> ne sont pas de vraies variables mais des valeurs de la variable <code>Tumor_attributes</code>.</p>
+<p>Nous pouvons résoudre ce problème avec <code>tidyr::gather()</code>, qui est utilisé pour convertir les données messy en tidy. La fonction <code>gather</code> prend le dataframe que nous voulons nettoyer entrée. Les deux paramètres suivants sont les noms des colonnes key et value columns du jeu de données tidy.</p>
+<p>Dans notre exemple, key = ‘Tumor_Atrributes’ et value = ‘Score’. Vous pouvez également préciser les colonnes que vous ne voulez pas ranger, à savoir ID et class:</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="co">#Tidy Data</span></a>
+<a class="sourceLine" id="cb234-2" data-line-number="2"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb234-3" data-line-number="3">tidy_df &lt;-<span class="st"> </span>biopsy_new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="st">&quot;Tumor_Attributes&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Score&quot;</span>, <span class="op">-</span>ID, <span class="op">-</span>class)</a>
+<a class="sourceLine" id="cb234-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb234-5" data-line-number="5">tidy_df</a></code></pre></div>
+<pre><code>## # A tibble: 1,302 x 4
+##    ID      class     Tumor_Attributes Score
+##    &lt;chr&gt;   &lt;fct&gt;     &lt;chr&gt;            &lt;dbl&gt;
+##  1 1017122 malignant thickness            8
+##  2 1073960 malignant thickness           10
+##  3 1080185 malignant thickness           10
+##  4 1100524 malignant thickness            6
+##  5 1100524 malignant thickness            6
+##  6 1103608 malignant thickness           10
+##  7 1112209 malignant thickness            8
+##  8 1116116 malignant thickness            9
+##  9 1116116 malignant thickness            9
+## 10 1168736 malignant thickness           10
+## # … with 1,292 more rows</code></pre>
+</div>
+<div id="liens-utiles-1" class="section level2">
+<h2><span class="header-section-number">23.17</span> Liens utiles</h2>
+<ul>
+<li><a href="https://r4ds.had.co.nz/tidy-data.html" target="_blank">r4ds on tidy data</a>: C’est toujours mieux d’apprendre de la source, ainsi voici le livre écrit par Hadley Wickham.</li>
+<li><a href="https://www.datacamp.com/courses/dplyr-data-manipulation-r-tutorial" target="_blank">DataCamp dplyr course</a>: Ce cours couvre les différentes fonctions de dplyr et comment manipuler les données.</li>
+</ul>
+
+</div>
+</div>
+<!-- 
+Footer 
+  - included at the end of every page
+  - EDAV logo to top of current page
+  - GitHub link
+  - License Link
+  - scroll-top button
+-->
+
+<center>
+<br><br>
+<a href="index.html"><img class="active-banner footer-logo" src="images/icons/edav_resource_black_small.png" title="Jump to the homepage"></a>
+<br><br>
+<a href="https://github.com/jtr13/EDAV" target="_blank"><img class="active-banner github-logo" src="images/icons/GitHub-Mark-120px-plus.png" title="Our GitHub repo"></a>
+<br><br>
+<i class="fas fa-code"></i> <b>with</b> <i class="fas fa-heart"></i>
+<a href="#top" id="scroll-top"><i class="fas fa-chevron-up"></i></a>
+</center>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="import.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="missing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Amelrich/EDAV/edit/master/tidy_data_dplyr.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

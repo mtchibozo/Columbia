@@ -1,0 +1,221 @@
+# (PART) Multivariate Categorical {-}
+
+# Diagramme : Mosaic {#mosaic}
+
+<!-- Chapter Banner -->
+![](images/banners/banner_mosaic.png)
+*Ce chapitre est issu d'une contribution à la communauté crée par [harin](https://github.com/harin){target="_blank"}*
+
+*Cette page est en cours de mise à jour. Nous apprécions toute remarque que vous puissiez avoir. Pour nous aider à améliorer cette page, vous pouvez [contribuer à notre repo](contribute.html).*
+
+```{r include=FALSE}
+df = read.csv("data/MusicIcecream.csv")
+```
+
+
+## Vue d'ensemble
+
+Cette section explique comment faire des graphiques en Mosaïque (Mosaic Plots)
+
+## tl;dr
+
+```{r message=FALSE}
+library(vcd)
+mosaic(Favorite ~ Age + Music, 
+       labeling = labeling_border(
+         abbreviate_labs = c(3, 10, 6),
+         rot_labels=c(0,0,-45)
+       ),
+       direction=c('v','v','h'), # Age = Vertical, Music = Vertical, Favoriate = Horizonal (a.k.a DoubleDecker)
+       gp = gpar(fill=c('lightblue', 'gray')),
+       df)
+```
+
+## L'ordre des coupes
+
+Il est préférable de dessiner des graphiques en mosaïque de façon incrémentale: commencez en coupant selon une variable, puis ajoutez des variables une par une. Le graphique en mosaïque complet devrait avoir une seule coupe par variable.
+
+Important: si vos données sont dans un data frame, comme c'est le cas ci-dessous, **la colonne count doit être appellée `Freq`**. (Aussi valable pour les tables et les matrices, voir `?vcd::structable` pour plus de détails.)
+
+Veuillez aussi noter que ces graphiques sont dessinés avec `vcd::mosaic()` et non la fonction en R élémentaire, `mosaicplot()`.
+
+Les données:
+``` {r}
+df
+```
+
+Coupe uniquement selon `Age`:
+
+``` {r}
+library(vcd)
+mosaic(~Age, df)
+```
+
+Coupe selon `Age`, puis `Music`:
+
+```{r}
+mosaic(Music ~ Age, df)
+```
+
+Notez que la *première* coupe est entre "young" et "old", tandis que la deuxième série de coupes divise chaque groupe d'âge entre "classical" et "rock".
+
+Coupe selon `Age`, puis `Music`, puis `Favorite`:
+
+```{r}
+mosaic(Favorite ~ Age + Music, df)
+```
+
+## Direction des coupes
+
+Notez que dans l'exemple précédent, la direction des coupes est faite comme suit:
+
+1.  `Age` -- coupe horizontale
+
+2.  `Music` -- coupe verticale
+
+3.  `Favorite` -- coupe horizontale
+
+Il s'agit du schéma usuel de direction de coupes: les directions alternent en commençant par une coupe horizontale. On en déduit le même graphique avec:
+
+```{r}
+mosaic(Favorite ~ Age + Music, 
+       direction = c("h", "v", "h"), df)
+```
+
+Les directions peuvent être modifiées comme comme vous le souhaitez. Par exemple, pour créer un graphique de type "doubledecker", toutes les coupes doivent être verticales sauf la dernière:
+
+```{r}
+mosaic(Favorite ~ Age + Music,
+       direction = c("v", "v", "h"), df)
+```
+
+Notez que le vecteur des directions est ordonné selon l'ordre des coupes (`Age`, `Music`, `Favorite`), et non selon l'ordre dans lequel les variables apparaissent dans la formule, où la dernière variable à être coupée apparaît en premier dans la formule, avant le "~".
+
+## Couleur
+
+### Couleur de fond
+
+```{r}
+library(grid) # needed for gpar
+mosaic(Favorite ~ Age + Music, 
+       gp = gpar(fill = c("lightblue", "blue")),
+       df)
+```
+
+### Couleur de bordure (il faut également définir la couleur de fond(?))
+
+```{r}
+mosaic(Favorite ~ Age + Music,
+       gp = gpar(fill = c("lightblue", "blue"),
+                 col = "white"),
+       spacing = spacing_equal(sp = unit(0, "lines")),
+       df)
+```
+
+
+## Etiquettes
+
+Pour la documentation officielle sur les options d'étiquettage, voir [Labeling in the Strucplot Framework](http://ftp.auckland.ac.nz/software/CRAN/doc/vignettes/vcd/labeling.pdf){target="_blank"}
+
+### Faire pivoter les étiquettes
+
+Le vecteur `rot_labels =` définit la rotation en degrés sur les quatre côtés du graphique--pas selon l'ordre de coupe des variables--dans cet ordre: *haut, droite, bas, gauche*. (C'est un ordre différent de l'ordre par défaut des graphiques élémentaires!) L'ordre par défaut est `rot_labels = c(0, 90, 0, 90)`.
+
+```{r}
+mosaic(Favorite ~ Age + Music, 
+       labeling = labeling_border(rot_labels = c(45, -45, 0, 0)),
+       df)
+```
+
+
+### Alléger les étiquettes
+
+Les étiquettes sont abrégées dans l'ordre des coupes (comme avec `direction =`). L'algorithme d'abbréviation renvoit le nombre indiqué de charactères après suppression des voyelles (si nécessaire).
+
+Pour plus d'options sur le format, voir `>?vcd::labeling_border`.
+
+```{r}
+mosaic(Favorite ~ Age + Music, 
+       labeling = labeling_border(abbreviate_labs = c(3, 1, 6)), 
+       df)
+```
+
+## Agencement des cellules
+
+```{r}
+mosaic(Favorite ~ Age + Music,
+       spacing = spacing_equal(sp = unit(0, "lines")),
+       df)
+```
+
+Pour plus de détails, voir `>?vcd::spacings`
+
+
+### Mosaïque en utilisant vcd::doubledecker
+
+```{r}
+data(Arthritis)
+vcd::doubledecker(Improved ~ Treatment + Sex, data=Arthritis)
+```
+
+```{r}
+vcd::doubledecker(Music ~ Favorite + Age, 
+                  xtabs(Freq ~ Age + Music + Favorite, df))
+```
+
+## Mosaique en utilisant ggplot
+
+Pour avoir une vue d'ensemble sur les graphiques en mosaïques avec ggplot, voir le lien ci-dessous.
+[https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html](https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html){target="_blank"}
+
+```{r message=FALSE}
+library(ggmosaic)
+
+# equivalent to doing Favorite ~ Age + Music in vcd::mosaic with doubledecker style cut
+ggplot(df) + 
+  geom_mosaic(
+    aes(x=product(Favorite, Age, Music), # cut from right to left 
+        weight=Freq,
+        fill=Favorite
+        ),
+    divider=c("vspine" , "hspine", "hspine") # equivalent to divider=ddecker()
+  ) 
+```
+
+
+## Théorie
+
+## Quand l'utiliser
+
+Quand vous voulez étudier les liens entre les variables d'un jeu de données Catégoriques Multivariées
+
+## Considerations
+
+### Etiquettes
+
+La lisibilité des étiquettes pose problème dans les graphiques en mosaïque, particulièrement quand il y a beaucoup de dimensions. Ceci peut être allégé en
+- Racourcissant les noms
+- Faisant pivoter les étiquettes
+
+### Aspect Ratio
+- Les longueurs sont plus faciles à évaluer que les aires. Essayez d'utiliser des rectangles de même épaisseur ou hauteur
+- Les rectangles longs et fins sont préférables (on distinge plus facilement les longueurs que les aires)
+
+### Espace entre les rectangles
+- Pas d'espace = le plus efficace
+
+Néanmoins, un espace peut améliorer la lisibilitén donc essayez différentes combinaisons.
+
+- On peut avoir des espaces au niveau des coupes
+- On peut faire varier la taille des espaces selon la hierarchie
+
+### Couleur
+- bien pour les rapports dans le sous-groupe
+- Affiche les groupes résiduels
+- met en avant un sous-groupe particulier
+
+## Ressources externes
+
+- Chapitre 7 de [Graphical data analysis with R by Anthony Unwin](https://www.crcpress.com/Graphical-Data-Analysis-with-R/Unwin/p/book/9781498715232){target="_blank"}
+
+- [Lien](https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html){target="_blank"}: Une vue d'ensemble des graphiques en mosaïque avec ggplot au lien ci-joint.

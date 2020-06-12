@@ -1,0 +1,239 @@
+# (PARTIE) Types Spéciaux de Données {-}
+
+# Times Series avec des données manquantes {#missingTS}
+
+![](images/banners/banner_missing_time_series.png)
+*Ce chapitre a été réalisé dans le cadre d'une collaboration communautaire créée par [sdt2134](https://github.com/Somendratripathi/){target="_blank"}*
+
+*Cette page est un travail en cours. Nous apprécions tout commentaire ou feedback. Si vous souhaitez participer et améliorer cette page, vous pouvez [contribuer à notre repo](contribute.html).*
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(fpp)
+library(tidyverse)
+library(gridExtra)
+```
+
+## Vue d'ensemble
+
+Pour les data scientists, la préparation de données est en réalité la deuxième tâche la plus frustrante après avoir à expliquer son modèle à d'autres départements. Le traitement des données manquantes est une partie clé de la préparation de données et savoir comment les traiter peut adoucir l'humeur après avoir dû faire face à une [RMSE](https://en.wikipedia.org/wiki/Root-mean-square_deviation){target="_blank"} de mauvaise qualité. Le chapitre sur les [données manquantes](https://edav.info/missing.html) explique certaines façons de procéder pour traiter les valeurs manquantes dans un dataset; ce chapitre-ci va plus loin et se concentre sur les séries temporelles. 
+
+## Motivation
+**Pourquoi devrait-on s'en soucier quand on a la moyenne, médiane et le mode?**
+
+Il faut s'y intéresser car les problèmes dérivant des séries temporelles ne sont pas évidents. La plupart d'entre-elles sont suivies de travaux de prédictions et la plupart des algorithmes utilisés ne permettent pas la présence de valeurs manquantes. Les remplacer par la moyenne, médiane ou mode peut cacher des tendances ou patterns saisonniers, et les supprimer complètement peut réduire l'information contenue dans d'autres features pour les cas qui leur sont liés. `ImputeTS` procure une série de fonctions qui permettent de visualiser et approximer les valeurs manquantes avec beaucoup de précision. 
+
+Cependant, avant de procéder, il faut se poser deux questions:
+
+1. Y-a-t'il une raison valable pour le faire? 
+2. Ces valeurs manquantes sont-elles manquantes 'at random'?
+
+**Y-a-t'il une raison valable pour le faire?** Prenons l'exemple d'une boulangerie. On veut prédire les ventes quotidienne de gâteaux et trouver les valeurs manquantes liées aux vacances. Comment traiter ces données manquantes? Une façon de procéder serait de les remplacer par zéro et créer un 'flag' qui pourrait aider notre algorithme prédictif à comprendre ce pattern.
+
+Si les ventes sont manquantes parce que les gâteaux sont en rupture de stock ou parce que le boulanger avait disparu, ce genre de 'flag' ne fonctionnera pas car on ne sera pas capable de prédire ce genre d'événements dans le futur. Remplacer ces valeurs manqueantes est en général idéal dans ce genre de situations. 
+
+**Ces valeurs manquantes sont-elles manquantes 'at random'?** On n'a qu'une seule option: remplacer les valeurs manquantes. 
+
+Voici un exercice sur les séries temporelles que nous devons décomposer lorsque des valeurs manquantes sont présentes. 
+
+Dataset : a10 "Monthly anti-diabetic drug sales in Australia from 1992 to 2008"
+Pour cette exercice, nous utiliserons deux copies du dataset.
+
+Voici le dataset original du package `fpp`. 
+```{r}
+complete_a10 <- fpp::a10
+```
+
+Nous allons créer des valeurs manquantes et vérifier la performance de plusieurs fonctions de remplacement.
+```{r}
+set.seed(134)
+missatrand_a10 <- complete_a10
+missatrand_a10[sample(length(complete_a10),0.2*length(complete_a10))] <- NA 
+```
+
+#### Analysons cette série temporelle graphiquement
+```{r}
+plot(missatrand_a10)
+```
+
+Il semblerait que cette série a une [saisonnalité multiplicative](https://otexts.org/fpp2/classical-decomposition.html).
+Transformons-là de façon à ce qu'elle soit additive pour voir si cette saisonnalité apparait plus clairement. 
+
+```{r}
+plot(log(missatrand_a10))
+```
+
+Wow, on voit maintenant clairement un pattern saisonnier avec une tendance croissante.
+
+
+#### Et si on décomposait la série en chacun de ses composants? 
+
+```{r error=TRUE}
+plot(decompose(missatrand_a10, type = "multiplicative"))
+```
+Pas si vite. Comme mentionné plus haut, nous devons traiter les données manquantes avant de faire cela. 
+Suffit de parler, passons à l'action! 
+
+
+
+## Visualiser les données manquantes
+```{r message=FALSE}
+library(imputeTS)
+
+plotNA.distribution(missatrand_a10)
+```
+
+Regardons un résumé des données manquantes:
+```{r}
+statsNA(missatrand_a10)
+```
+
+
+Y-a-t'il un pattern dans le fait que ces données manquent? Combien de NAs consécutifs peuvent être observés? (gapsize) Et combien de valeurs manquantes sont représentées pour un gapsize spécifique? 
+```{r}
+plotNA.gapsize(missatrand_a10)
+```
+
+
+## Remplacement des valeurs manquantes
+
+### Méthodes génériques : indépendante des propriétés des séries temporelles
+
+#### Moyenne, médiane et mode
+
+Ceci est une méthode plutôt claire et simple d'insertion. Mais étant donné qu'on remplace les valeurs manquantes par la moyenne, on finit par perdre des informations concernant la tendance et la saisonnalité, ce qui mène à de grosses erreurs de remplacement. A cause de cela, cette méthode est meilleure pour des données qui sont stationnaires. Cette fonction nous permet également d'utiliser d'autres mesures comme la médiane et le mode. 
+
+###### Méthode 1
+```{r fig1, fig.height = 6,fig.width = 10, warning=FALSE, message=FALSE}
+imp <- na.mean(missatrand_a10)
+p1<-as.tibble(cbind(Date = as.yearmon(time(missatrand_a10)), 
+                missatrand = missatrand_a10,complete_a10 = complete_a10,imputed_val = imp))%>% 
+                mutate(imputed_val = ifelse(is.na(missatrand),imputed_val,NA),
+                       complete_a10 = ifelse(is.na(missatrand),complete_a10,NA)
+                       )%>%
+  ggplot(aes(x=Date)) + 
+    #geom_line(aes(y=missatrand),color="red")+
+    geom_line(aes(y=missatrand),color = "black")+
+    geom_point(aes(y=imputed_val),color = "blue")+
+    geom_point(aes(y=complete_a10),color = "red")+
+    ylab("Anti-diabetic drug sales")+
+    ggtitle("Imputed values (Blue); Real values (Red) ")+
+    theme(plot.title = element_text(size = 10))
+
+p2 <- ggplot() +
+  geom_line(aes(y = complete_a10-imp, x = as.yearmon(time(missatrand_a10)) )) +
+  ylim(-10,10) +
+  ylab("Errors")+
+  xlab("Date")+
+  ggtitle(paste("Errors in imputation"))+
+  theme(plot.title = element_text(size = 10))
+
+grid.arrange(p1, p2, ncol=2,top="Interpolation using mean")
+```
+
+#### Moyennes mobiles
+
+Comme cette fonction calcule les moyennes mobiles en fonction des dernières n observations, cela va générallement mieux performer que la méthode précédente. Les moyennes mobiles fonctionnent en général bien sur des données qui ont une tendance linéaire. Cette fonction permet également d'utiliser des moyennes mobiles pondérés linéairement et exponentiellement.
+
+
+###### Méthode 2
+```{r fig2, fig.height = 6,fig.width = 10, warning=FALSE, message=FALSE}
+imp <- na.ma(missatrand_a10)
+p1<-as.tibble(cbind(Date = as.yearmon(time(missatrand_a10)), 
+                missatrand = missatrand_a10,complete_a10 = complete_a10,imputed_val = imp))%>% 
+                mutate(imputed_val = ifelse(is.na(missatrand),imputed_val,NA),
+                       complete_a10 = ifelse(is.na(missatrand),complete_a10,NA)
+                       )%>%
+  ggplot(aes(x=Date)) + 
+    #geom_line(aes(y=missatrand),color="red")+
+    geom_line(aes(y=missatrand),color = "black")+
+    geom_point(aes(y=imputed_val),color = "blue")+
+    geom_point(aes(y=complete_a10),color = "red")+
+    ylab("Anti-diabetic drug sales")+
+    ggtitle("Imputed values (Blue); Real values (Red) ")+
+    theme(plot.title = element_text(size = 10))
+
+p2 <- ggplot() +
+  geom_line(aes(y = complete_a10-imp, x = as.yearmon(time(missatrand_a10)) )) +
+  ylim(-10,10) +
+  ylab("Errors")+
+  xlab("Date")+
+  ggtitle(paste("Errors in imputation"))+
+  theme(plot.title = element_text(size = 10))
+
+grid.arrange(p1, p2, ncol=2,top="Interpolation using n-Moving Averages")
+```
+
+
+### Méthodes spécifiques pour les séries temporelles
+
+#### Lissage Kalman avec auto.arima
+Ceci est une fonction plus avancée pour l'insertion et demande plus de temps de calcul. Elle utilise [le lissage Kalman](https://stats.stackexchange.com/questions/140990/using-kalman-filters-to-impute-missing-values-in-time-series?noredirect=1&lq=1){target="_blank"} sur les modèles ARIMA pour déduire les valeurs manquantes. Cette fonction peut aussi être utilisé pour des modèles de séries temporelles structurées.
+
+###### Méthode 3
+```{r fig3, fig.height = 6,fig.width = 10, warning=FALSE, message=FALSE}
+imp <- na.kalman(missatrand_a10,model = "auto.arima")
+p1<-as.tibble(cbind(Date = as.yearmon(time(missatrand_a10)), 
+                missatrand = missatrand_a10,complete_a10 = complete_a10,imputed_val = imp))%>% 
+                mutate(imputed_val = ifelse(is.na(missatrand),imputed_val,NA),
+                       complete_a10 = ifelse(is.na(missatrand),complete_a10,NA)
+                       )%>%
+  ggplot(aes(x=Date)) + 
+    #geom_line(aes(y=missatrand),color="red")+
+    geom_line(aes(y=missatrand),color = "black")+
+    geom_point(aes(y=imputed_val),color = "blue")+
+    geom_point(aes(y=complete_a10),color = "red")+
+    ylab("Anti-diabetic drug sales")+
+    ggtitle("Imputed values (Blue); Real values (Red) ")+
+    theme(plot.title = element_text(size = 10))
+
+p2 <- ggplot() +
+  geom_line(aes(y = complete_a10-imp, x = as.yearmon(time(missatrand_a10)) )) +
+  ylim(-10,10) +
+  ylab("Errors")+
+  xlab("Date")+
+  ggtitle(paste("Errors in imputation"))+
+  theme(plot.title = element_text(size = 10))
+
+grid.arrange(p1, p2, ncol=2,top="Interpolation using Auto.arima")
+```
+
+#### Séparation saisonnière
+Cette fonction déduit et remplace les valeurs manquantes en séparant les données par saison et en déduisant leur valeurs sur chaque dataset résultant. Une autre fonction similaire dans ce package est `na.seadec()` qui retire la saisonnalité des données, remplace les valeurs manquantes et rajoute la composante saisonnière à nouveau. 
+
+###### Méthode 4
+```{r fig4, fig.height = 6,fig.width = 10, warning=FALSE, message=FALSE}
+imp <- na.seasplit(missatrand_a10)
+p1<-as.tibble(cbind(Date = as.yearmon(time(missatrand_a10)), 
+                missatrand = missatrand_a10,complete_a10 = complete_a10,imputed_val = imp))%>% 
+                mutate(imputed_val = ifelse(is.na(missatrand),imputed_val,NA),
+                       complete_a10 = ifelse(is.na(missatrand),complete_a10,NA)
+                       )%>%
+  ggplot(aes(x=Date)) + 
+    #geom_line(aes(y=missatrand),color="red")+
+    geom_line(aes(y=missatrand),color = "black")+
+    geom_point(aes(y=imputed_val),color = "blue")+
+    geom_point(aes(y=complete_a10),color = "red")+
+    ylab("Anti-diabetic drug sales")+
+    ggtitle("Imputed values (Blue); Real values (Red) ")+
+    theme(plot.title = element_text(size = 10))
+
+p2 <- ggplot() +
+  geom_line(aes(y = complete_a10-imp, x = as.yearmon(time(missatrand_a10)) )) +
+  ylim(-10,10) +
+  ylab("Errors")+
+  xlab("Date")+
+  ggtitle(paste("Errors in imputation"))+
+  theme(plot.title = element_text(size = 10))
+
+grid.arrange(p1, p2, ncol=2,top="Seasonally splitted interpolation")
+```
+
+
+
+## Lecture supplémentaire
+
+- Plus de détails sur le package impute TS peut être trouver ici [imputeTS](https://cran.r-project.org/web/packages/imputeTS/vignettes/imputeTS-Time-Series-Missing-Value-Imputation-in-R.pdf){target="_blank"}
+
+- Pour en apprendre plus sur les time series, décomposition, prédiction et plus, allez lire les note de Rob J. Hyndman sur [otext](https://otexts.org/fpp2/){target="_blank"}

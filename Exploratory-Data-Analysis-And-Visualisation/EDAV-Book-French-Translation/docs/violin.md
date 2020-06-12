@@ -1,0 +1,80 @@
+# Diagramme : Violin Plot {#violin}
+
+![](images/banners/banner_violin.png)
+*Ce chapitre est à l'origine une contribution de [AshwinJay101](https://github.com/AshwinJay101){target="_blank"}*
+
+*En cours de progression. Toute amélioration est la bienvenue. Si vous souhaitez participer rendez vous sur [contribuer au repo](contribute.html).*
+
+## Avant-propos
+
+Cette section couvre les violins plots.
+
+## Quelques exemples en R
+
+Utilisons le jeu de données `chickwts` issu du package `datasets` pour réaliser un violin plot avec `ggplot2`. 
+
+<img src="violin_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+
+Voilà le code pour le faire : 
+
+```r
+# import ggplot and the Datasets Package
+library(datasets)
+library(ggplot2)
+
+supps <- c("horsebean", "linseed", "soybean", "meatmeal", "sunflower", "casein")
+
+# plot data
+
+ggplot(chickwts, aes(x = factor(feed, levels = supps), 
+                     y = weight)) + 
+  # plotting
+  geom_violin(fill = "lightBlue", color = "#473e2c") + 
+  labs(x = "Feed Supplement", y = "Chick Weight (g)")
+```
+
+## Ajout de quelques statistiques au violin plot 
+
+### Ajout de la médiane et de l'intervalle inter-quartile
+On peut ajouter la médianne et l'intervalle interquartile sur un violin plot.
+
+
+```r
+ggplot(chickwts, aes(x = factor(feed, levels = supps), 
+                     y = weight)) + 
+  # plotting
+  geom_violin(fill = "lightBlue", color = "#473e2c") + 
+  labs(x = "Feed Supplement", y = "Chick Weight (g)") + 
+   geom_boxplot(width=0.1)
+```
+
+<img src="violin_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+Pour obtenir ce résultat on ajoute juste une geom boxplot.
+
+### Affichage des données avec des points
+
+
+```r
+ggplot(chickwts, aes(x = factor(feed, levels = supps), 
+                     y = weight)) + 
+  # plotting
+  geom_violin(fill = "lightBlue", color = "#473e2c") + 
+  labs(x = "Feed Supplement", y = "Chick Weight (g)") + 
+  geom_dotplot(binaxis='y', dotsize=0.5, stackdir='center')
+```
+
+<img src="violin_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+
+
+## Description 
+
+Les violin plots sont similaires au boxplots. L'avantage de ces derniers par rapport aux boxplots est qu'ils nous permette de visualiser la distribution des données *et* et leur densité de probabilité. On peut interpreter le violin plot comme la combinaison parfaite des [boxplots](box.html) et des density plots.
+
+Ce type de graphique nous permet de savoir si les données sont unimodale, bimodale ou même multi-modale. Ces détails pourtant simples sont invisible dans un boxplot. Dans un violin plot la distribution peut être vue sur la largeur.
+
+## Quand l'utiliser ?
+Les violin plots ne s'utilisent que sur des variables continues.
+
+## Ressources externes
+- [ggplot2 Violin Plot](http://www.sthda.com/english/wiki/ggplot2-violin-plot-quick-start-guide-r-software-and-data-visualization){target="_blank"}: Ressource excellente pour créer et personnaliser vos violin plot.

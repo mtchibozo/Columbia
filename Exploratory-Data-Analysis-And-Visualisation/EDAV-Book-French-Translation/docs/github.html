@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>29 GitHub/git Resources | edav.info/</title>
+  <meta name="description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="29 GitHub/git Resources | edav.info/" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://edav.info/" />
+  <meta property="og:image" content="https://edav.info/images/edav_link_logo.png" />
+  <meta property="og:description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course." />
+  <meta name="github-repo" content="amalrich/EDAV" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="29 GitHub/git Resources | edav.info/" />
+  
+  <meta name="twitter:description" content="This resource is a collaborative collection of resources designed to help students succeed in GR5702 Exploratory Data Analysis and Visualization, a course offered at Columbia University. While the course lectures and textbook focus on theoretical issues, this resource, in contrast, provides coding tips and examples to assist students as they create their own analyses and visualizations. It is our hope that students will contribute to edav.info and it will grow with the course." />
+  <meta name="twitter:image" content="https://edav.info/images/edav_link_logo.png" />
+
+<meta name="author" content="Zach Bogart, Joyce Robbins" />
+<meta name="author" content="Translated by Amaury Sudrie, Maxime Tchibozo, Romane Goldmuntz and Vy Tran" />
+
+
+<meta name="date" content="2019-10-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="themes.html"/>
+<link rel="next" href="publish.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="libs/lfx-webgl-heatmap-0.2.7/lfx-webgl-heatmap-prod.js"></script>
+<script src="libs/lfx-webgl-heatmap-0.2.7/lfx-webgl-heatmap-bindings.js"></script>
+<link id="lfx-webgl-heatmap-skyline-attachment" rel="attachment" href="libs/lfx-webgl-heatmap-0.2.7/skyline-gradient.png"/>
+<link id="lfx-webgl-heatmap-deep-sea-attachment" rel="attachment" href="libs/lfx-webgl-heatmap-0.2.7/deep-sea-gradient.png"/>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
+<script src="libs/vis-4.20.1/vis.min.js"></script>
+<script src="libs/visNetwork-binding-2.0.8/visNetwork.js"></script>
+<!-- 
+Favicon 
+  - included in the toolbar of every page
+  - EDAV Logo favicon
+  - via: https://www.favicon-generator.org/
+-->
+
+<link rel="apple-touch-icon" sizes="57x57" href="images/icons/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="images/icons/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="images/icons/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="images/icons/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="images/icons/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="images/icons/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/icons/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="images/icons/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon/favicon-16x16.png">
+<link rel="manifest" href="images/icons/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="images/icons/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html"><b>edav.info/</b></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenue</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#tout-ce-dont-vous-aurez-besoin-pour-exploratory-data-analysis-visualization"><i class="fa fa-check"></i><b>0.1</b> Tout ce dont vous aurez besoin pour Exploratory Data Analysis &amp; Visualization</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contact"><i class="fa fa-check"></i><b>0.2</b> Contact</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.3</b> License</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.4</b> Colophon</a></li>
+</ul></li>
+<li class="part"><span><b>I Getting Started</b></span></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#avant-propos"><i class="fa fa-check"></i><b>1.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#types-dassistance"><i class="fa fa-check"></i><b>1.2</b> Types d’assistance</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#information-bleu"><i class="fa fa-check"></i><b>1.2.1</b> Information (Bleu)</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#revue-detaillee-rouge"><i class="fa fa-check"></i><b>1.2.2</b> Revue détaillée (Rouge)</a></li>
+<li class="chapter" data-level="1.2.3" data-path="intro.html"><a href="intro.html#documentation-vert"><i class="fa fa-check"></i><b>1.2.3</b> Documentation (Vert)</a></li>
+<li class="chapter" data-level="1.2.4" data-path="intro.html"><a href="intro.html#references-yellow"><i class="fa fa-check"></i><b>1.2.4</b> References (Yellow)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#aider-a-ameliorer-edav.info"><i class="fa fa-check"></i><b>1.3</b> Aider à améliorer <em>edav.info/</em></a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#fun-stuff"><i class="fa fa-check"></i><b>1.4</b> Fun stuff</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#t-shirts"><i class="fa fa-check"></i><b>1.4.1</b> T-shirts</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#acknowledgments"><i class="fa fa-check"></i><b>1.5</b> Acknowledgments</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#our-contributors"><i class="fa fa-check"></i><b>1.5.1</b> Our Contributors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Les bases de R</a><ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#top-10"><i class="fa fa-check"></i><b>2.1</b> Top 10</a></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#depannage"><i class="fa fa-check"></i><b>2.2</b> Dépannage</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#mon-document-ne-se-visualise-pas-correctement-quand-jutilise-knit"><i class="fa fa-check"></i><b>2.2.1</b> Mon document ne se visualise pas correctement quand j’utilise “knit”</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basics.html"><a href="basics.html#les-fonctions-ne-marchent-plus"><i class="fa fa-check"></i><b>2.2.2</b> Les fonctions ne marchent plus</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#astuces-et-tours-de-passe-passe"><i class="fa fa-check"></i><b>2.3</b> Astuces et tours de passe-passe</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="basics.html"><a href="basics.html#knitr"><i class="fa fa-check"></i><b>2.3.1</b> Knitr</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basics.html"><a href="basics.html#raccourcis-clavier-rstudio"><i class="fa fa-check"></i><b>2.3.2</b> Raccourcis clavier RStudio</a></li>
+<li class="chapter" data-level="2.3.3" data-path="basics.html"><a href="basics.html#taille-des-figures-et-bien-plus-encore"><i class="fa fa-check"></i><b>2.3.3</b> Taille des figures (et bien plus encore)</a></li>
+<li class="chapter" data-level="2.3.4" data-path="basics.html"><a href="basics.html#visualiser-des-graphiques-dans-des-fenetres-pour-graphique"><i class="fa fa-check"></i><b>2.3.4</b> Visualiser des graphiques dans des fenêtres pour graphique</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basics.html"><a href="basics.html#rendu-de-devoirs"><i class="fa fa-check"></i><b>2.4</b> Rendu de devoirs</a></li>
+<li class="chapter" data-level="2.5" data-path="basics.html"><a href="basics.html#demander-de-laide"><i class="fa fa-check"></i><b>2.5</b> Demander de l’aide</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="basics.html"><a href="basics.html#choses-a-essayer"><i class="fa fa-check"></i><b>2.5.1</b> Choses à essayer</a></li>
+<li class="chapter" data-level="2.5.2" data-path="basics.html"><a href="basics.html#a-laide"><i class="fa fa-check"></i><b>2.5.2</b> A l’aide!</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i><b>3</b> Final Project Assignment</a><ul>
+<li class="chapter" data-level="3.1" data-path="project.html"><a href="project.html#vue-densemble"><i class="fa fa-check"></i><b>3.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="3.2" data-path="project.html"><a href="project.html#info-generale"><i class="fa fa-check"></i><b>3.2</b> Info Generale</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="project.html"><a href="project.html#objectif"><i class="fa fa-check"></i><b>3.2.1</b> Objectif</a></li>
+<li class="chapter" data-level="3.2.2" data-path="project.html"><a href="project.html#sujets"><i class="fa fa-check"></i><b>3.2.2</b> Sujets</a></li>
+<li class="chapter" data-level="3.2.3" data-path="project.html"><a href="project.html#donnees"><i class="fa fa-check"></i><b>3.2.3</b> Données</a></li>
+<li class="chapter" data-level="3.2.4" data-path="project.html"><a href="project.html#code"><i class="fa fa-check"></i><b>3.2.4</b> Code</a></li>
+<li class="chapter" data-level="3.2.5" data-path="project.html"><a href="project.html#analyse"><i class="fa fa-check"></i><b>3.2.5</b> Analyse</a></li>
+<li class="chapter" data-level="3.2.6" data-path="project.html"><a href="project.html#feedback"><i class="fa fa-check"></i><b>3.2.6</b> Feedback</a></li>
+<li class="chapter" data-level="3.2.7" data-path="project.html"><a href="project.html#examen-par-des-pairs"><i class="fa fa-check"></i><b>3.2.7</b> Examen par des pairs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="project.html"><a href="project.html#format-du-rapport"><i class="fa fa-check"></i><b>3.3</b> Format du rapport</a></li>
+<li class="chapter" data-level="3.4" data-path="project.html"><a href="project.html#schema"><i class="fa fa-check"></i><b>3.4</b> Schéma</a><ul>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#i.-introduction"><i class="fa fa-check"></i>I. Introduction</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#ii.-description-des-donnees-et-de-leur-source"><i class="fa fa-check"></i>II. Description des données et de leur source</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#iii.-description-des-donnees-importees-nettoyees-transformees"><i class="fa fa-check"></i>III. Description des données importées / nettoyées / transformées</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#iv.-analyse-des-donnees-manquantes"><i class="fa fa-check"></i>IV. Analyse des données manquantes</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#v.-resultats"><i class="fa fa-check"></i>V. Resultats</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#vi.-partie-interactive"><i class="fa fa-check"></i>VI. Partie Interactive</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html#vii.-conclusion"><i class="fa fa-check"></i>VII. Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="project.html"><a href="project.html#style-de-presentation"><i class="fa fa-check"></i><b>3.5</b> Style de presentation</a></li>
+<li class="chapter" data-level="3.6" data-path="project.html"><a href="project.html#grading"><i class="fa fa-check"></i><b>3.6</b> Grading</a></li>
+<li class="chapter" data-level="3.7" data-path="project.html"><a href="project.html#resources"><i class="fa fa-check"></i><b>3.7</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="contribute.html"><a href="contribute.html"><i class="fa fa-check"></i><b>4</b> Contribuez à cette ressour e</a><ul>
+<li class="chapter" data-level="4.1" data-path="contribute.html"><a href="contribute.html#pourquoi-contribuer"><i class="fa fa-check"></i><b>4.1</b> Pourquoi contribuer?</a></li>
+<li class="chapter" data-level="4.2" data-path="contribute.html"><a href="contribute.html#que-contribuer"><i class="fa fa-check"></i><b>4.2</b> Que contribuer?</a></li>
+<li class="chapter" data-level="4.3" data-path="contribute.html"><a href="contribute.html#comment-contribuer"><i class="fa fa-check"></i><b>4.3</b> Comment contribuer</a></li>
+<li class="chapter" data-level="4.4" data-path="contribute.html"><a href="contribute.html#soumettez-une-issue"><i class="fa fa-check"></i><b>4.4</b> Soumettez une “issue”</a></li>
+<li class="chapter" data-level="4.5" data-path="contribute.html"><a href="contribute.html#tutoriel-github"><i class="fa fa-check"></i><b>4.5</b> Tutoriel GitHub</a><ul>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-1-trouver-quelquechose-a-changer"><i class="fa fa-check"></i>Etape 1: Trouver quelquechose à changer</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-2-cliquez-sur-le-bouton-edit"><i class="fa fa-check"></i>Etape 2: Cliquez sur le bouton edit</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-3-forkez-le-depot"><i class="fa fa-check"></i>Etape 3: Forkez le dépôt</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#step-4-corrigez-lerreur"><i class="fa fa-check"></i>Step 4: Corrigez l’erreur</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-5-comparer-des-changements"><i class="fa fa-check"></i>Etape 5: Comparer des changements</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#etape-6-ouvrez-une-requete-pull"><i class="fa fa-check"></i>Etape 6: Ouvrez une requête pull</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#et-maintenant"><i class="fa fa-check"></i>Et maintenant?</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html#soyons-prevoyants-la-prochaine-modification"><i class="fa fa-check"></i>Soyons prévoyants: la prochaine modification</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="contribute.html"><a href="contribute.html#ressources"><i class="fa fa-check"></i><b>4.6</b> Ressources</a></li>
+</ul></li>
+<li class="part"><span><b>II Continuous Variables</b></span></li>
+<li class="chapter" data-level="5" data-path="histo.html"><a href="histo.html"><i class="fa fa-check"></i><b>5</b> Diagramme: Histogrammes</a><ul>
+<li class="chapter" data-level="5.1" data-path="histo.html"><a href="histo.html#avant-propos-1"><i class="fa fa-check"></i><b>5.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="5.2" data-path="histo.html"><a href="histo.html#tldr"><i class="fa fa-check"></i><b>5.2</b> tl;dr</a></li>
+<li class="chapter" data-level="5.3" data-path="histo.html"><a href="histo.html#simple-examples"><i class="fa fa-check"></i><b>5.3</b> Simple examples</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="histo.html"><a href="histo.html#histogramme-de-base-en-r"><i class="fa fa-check"></i><b>5.3.1</b> Histogramme de base en R</a></li>
+<li class="chapter" data-level="5.3.2" data-path="histo.html"><a href="histo.html#histogramme-avec-ggplot2"><i class="fa fa-check"></i><b>5.3.2</b> Histogramme avec ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="histo.html"><a href="histo.html#theorie"><i class="fa fa-check"></i><b>5.4</b> Théorie</a></li>
+<li class="chapter" data-level="5.5" data-path="histo.html"><a href="histo.html#types-dhistogrammes"><i class="fa fa-check"></i><b>5.5</b> Types d’histogrammes</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="histo.html"><a href="histo.html#frequence-ou-compte"><i class="fa fa-check"></i><b>5.5.1</b> Frequence ou compte</a></li>
+<li class="chapter" data-level="5.5.2" data-path="histo.html"><a href="histo.html#frequence-relative"><i class="fa fa-check"></i><b>5.5.2</b> Frequence relative</a></li>
+<li class="chapter" data-level="5.5.3" data-path="histo.html"><a href="histo.html#frequence-cumulee"><i class="fa fa-check"></i><b>5.5.3</b> Frequence cumulée</a></li>
+<li class="chapter" data-level="5.5.4" data-path="histo.html"><a href="histo.html#densite"><i class="fa fa-check"></i><b>5.5.4</b> Densité</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="histo.html"><a href="histo.html#parametres"><i class="fa fa-check"></i><b>5.6</b> Paramètres</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="histo.html"><a href="histo.html#limite-droite-et-gauches-des-batons"><i class="fa fa-check"></i><b>5.6.1</b> Limite droite et gauches des bâtons</a></li>
+<li class="chapter" data-level="5.6.2" data-path="histo.html"><a href="histo.html#nombre-de-batons"><i class="fa fa-check"></i><b>5.6.2</b> Nombre de bâtons</a></li>
+<li class="chapter" data-level="5.6.3" data-path="histo.html"><a href="histo.html#alignement-des-batones"><i class="fa fa-check"></i><b>5.6.3</b> Alignement des bâtones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="histo.html"><a href="histo.html#histogramme-interactif-avec-ggvis"><i class="fa fa-check"></i><b>5.7</b> Histogramme interactif avec <code>ggvis</code></a><ul>
+<li class="chapter" data-level="5.7.1" data-path="histo.html"><a href="histo.html#changer-la-largeur-de-bande-de-facon-interactive"><i class="fa fa-check"></i><b>5.7.1</b> Changer la largeur de bande de façon interactive</a></li>
+<li class="chapter" data-level="5.7.2" data-path="histo.html"><a href="histo.html#gdp"><i class="fa fa-check"></i><b>5.7.2</b> GDP</a></li>
+<li class="chapter" data-level="5.7.3" data-path="histo.html"><a href="histo.html#changer-le-centre-de-facon-interactive"><i class="fa fa-check"></i><b>5.7.3</b> Changer le centre de façon interactive</a></li>
+<li class="chapter" data-level="5.7.4" data-path="histo.html"><a href="histo.html#changer-le-centre-avec-affichage-des-valeurs"><i class="fa fa-check"></i><b>5.7.4</b> Changer le centre (avec affichage des valeurs)</a></li>
+<li class="chapter" data-level="5.7.5" data-path="histo.html"><a href="histo.html#changer-les-limites-droites-et-gauches-de-facon-interactive"><i class="fa fa-check"></i><b>5.7.5</b> Changer les limites droites et gauches de façon interactive</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="histo.html"><a href="histo.html#ressources-externes"><i class="fa fa-check"></i><b>5.8</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="box.html"><a href="box.html"><i class="fa fa-check"></i><b>6</b> Chart: Boxplot</a><ul>
+<li class="chapter" data-level="6.1" data-path="box.html"><a href="box.html#tldr-1"><i class="fa fa-check"></i><b>6.1</b> tl;dr</a></li>
+<li class="chapter" data-level="6.2" data-path="box.html"><a href="box.html#exemples-simples"><i class="fa fa-check"></i><b>6.2</b> Exemples simples</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="box.html"><a href="box.html#boxplots-unique"><i class="fa fa-check"></i><b>6.2.1</b> Boxplots unique</a></li>
+<li class="chapter" data-level="6.2.2" data-path="box.html"><a href="box.html#boxplots-multiples-utilisant-ggplot2"><i class="fa fa-check"></i><b>6.2.2</b> Boxplots multiples utilisant ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="box.html"><a href="box.html#theorie-1"><i class="fa fa-check"></i><b>6.3</b> Théorie</a></li>
+<li class="chapter" data-level="6.4" data-path="box.html"><a href="box.html#quand-lutiliser"><i class="fa fa-check"></i><b>6.4</b> Quand l’utiliser</a></li>
+<li class="chapter" data-level="6.5" data-path="box.html"><a href="box.html#considerations"><i class="fa fa-check"></i><b>6.5</b> Considérations</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="box.html"><a href="box.html#orientation-retournee"><i class="fa fa-check"></i><b>6.5.1</b> Orientation retournée</a></li>
+<li class="chapter" data-level="6.5.2" data-path="box.html"><a href="box.html#pas-pour-des-donnees-categorielles"><i class="fa fa-check"></i><b>6.5.2</b> PAS pour des données catégorielles</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="box.html"><a href="box.html#ressources-externes-1"><i class="fa fa-check"></i><b>6.6</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="violin.html"><a href="violin.html"><i class="fa fa-check"></i><b>7</b> Diagramme : Violin Plot</a><ul>
+<li class="chapter" data-level="7.1" data-path="violin.html"><a href="violin.html#avant-propos-2"><i class="fa fa-check"></i><b>7.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="7.2" data-path="violin.html"><a href="violin.html#quelques-exemples-en-r"><i class="fa fa-check"></i><b>7.2</b> Quelques exemples en R</a></li>
+<li class="chapter" data-level="7.3" data-path="violin.html"><a href="violin.html#ajout-de-quelques-statistiques-au-violin-plot"><i class="fa fa-check"></i><b>7.3</b> Ajout de quelques statistiques au violin plot</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="violin.html"><a href="violin.html#ajout-de-la-mediane-et-de-lintervalle-inter-quartile"><i class="fa fa-check"></i><b>7.3.1</b> Ajout de la médiane et de l’intervalle inter-quartile</a></li>
+<li class="chapter" data-level="7.3.2" data-path="violin.html"><a href="violin.html#affichage-des-donnees-avec-des-points"><i class="fa fa-check"></i><b>7.3.2</b> Affichage des données avec des points</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="violin.html"><a href="violin.html#description"><i class="fa fa-check"></i><b>7.4</b> Description</a></li>
+<li class="chapter" data-level="7.5" data-path="violin.html"><a href="violin.html#quand-lutiliser-1"><i class="fa fa-check"></i><b>7.5</b> Quand l’utiliser ?</a></li>
+<li class="chapter" data-level="7.6" data-path="violin.html"><a href="violin.html#ressources-externes-2"><i class="fa fa-check"></i><b>7.6</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ridgeline.html"><a href="ridgeline.html"><i class="fa fa-check"></i><b>8</b> Diagramme : Ridgeline Plots</a><ul>
+<li class="chapter" data-level="8.1" data-path="ridgeline.html"><a href="ridgeline.html#avant-propos-3"><i class="fa fa-check"></i><b>8.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="8.2" data-path="ridgeline.html"><a href="ridgeline.html#tldr-2"><i class="fa fa-check"></i><b>8.2</b> tl;dr</a></li>
+<li class="chapter" data-level="8.3" data-path="ridgeline.html"><a href="ridgeline.html#exemple-simple"><i class="fa fa-check"></i><b>8.3</b> Exemple simple</a></li>
+<li class="chapter" data-level="8.4" data-path="ridgeline.html"><a href="ridgeline.html#ridgeline-plots-avec-ggridge"><i class="fa fa-check"></i><b>8.4</b> Ridgeline Plots avec ggridge</a></li>
+<li class="chapter" data-level="8.5" data-path="ridgeline.html"><a href="ridgeline.html#quand-utiliser"><i class="fa fa-check"></i><b>8.5</b> Quand utiliser ?</a></li>
+<li class="chapter" data-level="8.6" data-path="ridgeline.html"><a href="ridgeline.html#considerations-1"><i class="fa fa-check"></i><b>8.6</b> Considerations</a></li>
+<li class="chapter" data-level="8.7" data-path="ridgeline.html"><a href="ridgeline.html#ressources-externes-3"><i class="fa fa-check"></i><b>8.7</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="qqplot.html"><a href="qqplot.html"><i class="fa fa-check"></i><b>9</b> Diagramme : QQ-Plot</a><ul>
+<li class="chapter" data-level="9.1" data-path="qqplot.html"><a href="qqplot.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="qqplot.html"><a href="qqplot.html#interpretation-des-qqplots"><i class="fa fa-check"></i><b>9.2</b> Interpretation des qqplots</a></li>
+<li class="chapter" data-level="9.3" data-path="qqplot.html"><a href="qqplot.html#normal-ou-pas-example-avec-qqnorm"><i class="fa fa-check"></i><b>9.3</b> Normal ou pas (example avec qqnorm)</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="qqplot.html"><a href="qqplot.html#qqplot-normal"><i class="fa fa-check"></i><b>9.3.1</b> qqplot normal</a></li>
+<li class="chapter" data-level="9.3.2" data-path="qqplot.html"><a href="qqplot.html#qqplot-non-normal"><i class="fa fa-check"></i><b>9.3.2</b> qqplot non-normal</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="qqplot.html"><a href="qqplot.html#differents-genre-de-qqplots"><i class="fa fa-check"></i><b>9.4</b> Différents genre de qqplots</a></li>
+<li class="chapter" data-level="9.5" data-path="qqplot.html"><a href="qqplot.html#qqplot-avec-ggplot"><i class="fa fa-check"></i><b>9.5</b> qqplot avec ggplot</a></li>
+<li class="chapter" data-level="9.6" data-path="qqplot.html"><a href="qqplot.html#references"><i class="fa fa-check"></i><b>9.6</b> References</a></li>
+</ul></li>
+<li class="part"><span><b>III Categorical Variables</b></span></li>
+<li class="chapter" data-level="10" data-path="bar.html"><a href="bar.html"><i class="fa fa-check"></i><b>10</b> Diagramme : Bar Chart</a><ul>
+<li class="chapter" data-level="10.1" data-path="bar.html"><a href="bar.html#avant-propos-4"><i class="fa fa-check"></i><b>10.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="10.2" data-path="bar.html"><a href="bar.html#tldr-3"><i class="fa fa-check"></i><b>10.2</b> tl;dr</a></li>
+<li class="chapter" data-level="10.3" data-path="bar.html"><a href="bar.html#exemples-simples-1"><i class="fa fa-check"></i><b>10.3</b> Exemples simples</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="bar.html"><a href="bar.html#bar-chart-avec-la-base-r"><i class="fa fa-check"></i><b>10.3.1</b> Bar chart avec la base R</a></li>
+<li class="chapter" data-level="10.3.2" data-path="bar.html"><a href="bar.html#bar-chart-avec-ggplot2"><i class="fa fa-check"></i><b>10.3.2</b> Bar chart avec ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="bar.html"><a href="bar.html#theorie-2"><i class="fa fa-check"></i><b>10.4</b> Théorie</a></li>
+<li class="chapter" data-level="10.5" data-path="bar.html"><a href="bar.html#quand-utiliser-1"><i class="fa fa-check"></i><b>10.5</b> Quand utiliser ?</a></li>
+<li class="chapter" data-level="10.6" data-path="ridgeline.html"><a href="ridgeline.html#considerations-1"><i class="fa fa-check"></i><b>10.6</b> Considérations</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="bar.html"><a href="bar.html#pas-pour-les-donnees-continues.."><i class="fa fa-check"></i><b>10.6.1</b> Pas pour les données continues..</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="bar.html"><a href="bar.html#modifications"><i class="fa fa-check"></i><b>10.7</b> Modifications</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="bar.html"><a href="bar.html#inversion-des-barres"><i class="fa fa-check"></i><b>10.7.1</b> Inversion des barres</a></li>
+<li class="chapter" data-level="10.7.2" data-path="bar.html"><a href="bar.html#reordonner-les-barres"><i class="fa fa-check"></i><b>10.7.2</b> Reordonner les barres</a></li>
+<li class="chapter" data-level="10.7.3" data-path="bar.html"><a href="bar.html#facet-wrap"><i class="fa fa-check"></i><b>10.7.3</b> Facet Wrap</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="bar.html"><a href="bar.html#ressources-externes-4"><i class="fa fa-check"></i><b>10.8</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="cleveland.html"><a href="cleveland.html"><i class="fa fa-check"></i><b>11</b> Diagramme : Cleveland Dot Plot</a><ul>
+<li class="chapter" data-level="11.1" data-path="cleveland.html"><a href="cleveland.html#avant-propos-5"><i class="fa fa-check"></i><b>11.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="11.2" data-path="cleveland.html"><a href="cleveland.html#multiple-dot-plots"><i class="fa fa-check"></i><b>11.2</b> Multiple dot plots</a></li>
+</ul></li>
+<li class="part"><span><b>IV Multivariate Continuous</b></span></li>
+<li class="chapter" data-level="12" data-path="scatter.html"><a href="scatter.html"><i class="fa fa-check"></i><b>12</b> Diagramme : Scatterplot</a><ul>
+<li class="chapter" data-level="12.1" data-path="scatter.html"><a href="scatter.html#avant-propos-6"><i class="fa fa-check"></i><b>12.1</b> Avant-propos</a></li>
+<li class="chapter" data-level="12.2" data-path="scatter.html"><a href="scatter.html#tldr-4"><i class="fa fa-check"></i><b>12.2</b> tl;dr</a></li>
+<li class="chapter" data-level="12.3" data-path="scatter.html"><a href="scatter.html#exemples-simples-2"><i class="fa fa-check"></i><b>12.3</b> Exemples simples</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="scatter.html"><a href="scatter.html#scatterplot-de-base-en-r"><i class="fa fa-check"></i><b>12.3.1</b> Scatterplot de base en R</a></li>
+<li class="chapter" data-level="12.3.2" data-path="scatter.html"><a href="scatter.html#scatterplot-avec-ggplot2"><i class="fa fa-check"></i><b>12.3.2</b> Scatterplot avec ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="scatter.html"><a href="scatter.html#theorie-3"><i class="fa fa-check"></i><b>12.4</b> Théorie</a></li>
+<li class="chapter" data-level="12.5" data-path="scatter.html"><a href="scatter.html#quand-utiliser-2"><i class="fa fa-check"></i><b>12.5</b> Quand utiliser ?</a></li>
+<li class="chapter" data-level="12.6" data-path="scatter.html"><a href="scatter.html#considerations-2"><i class="fa fa-check"></i><b>12.6</b> Considérations</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="scatter.html"><a href="scatter.html#chevauchement-des-donnees."><i class="fa fa-check"></i><b>12.6.1</b> Chevauchement des données.</a></li>
+<li class="chapter" data-level="12.6.2" data-path="scatter.html"><a href="scatter.html#changement-dechelle"><i class="fa fa-check"></i><b>12.6.2</b> Changement d’échelle</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="scatter.html"><a href="scatter.html#modifications-1"><i class="fa fa-check"></i><b>12.7</b> Modifications</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="scatter.html"><a href="scatter.html#lignes-de-contours"><i class="fa fa-check"></i><b>12.7.1</b> Lignes de contours</a></li>
+<li class="chapter" data-level="12.7.2" data-path="scatter.html"><a href="scatter.html#matrices-de-scatterplot"><i class="fa fa-check"></i><b>12.7.2</b> Matrices de scatterplot</a></li>
+</ul></li>
+<li class="chapter" data-level="12.8" data-path="scatter.html"><a href="scatter.html#ressources-externes-5"><i class="fa fa-check"></i><b>12.8</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="iris.html"><a href="iris.html"><i class="fa fa-check"></i><b>13</b> Walkthrough: Iris Scatterplot</a><ul>
+<li class="chapter" data-level="13.1" data-path="iris.html"><a href="iris.html#avant-propos-7"><i class="fa fa-check"></i><b>13.1</b> Avant-propos</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="iris.html"><a href="iris.html#tldr-5"><i class="fa fa-check"></i><b>13.1.1</b> tl;dr</a></li>
+<li class="chapter" data-level="13.1.2" data-path="iris.html"><a href="iris.html#packages"><i class="fa fa-check"></i><b>13.1.2</b> Packages</a></li>
+<li class="chapter" data-level="13.1.3" data-path="iris.html"><a href="iris.html#techniques"><i class="fa fa-check"></i><b>13.1.3</b> Techniques</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="iris.html"><a href="iris.html#petite-note-sur-comment-le-faire-sans-effort"><i class="fa fa-check"></i><b>13.2</b> Petite note sur comment le faire sans effort</a></li>
+<li class="chapter" data-level="13.3" data-path="iris.html"><a href="iris.html#visualisation-des-donnees"><i class="fa fa-check"></i><b>13.3</b> Visualisation des données</a></li>
+<li class="chapter" data-level="13.4" data-path="iris.html"><a href="iris.html#afficher-les-donnees"><i class="fa fa-check"></i><b>13.4</b> Afficher les données</a></li>
+<li class="chapter" data-level="13.5" data-path="iris.html"><a href="iris.html#markdown-etiquette"><i class="fa fa-check"></i><b>13.5</b> Markdown etiquette</a></li>
+<li class="chapter" data-level="13.6" data-path="iris.html"><a href="iris.html#chevauchement-de-donnees"><i class="fa fa-check"></i><b>13.6</b> Chevauchement de données</a><ul>
+<li class="chapter" data-level="13.6.1" data-path="iris.html"><a href="iris.html#premierement-la-legende"><i class="fa fa-check"></i><b>13.6.1</b> Premièrement : la légende</a></li>
+<li class="chapter" data-level="13.6.2" data-path="iris.html"><a href="iris.html#deuxiement-le-jittering"><i class="fa fa-check"></i><b>13.6.2</b> Deuxièment : le jittering</a></li>
+<li class="chapter" data-level="13.6.3" data-path="iris.html"><a href="iris.html#parenthese-exemple-de-cas-ou-le-alpha-blending-est-utile"><i class="fa fa-check"></i><b>13.6.3</b> <em>Parenthèse</em> : Exemple de cas où le alpha blending est utile</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="iris.html"><a href="iris.html#remanier-pour-presenter"><i class="fa fa-check"></i><b>13.7</b> Remanier pour présenter</a></li>
+<li class="chapter" data-level="13.8" data-path="iris.html"><a href="iris.html#modifier-lapparence"><i class="fa fa-check"></i><b>13.8</b> Modifier l’apparence</a></li>
+<li class="chapter" data-level="13.9" data-path="iris.html"><a href="iris.html#ajouter-des-themes"><i class="fa fa-check"></i><b>13.9</b> Ajouter des themes</a></li>
+<li class="chapter" data-level="13.10" data-path="iris.html"><a href="iris.html#pour-aller-plus-loin"><i class="fa fa-check"></i><b>13.10</b> Pour aller plus loin</a></li>
+<li class="chapter" data-level="13.11" data-path="iris.html"><a href="iris.html#liens-utiles"><i class="fa fa-check"></i><b>13.11</b> Liens utiles</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html"><i class="fa fa-check"></i><b>14</b> Chart: Parallel Coordinate Plots</a><ul>
+<li class="chapter" data-level="14.1" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#vue-densemble-1"><i class="fa fa-check"></i><b>14.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="14.2" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#tldr-6"><i class="fa fa-check"></i><b>14.2</b> tl;dr</a></li>
+<li class="chapter" data-level="14.3" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#examples-simples"><i class="fa fa-check"></i><b>14.3</b> Examples simples</a></li>
+<li class="chapter" data-level="14.4" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#theorie-4"><i class="fa fa-check"></i><b>14.4</b> Theorie</a></li>
+<li class="chapter" data-level="14.5" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#quand-les-utiliser"><i class="fa fa-check"></i><b>14.5</b> Quand les utiliser</a></li>
+<li class="chapter" data-level="14.6" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#considerations-3"><i class="fa fa-check"></i><b>14.6</b> Considerations</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#quand-utiliser-le-clustering"><i class="fa fa-check"></i><b>14.6.1</b> Quand utiliser le clustering?</a></li>
+<li class="chapter" data-level="14.6.2" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#choix-du-parametre-alpha"><i class="fa fa-check"></i><b>14.6.2</b> Choix du paramètre alpha</a></li>
+<li class="chapter" data-level="14.6.3" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#scales"><i class="fa fa-check"></i><b>14.6.3</b> Scales</a></li>
+<li class="chapter" data-level="14.6.4" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#ordre-des-variables"><i class="fa fa-check"></i><b>14.6.4</b> Ordre des variables</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#modifications-2"><i class="fa fa-check"></i><b>14.7</b> Modifications</a><ul>
+<li class="chapter" data-level="14.7.1" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#permutation-des-coordonnees"><i class="fa fa-check"></i><b>14.7.1</b> Permutation des coordonnées</a></li>
+<li class="chapter" data-level="14.7.2" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#faire-appparaitre-des-tendances"><i class="fa fa-check"></i><b>14.7.2</b> Faire appparaître des tendances</a></li>
+<li class="chapter" data-level="14.7.3" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#utilisation-de-splines"><i class="fa fa-check"></i><b>14.7.3</b> Utilisation de splines</a></li>
+<li class="chapter" data-level="14.7.4" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#ajout-de-boxplot-au-graphique"><i class="fa fa-check"></i><b>14.7.4</b> Ajout de boxplot au graphique</a></li>
+</ul></li>
+<li class="chapter" data-level="14.8" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#autres-packages"><i class="fa fa-check"></i><b>14.8</b> Autres Packages</a></li>
+<li class="chapter" data-level="14.9" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#ressources-externes-6"><i class="fa fa-check"></i><b>14.9</b> Ressources Externes</a></li>
+</ul></li>
+<li class="part"><span><b>V Multivariate Categorical</b></span></li>
+<li class="chapter" data-level="15" data-path="mosaic.html"><a href="mosaic.html"><i class="fa fa-check"></i><b>15</b> Diagramme : Mosaic</a><ul>
+<li class="chapter" data-level="15.1" data-path="mosaic.html"><a href="mosaic.html#vue-densemble-2"><i class="fa fa-check"></i><b>15.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="15.2" data-path="mosaic.html"><a href="mosaic.html#tldr-7"><i class="fa fa-check"></i><b>15.2</b> tl;dr</a></li>
+<li class="chapter" data-level="15.3" data-path="mosaic.html"><a href="mosaic.html#lordre-des-coupes"><i class="fa fa-check"></i><b>15.3</b> L’ordre des coupes</a></li>
+<li class="chapter" data-level="15.4" data-path="mosaic.html"><a href="mosaic.html#direction-des-coupes"><i class="fa fa-check"></i><b>15.4</b> Direction des coupes</a></li>
+<li class="chapter" data-level="15.5" data-path="mosaic.html"><a href="mosaic.html#couleur"><i class="fa fa-check"></i><b>15.5</b> Couleur</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="mosaic.html"><a href="mosaic.html#couleur-de-fond"><i class="fa fa-check"></i><b>15.5.1</b> Couleur de fond</a></li>
+<li class="chapter" data-level="15.5.2" data-path="mosaic.html"><a href="mosaic.html#couleur-de-bordure-il-faut-egalement-definir-la-couleur-de-fond"><i class="fa fa-check"></i><b>15.5.2</b> Couleur de bordure (il faut également définir la couleur de fond(?))</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="mosaic.html"><a href="mosaic.html#etiquettes"><i class="fa fa-check"></i><b>15.6</b> Etiquettes</a><ul>
+<li class="chapter" data-level="15.6.1" data-path="mosaic.html"><a href="mosaic.html#faire-pivoter-les-etiquettes"><i class="fa fa-check"></i><b>15.6.1</b> Faire pivoter les étiquettes</a></li>
+<li class="chapter" data-level="15.6.2" data-path="mosaic.html"><a href="mosaic.html#alleger-les-etiquettes"><i class="fa fa-check"></i><b>15.6.2</b> Alléger les étiquettes</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="mosaic.html"><a href="mosaic.html#agencement-des-cellules"><i class="fa fa-check"></i><b>15.7</b> Agencement des cellules</a><ul>
+<li class="chapter" data-level="15.7.1" data-path="mosaic.html"><a href="mosaic.html#mosaique-en-utilisant-vcddoubledecker"><i class="fa fa-check"></i><b>15.7.1</b> Mosaïque en utilisant vcd::doubledecker</a></li>
+</ul></li>
+<li class="chapter" data-level="15.8" data-path="mosaic.html"><a href="mosaic.html#mosaique-en-utilisant-ggplot"><i class="fa fa-check"></i><b>15.8</b> Mosaique en utilisant ggplot</a></li>
+<li class="chapter" data-level="15.9" data-path="parallelcoordinates.html"><a href="parallelcoordinates.html#theorie-4"><i class="fa fa-check"></i><b>15.9</b> Théorie</a></li>
+<li class="chapter" data-level="15.10" data-path="mosaic.html"><a href="mosaic.html#quand-lutiliser-2"><i class="fa fa-check"></i><b>15.10</b> Quand l’utiliser</a></li>
+<li class="chapter" data-level="15.11" data-path="mosaic.html"><a href="mosaic.html#considerations-4"><i class="fa fa-check"></i><b>15.11</b> Considerations</a><ul>
+<li class="chapter" data-level="15.11.1" data-path="mosaic.html"><a href="mosaic.html#etiquettes-1"><i class="fa fa-check"></i><b>15.11.1</b> Etiquettes</a></li>
+<li class="chapter" data-level="15.11.2" data-path="mosaic.html"><a href="mosaic.html#aspect-ratio"><i class="fa fa-check"></i><b>15.11.2</b> Aspect Ratio</a></li>
+<li class="chapter" data-level="15.11.3" data-path="mosaic.html"><a href="mosaic.html#espace-entre-les-rectangles"><i class="fa fa-check"></i><b>15.11.3</b> Espace entre les rectangles</a></li>
+<li class="chapter" data-level="15.11.4" data-path="mosaic.html"><a href="mosaic.html#couleur-1"><i class="fa fa-check"></i><b>15.11.4</b> Couleur</a></li>
+</ul></li>
+<li class="chapter" data-level="15.12" data-path="mosaic.html"><a href="mosaic.html#ressources-externes-7"><i class="fa fa-check"></i><b>15.12</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="heatmap.html"><a href="heatmap.html"><i class="fa fa-check"></i><b>16</b> Diagramme: Carte Thermique</a><ul>
+<li class="chapter" data-level="16.1" data-path="heatmap.html"><a href="heatmap.html#vue-densemble-3"><i class="fa fa-check"></i><b>16.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="16.2" data-path="heatmap.html"><a href="heatmap.html#tldr-8"><i class="fa fa-check"></i><b>16.2</b> tl;dr</a></li>
+<li class="chapter" data-level="16.3" data-path="heatmap.html"><a href="heatmap.html#exemples-simples-3"><i class="fa fa-check"></i><b>16.3</b> Exemples simples</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="heatmap.html"><a href="heatmap.html#carte-thermique-de-compartiments-dhistogrammes-en-2d-bin-count"><i class="fa fa-check"></i><b>16.3.1</b> Carte thermique de compartiments d’histogrammes en 2D (bin count)</a></li>
+<li class="chapter" data-level="16.3.2" data-path="heatmap.html"><a href="heatmap.html#carte-thermique-dun-dataframe"><i class="fa fa-check"></i><b>16.3.2</b> Carte thermique d’un Dataframe</a></li>
+<li class="chapter" data-level="16.3.3" data-path="heatmap.html"><a href="heatmap.html#modifications-3"><i class="fa fa-check"></i><b>16.3.3</b> Modifications</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="heatmap.html"><a href="heatmap.html#theorie-5"><i class="fa fa-check"></i><b>16.4</b> Theorie</a></li>
+<li class="chapter" data-level="16.5" data-path="heatmap.html"><a href="heatmap.html#ressources-externes-8"><i class="fa fa-check"></i><b>16.5</b> Ressources Externes</a></li>
+</ul></li>
+<li class="part"><span><b>VI Special Data Types</b></span></li>
+<li class="chapter" data-level="17" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>17</b> Spatial Data</a><ul>
+<li class="chapter" data-level="17.1" data-path="maps.html"><a href="maps.html#les-choropleth-maps"><i class="fa fa-check"></i><b>17.1</b> Les choropleth maps</a></li>
+<li class="chapter" data-level="17.2" data-path="maps.html"><a href="maps.html#square-bins"><i class="fa fa-check"></i><b>17.2</b> Square bins</a></li>
+<li class="chapter" data-level="17.3" data-path="maps.html"><a href="maps.html#donnees-sur-la-longitude-latitude"><i class="fa fa-check"></i><b>17.3</b> Données sur la Longitude / Latitude</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>18</b> Interactive Geographic Data</a><ul>
+<li class="chapter" data-level="18.1" data-path="leaflet.html"><a href="leaflet.html#vue-densemble-4"><i class="fa fa-check"></i><b>18.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="18.2" data-path="leaflet.html"><a href="leaflet.html#breve-description-du-jeu-de-donnees"><i class="fa fa-check"></i><b>18.2</b> Brève description du jeu de données</a></li>
+<li class="chapter" data-level="18.3" data-path="leaflet.html"><a href="leaflet.html#plotting-markers"><i class="fa fa-check"></i><b>18.3</b> Plotting Markers</a></li>
+<li class="chapter" data-level="18.4" data-path="leaflet.html"><a href="leaflet.html#heatmaps-dynamiques"><i class="fa fa-check"></i><b>18.4</b> Heatmaps dynamiques</a></li>
+<li class="chapter" data-level="18.5" data-path="leaflet.html"><a href="leaflet.html#clustering-dynamique"><i class="fa fa-check"></i><b>18.5</b> Clustering dynamique</a></li>
+<li class="chapter" data-level="18.6" data-path="leaflet.html"><a href="leaflet.html#afficher-les-groupes"><i class="fa fa-check"></i><b>18.6</b> Afficher les groupes</a></li>
+<li class="chapter" data-level="18.7" data-path="leaflet.html"><a href="leaflet.html#afficher-des-donnees-categorielles"><i class="fa fa-check"></i><b>18.7</b> Afficher des données catégorielles</a></li>
+<li class="chapter" data-level="18.8" data-path="leaflet.html"><a href="leaflet.html#external-resources"><i class="fa fa-check"></i><b>18.8</b> External Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>19</b> Interactive Networks</a><ul>
+<li class="chapter" data-level="19.1" data-path="network.html"><a href="network.html#visnetwork-interactive"><i class="fa fa-check"></i><b>19.1</b> visNetwork (interactive)</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="network.html"><a href="network.html#lexemple-service-minimum"><i class="fa fa-check"></i><b>19.1.1</b> L’exemple service minimum</a></li>
+<li class="chapter" data-level="19.1.2" data-path="network.html"><a href="network.html#performance"><i class="fa fa-check"></i><b>19.1.2</b> Performance</a></li>
+<li class="chapter" data-level="19.1.3" data-path="network.html"><a href="network.html#des-outils-de-configuration-utiles"><i class="fa fa-check"></i><b>19.1.3</b> Des outils de configuration utiles</a></li>
+<li class="chapter" data-level="19.1.4" data-path="network.html"><a href="network.html#colorer-les-noeuds"><i class="fa fa-check"></i><b>19.1.4</b> Colorer les noeuds</a></li>
+<li class="chapter" data-level="19.1.5" data-path="network.html"><a href="network.html#noeuds-orientes-fleches"><i class="fa fa-check"></i><b>19.1.5</b> Noeuds orientés (flèches)</a></li>
+<li class="chapter" data-level="19.1.6" data-path="network.html"><a href="network.html#desactiver-le-mouvement-du-graphe"><i class="fa fa-check"></i><b>19.1.6</b> Désactiver le mouvement du graphe</a></li>
+<li class="chapter" data-level="19.1.7" data-path="network.html"><a href="network.html#griser-les-noeuds-loins-de-celui-selectionne-par-definition-du-degre"><i class="fa fa-check"></i><b>19.1.7</b> Griser les noeuds loins de celui selectionné (par définition du degré)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html"><i class="fa fa-check"></i><b>20</b> Séries temporelles</a><ul>
+<li class="chapter" data-level="20.1" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#vue-densemble-5"><i class="fa fa-check"></i><b>20.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="20.2" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#series-temporelles-simplesmultiples"><i class="fa fa-check"></i><b>20.2</b> Séries temporelles simples/multiples</a></li>
+<li class="chapter" data-level="20.3" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#tendance-generale"><i class="fa fa-check"></i><b>20.3</b> Tendance générale</a></li>
+<li class="chapter" data-level="20.4" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#tendance-saisonniere"><i class="fa fa-check"></i><b>20.4</b> Tendance saisonnière</a></li>
+<li class="chapter" data-level="20.5" data-path="timeseriesbasic.html"><a href="timeseriesbasic.html#frequence-des-donnees"><i class="fa fa-check"></i><b>20.5</b> Fréquence des données</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="tidyquant.html"><a href="tidyquant.html"><i class="fa fa-check"></i><b>21</b> Stock data with tidyquant</a><ul>
+<li class="chapter" data-level="21.1" data-path="tidyquant.html"><a href="tidyquant.html#vue-densemble-6"><i class="fa fa-check"></i><b>21.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="21.2" data-path="tidyquant.html"><a href="tidyquant.html#quest-ce-que-tidyquant"><i class="fa fa-check"></i><b>21.2</b> Qu’est ce que tidyquant ?</a></li>
+<li class="chapter" data-level="21.3" data-path="tidyquant.html"><a href="tidyquant.html#installer-tidyquant"><i class="fa fa-check"></i><b>21.3</b> Installer tidyquant</a></li>
+<li class="chapter" data-level="21.4" data-path="tidyquant.html"><a href="tidyquant.html#simple-timeseries"><i class="fa fa-check"></i><b>21.4</b> Simple timeseries</a></li>
+<li class="chapter" data-level="21.5" data-path="tidyquant.html"><a href="tidyquant.html#timeseries-multiples"><i class="fa fa-check"></i><b>21.5</b> Timeseries multiples</a></li>
+<li class="chapter" data-level="21.6" data-path="tidyquant.html"><a href="tidyquant.html#ressources-externes-9"><i class="fa fa-check"></i><b>21.6</b> Ressources externes</a></li>
+</ul></li>
+<li class="part"><span><b>VII Travailler avec des données</b></span></li>
+<li class="chapter" data-level="22" data-path="import.html"><a href="import.html"><i class="fa fa-check"></i><b>22</b> Importer des données</a><ul>
+<li class="chapter" data-level="22.1" data-path="import.html"><a href="import.html#vue-densemble-7"><i class="fa fa-check"></i><b>22.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="22.2" data-path="import.html"><a href="import.html#importer-des-datasets-deja-implementes-dans-r"><i class="fa fa-check"></i><b>22.2</b> Importer des datasets déjà implémentés dans R</a></li>
+<li class="chapter" data-level="22.3" data-path="import.html"><a href="import.html#importer-des-donnees-stockees-localement"><i class="fa fa-check"></i><b>22.3</b> Importer des données stockées localement</a><ul>
+<li class="chapter" data-level="22.3.1" data-path="import.html"><a href="import.html#importer-des-fichiers-textes"><i class="fa fa-check"></i><b>22.3.1</b> Importer des fichiers textes</a></li>
+<li class="chapter" data-level="22.3.2" data-path="import.html"><a href="import.html#importer-des-fichiers-csv"><i class="fa fa-check"></i><b>22.3.2</b> Importer des fichiers CSV</a></li>
+<li class="chapter" data-level="22.3.3" data-path="import.html"><a href="import.html#importer-un-fichier-json"><i class="fa fa-check"></i><b>22.3.3</b> Importer un fichier JSON</a></li>
+</ul></li>
+<li class="chapter" data-level="22.4" data-path="import.html"><a href="import.html#importer-des-donnees-web"><i class="fa fa-check"></i><b>22.4</b> Importer des données web</a><ul>
+<li class="chapter" data-level="22.4.1" data-path="import.html"><a href="import.html#lire-un-fichier-directement-dans-notre-environnement-de-travail"><i class="fa fa-check"></i><b>22.4.1</b> Lire un fichier directement dans notre environnement de travail</a></li>
+<li class="chapter" data-level="22.4.2" data-path="import.html"><a href="import.html#scraper-une-table-html-en-utilisant-rvest"><i class="fa fa-check"></i><b>22.4.2</b> Scraper une table HTML en utilisant <code>rvest</code></a></li>
+</ul></li>
+<li class="chapter" data-level="22.5" data-path="import.html"><a href="import.html#importer-des-donnees-a-partir-de-bases-de-donnees"><i class="fa fa-check"></i><b>22.5</b> Importer des données à partir de bases de données</a></li>
+<li class="chapter" data-level="22.6" data-path="import.html"><a href="import.html#plus-de-ressources"><i class="fa fa-check"></i><b>22.6</b> Plus de ressources</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>23</b> Revue détaillée : Tidy Data &amp; dplyr</a><ul>
+<li class="chapter" data-level="23.1" data-path="tidy.html"><a href="tidy.html#vue-densemble-8"><i class="fa fa-check"></i><b>23.1</b> Vue d’ensemble</a><ul>
+<li class="chapter" data-level="23.1.1" data-path="tidy.html"><a href="tidy.html#les-packages"><i class="fa fa-check"></i><b>23.1.1</b> Les packages</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="tidy.html"><a href="tidy.html#installer-les-packages"><i class="fa fa-check"></i><b>23.2</b> Installer les packages</a></li>
+<li class="chapter" data-level="23.3" data-path="tidy.html"><a href="tidy.html#voir-les-donnees"><i class="fa fa-check"></i><b>23.3</b> Voir les données</a></li>
+<li class="chapter" data-level="23.4" data-path="tidy.html"><a href="tidy.html#quest-ce-quune-tidy-data"><i class="fa fa-check"></i><b>23.4</b> Qu’est ce qu’une Tidy data?</a></li>
+<li class="chapter" data-level="23.5" data-path="tidy.html"><a href="tidy.html#tibbles"><i class="fa fa-check"></i><b>23.5</b> Tibbles</a></li>
+<li class="chapter" data-level="23.6" data-path="tidy.html"><a href="tidy.html#test-pour-les-valeurs-manquantes"><i class="fa fa-check"></i><b>23.6</b> Test pour les valeurs manquantes</a></li>
+<li class="chapter" data-level="23.7" data-path="tidy.html"><a href="tidy.html#remplacer-les-valeurs-manquantes"><i class="fa fa-check"></i><b>23.7</b> Remplacer les valeurs manquantes</a></li>
+<li class="chapter" data-level="23.8" data-path="tidy.html"><a href="tidy.html#vocabulaire-de-la-manipulation-de-donnees"><i class="fa fa-check"></i><b>23.8</b> Vocabulaire de la manipulation de données</a></li>
+<li class="chapter" data-level="23.9" data-path="tidy.html"><a href="tidy.html#renommage"><i class="fa fa-check"></i><b>23.9</b> Renommage</a></li>
+<li class="chapter" data-level="23.10" data-path="tidy.html"><a href="tidy.html#select"><i class="fa fa-check"></i><b>23.10</b> Select</a></li>
+<li class="chapter" data-level="23.11" data-path="tidy.html"><a href="tidy.html#mutate"><i class="fa fa-check"></i><b>23.11</b> Mutate</a></li>
+<li class="chapter" data-level="23.12" data-path="tidy.html"><a href="tidy.html#filter"><i class="fa fa-check"></i><b>23.12</b> Filter</a></li>
+<li class="chapter" data-level="23.13" data-path="tidy.html"><a href="tidy.html#arrange"><i class="fa fa-check"></i><b>23.13</b> Arrange</a></li>
+<li class="chapter" data-level="23.14" data-path="tidy.html"><a href="tidy.html#summarize-group-by"><i class="fa fa-check"></i><b>23.14</b> Summarize &amp; Group By</a></li>
+<li class="chapter" data-level="23.15" data-path="tidy.html"><a href="tidy.html#pipe-operator"><i class="fa fa-check"></i><b>23.15</b> Pipe Operator</a></li>
+<li class="chapter" data-level="23.16" data-path="tidy.html"><a href="tidy.html#nettoyer-les-donnees-transformees"><i class="fa fa-check"></i><b>23.16</b> Nettoyer les données transformées</a></li>
+<li class="chapter" data-level="23.17" data-path="tidy.html"><a href="tidy.html#liens-utiles-1"><i class="fa fa-check"></i><b>23.17</b> Liens utiles</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i><b>24</b> Données manquantes</a><ul>
+<li class="chapter" data-level="24.1" data-path="missing.html"><a href="missing.html#vue-densemble-9"><i class="fa fa-check"></i><b>24.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="24.2" data-path="missing.html"><a href="missing.html#tldr-9"><i class="fa fa-check"></i><b>24.2</b> tl;dr</a></li>
+<li class="chapter" data-level="24.3" data-path="missing.html"><a href="missing.html#que-sont-les-nas"><i class="fa fa-check"></i><b>24.3</b> Que sont les NAs?</a></li>
+<li class="chapter" data-level="24.4" data-path="missing.html"><a href="missing.html#types-de-donnees-manquantes"><i class="fa fa-check"></i><b>24.4</b> Types de Données Manquantes</a></li>
+<li class="chapter" data-level="24.5" data-path="missing.html"><a href="missing.html#patterns-manquants"><i class="fa fa-check"></i><b>24.5</b> Patterns manquants</a><ul>
+<li class="chapter" data-level="24.5.1" data-path="missing.html"><a href="missing.html#patterns-manquants-par-colonne"><i class="fa fa-check"></i><b>24.5.1</b> Patterns manquants par colonne</a></li>
+<li class="chapter" data-level="24.5.2" data-path="missing.html"><a href="missing.html#patterns-manquants-par-rang"><i class="fa fa-check"></i><b>24.5.2</b> Patterns manquants par rang</a></li>
+</ul></li>
+<li class="chapter" data-level="24.6" data-path="missing.html"><a href="missing.html#traiter-les-valeurs-manquantes"><i class="fa fa-check"></i><b>24.6</b> Traiter les valeurs manquantes</a><ul>
+<li class="chapter" data-level="24.6.1" data-path="missing.html"><a href="missing.html#supression-des-rangs-comprenant-des-nas"><i class="fa fa-check"></i><b>24.6.1</b> Supression des rangs comprenant des NAs</a></li>
+<li class="chapter" data-level="24.6.2" data-path="missing.html"><a href="missing.html#technique-de-prediction"><i class="fa fa-check"></i><b>24.6.2</b> Technique de prédiction</a></li>
+<li class="chapter" data-level="24.6.3" data-path="missing.html"><a href="missing.html#prediction-par-modele"><i class="fa fa-check"></i><b>24.6.3</b> Prédiction par modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="24.7" data-path="missing.html"><a href="missing.html#external-resources-1"><i class="fa fa-check"></i><b>24.7</b> External Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="outliers.html"><a href="outliers.html"><i class="fa fa-check"></i><b>25</b> Outliers</a><ul>
+<li class="chapter" data-level="25.1" data-path="outliers.html"><a href="outliers.html#vue-densemble-10"><i class="fa fa-check"></i><b>25.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="25.2" data-path="outliers.html"><a href="outliers.html#tldr-10"><i class="fa fa-check"></i><b>25.2</b> tl;dr</a></li>
+<li class="chapter" data-level="25.3" data-path="outliers.html"><a href="outliers.html#que-sont-outliers"><i class="fa fa-check"></i><b>25.3</b> Que sont outliers?</a></li>
+<li class="chapter" data-level="25.4" data-path="outliers.html"><a href="outliers.html#types-doutliers"><i class="fa fa-check"></i><b>25.4</b> Types d’outliers</a><ul>
+<li class="chapter" data-level="25.4.1" data-path="outliers.html"><a href="outliers.html#outliers-univariable"><i class="fa fa-check"></i><b>25.4.1</b> Outliers univariable</a></li>
+<li class="chapter" data-level="25.4.2" data-path="outliers.html"><a href="outliers.html#les-outliers-multivariables"><i class="fa fa-check"></i><b>25.4.2</b> Les outliers multivariables</a></li>
+<li class="chapter" data-level="25.4.3" data-path="outliers.html"><a href="outliers.html#les-outliers-categoriels"><i class="fa fa-check"></i><b>25.4.3</b> Les outliers catégoriels</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="outliers.html"><a href="outliers.html#gerer-les-outliers"><i class="fa fa-check"></i><b>25.5</b> Gérer les outliers</a><ul>
+<li class="chapter" data-level="25.5.1" data-path="outliers.html"><a href="outliers.html#sans-information"><i class="fa fa-check"></i><b>25.5.1</b> Sans information</a></li>
+<li class="chapter" data-level="25.5.2" data-path="outliers.html"><a href="outliers.html#plus-informatif"><i class="fa fa-check"></i><b>25.5.2</b> Plus informatif</a></li>
+</ul></li>
+<li class="chapter" data-level="25.6" data-path="outliers.html"><a href="outliers.html#ressources-externes-10"><i class="fa fa-check"></i><b>25.6</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="dates.html"><a href="dates.html"><i class="fa fa-check"></i><b>26</b> Dates dans R</a><ul>
+<li class="chapter" data-level="26.1" data-path="dates.html"><a href="dates.html#introduction-1"><i class="fa fa-check"></i><b>26.1</b> Introduction</a></li>
+<li class="chapter" data-level="26.2" data-path="dates.html"><a href="dates.html#convertir-en-la-classe-date"><i class="fa fa-check"></i><b>26.2</b> Convertir en la classe <code>Date</code></a></li>
+<li class="chapter" data-level="26.3" data-path="dates.html"><a href="dates.html#travaillez-avec-la-classe-date"><i class="fa fa-check"></i><b>26.3</b> Travaillez avec la classe <code>Date</code></a></li>
+<li class="chapter" data-level="26.4" data-path="dates.html"><a href="dates.html#tracez-des-graphes-avec-une-variable-de-classe-date"><i class="fa fa-check"></i><b>26.4</b> Tracez des graphes avec une variable de classe <code>Date</code></a><ul>
+<li class="chapter" data-level="26.4.1" data-path="dates.html"><a href="dates.html#base-r"><i class="fa fa-check"></i><b>26.4.1</b> base R</a></li>
+<li class="chapter" data-level="26.4.2" data-path="dates.html"><a href="dates.html#ggplot2"><i class="fa fa-check"></i><b>26.4.2</b> ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="26.5" data-path="dates.html"><a href="dates.html#date-and-time-classes"><i class="fa fa-check"></i><b>26.5</b> Date and time classes</a></li>
+</ul></li>
+<li class="part"><span><b>VIII Other Topics</b></span></li>
+<li class="chapter" data-level="27" data-path="percept.html"><a href="percept.html"><i class="fa fa-check"></i><b>27</b> Perception/Couleur</a><ul>
+<li class="chapter" data-level="27.1" data-path="percept.html"><a href="percept.html#vue-densemble-11"><i class="fa fa-check"></i><b>27.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="27.2" data-path="percept.html"><a href="percept.html#perception"><i class="fa fa-check"></i><b>27.2</b> Perception</a></li>
+<li class="chapter" data-level="27.3" data-path="percept.html"><a href="percept.html#couleur-2"><i class="fa fa-check"></i><b>27.3</b> Couleur</a></li>
+<li class="chapter" data-level="27.4" data-path="percept.html"><a href="percept.html#astuces-pour-utiliser-les-couleurs-avec-ggplot2"><i class="fa fa-check"></i><b>27.4</b> Astuces pour utiliser les couleurs avec <code>ggplot2</code></a><ul>
+<li class="chapter" data-level="27.4.1" data-path="percept.html"><a href="percept.html#donnees-continues"><i class="fa fa-check"></i><b>27.4.1</b> Données continues</a></li>
+<li class="chapter" data-level="27.4.2" data-path="percept.html"><a href="percept.html#donnees-discretes"><i class="fa fa-check"></i><b>27.4.2</b> Données discrètes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i><b>28</b> Thèmes et Palettes</a><ul>
+<li class="chapter" data-level="28.1" data-path="themes.html"><a href="themes.html#vue-densemble-12"><i class="fa fa-check"></i><b>28.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="28.2" data-path="themes.html"><a href="themes.html#themes-ggplot2"><i class="fa fa-check"></i><b>28.2</b> Thèmes ggplot2</a><ul>
+<li class="chapter" data-level="28.2.1" data-path="themes.html"><a href="themes.html#exemples-de-themes-ggplot"><i class="fa fa-check"></i><b>28.2.1</b> exemples de thèmes ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="28.3" data-path="themes.html"><a href="themes.html#rcolorbrewer"><i class="fa fa-check"></i><b>28.3</b> RColorBrewer</a></li>
+<li class="chapter" data-level="28.4" data-path="themes.html"><a href="themes.html#ggthemes"><i class="fa fa-check"></i><b>28.4</b> ggthemes</a><ul>
+<li class="chapter" data-level="28.4.1" data-path="themes.html"><a href="themes.html#exemples-de-ggthemes"><i class="fa fa-check"></i><b>28.4.1</b> exemples de ggthemes</a></li>
+</ul></li>
+<li class="chapter" data-level="28.5" data-path="themes.html"><a href="themes.html#ggthemr"><i class="fa fa-check"></i><b>28.5</b> ggthemr</a><ul>
+<li class="chapter" data-level="28.5.1" data-path="themes.html"><a href="themes.html#exemples-ggthemr"><i class="fa fa-check"></i><b>28.5.1</b> exemples ggthemr</a></li>
+</ul></li>
+<li class="chapter" data-level="28.6" data-path="themes.html"><a href="themes.html#ggsci"><i class="fa fa-check"></i><b>28.6</b> ggsci</a><ul>
+<li class="chapter" data-level="28.6.1" data-path="themes.html"><a href="themes.html#ggsci-pour-donnees-discretes"><i class="fa fa-check"></i><b>28.6.1</b> ggsci pour données discrètes</a></li>
+<li class="chapter" data-level="28.6.2" data-path="themes.html"><a href="themes.html#ggsci-pour-donnees-continues"><i class="fa fa-check"></i><b>28.6.2</b> ggsci pour données continues</a></li>
+</ul></li>
+<li class="chapter" data-level="28.7" data-path="themes.html"><a href="themes.html#ressources-externes-11"><i class="fa fa-check"></i><b>28.7</b> Ressources externes</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="github.html"><a href="github.html"><i class="fa fa-check"></i><b>29</b> GitHub/git Resources</a><ul>
+<li class="chapter" data-level="29.1" data-path="github.html"><a href="github.html#vue-densemble-13"><i class="fa fa-check"></i><b>29.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="29.2" data-path="github.html"><a href="github.html#tout-dabord"><i class="fa fa-check"></i><b>29.2</b> Tout d’abord</a></li>
+<li class="chapter" data-level="29.3" data-path="github.html"><a href="github.html#le-workflow-sans-branche"><i class="fa fa-check"></i><b>29.3</b> Le workflow sans branche</a></li>
+<li class="chapter" data-level="29.4" data-path="github.html"><a href="github.html#votre-repo-avec-branche"><i class="fa fa-check"></i><b>29.4</b> Votre repo avec branche</a></li>
+<li class="chapter" data-level="29.5" data-path="github.html"><a href="github.html#ere-pr-sur-un-autre-repo-avec-branching"><i class="fa fa-check"></i><b>29.5</b> 1ère PR sur un autre repo avec branching</a><ul>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-1-fork-le-repo-upstream-une-seule-fois"><i class="fa fa-check"></i>Etape 1: ‘Fork’ le repo ‘upstream’ (une seule fois)</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-2-clonez-le-repo-dorigine-et-creez-un-repo-local-une-fois"><i class="fa fa-check"></i>Etape 2: Clonez le repo d’origine et créez un repo local (une fois)</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-3-configurez-le-repo-remote-qui-est-relie-au-repo-upstream-une-fois"><i class="fa fa-check"></i>Etape 3: Configurez le repo ‘remote’ qui est relié au repo ‘upstream’ (une fois)</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-4-branch"><i class="fa fa-check"></i>Etape 4: Branch</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-5-travaillez-commit-et-push"><i class="fa fa-check"></i>Etape 5: Travaillez, commit et push</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-6-envoyer-une-pull-request"><i class="fa fa-check"></i>Etape 6: Envoyer une pull request</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-7-fusionner-la-pull-request"><i class="fa fa-check"></i>Etape 7: Fusionner la pull request</a></li>
+</ul></li>
+<li class="chapter" data-level="29.6" data-path="github.html"><a href="github.html#eme-neme-pr-sur-un-autre-repo-avec-branching"><i class="fa fa-check"></i><b>29.6</b> 2ème-<em>n</em>ème PR sur un autre repo avec branching</a><ul>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#step-1-synchroniser"><i class="fa fa-check"></i>Step 1: Synchroniser</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-2-supprimer-lancienne-branche"><i class="fa fa-check"></i>Etape 2: Supprimer l’ancienne branche</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etape-3-mettre-a-jour-votre-fork-sur-github"><i class="fa fa-check"></i>Etape 3: Mettre à jour votre fork sur GitHub</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#etapes-4-7-voir-ci-dessus"><i class="fa fa-check"></i>Etapes 4-7: Voir ci-dessus</a></li>
+</ul></li>
+<li class="chapter" data-level="29.7" data-path="github.html"><a href="github.html#infos-git-qui-peuvent-etre-utiles"><i class="fa fa-check"></i><b>29.7</b> Infos Git qui peuvent être utiles</a><ul>
+<li class="chapter" data-level="29.7.1" data-path="github.html"><a href="github.html#supprimer-le-dernier-commit"><i class="fa fa-check"></i><b>29.7.1</b> Supprimer le dernier commit</a></li>
+<li class="chapter" data-level="29.7.2" data-path="github.html"><a href="github.html#supprimer-tous-les-changements-depuis-le-dernier-commit"><i class="fa fa-check"></i><b>29.7.2</b> Supprimer tous les changements depuis le dernier commit</a></li>
+<li class="chapter" data-level="29.7.3" data-path="github.html"><a href="github.html#oublier-de-creer-une-nouvelle-branche-sans-commit"><i class="fa fa-check"></i><b>29.7.3</b> Oublier de créer une nouvelle branche (sans commit)</a></li>
+<li class="chapter" data-level="29.7.4" data-path="github.html"><a href="github.html#annuler-la-supression-dune-branche"><i class="fa fa-check"></i><b>29.7.4</b> Annuler la supression d’une branche</a></li>
+</ul></li>
+<li class="chapter" data-level="29.8" data-path="github.html"><a href="github.html#autres-ressources"><i class="fa fa-check"></i><b>29.8</b> Autres ressources</a><ul>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#obtenir-de-laide"><i class="fa fa-check"></i>Obtenir de l’aide</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#ramification"><i class="fa fa-check"></i>Ramification</a></li>
+<li class="chapter" data-level="" data-path="github.html"><a href="github.html#ressources-additionnelles"><i class="fa fa-check"></i>Ressources additionnelles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="publish.html"><a href="publish.html"><i class="fa fa-check"></i><b>30</b> Publishing Resources</a><ul>
+<li class="chapter" data-level="30.1" data-path="publish.html"><a href="publish.html#vue-densemble-14"><i class="fa fa-check"></i><b>30.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="30.2" data-path="publish.html"><a href="publish.html#tldr-11"><i class="fa fa-check"></i><b>30.2</b> tl;dr</a></li>
+<li class="chapter" data-level="30.3" data-path="publish.html"><a href="publish.html#bookdown"><i class="fa fa-check"></i><b>30.3</b> Bookdown</a></li>
+<li class="chapter" data-level="30.4" data-path="publish.html"><a href="publish.html#les-essentiels"><i class="fa fa-check"></i><b>30.4</b> Les essentiels</a></li>
+<li class="chapter" data-level="30.5" data-path="publish.html"><a href="publish.html#ajouter-un-nom-de-domaine-personnalise"><i class="fa fa-check"></i><b>30.5</b> Ajouter un nom de domaine personnalisé</a></li>
+<li class="chapter" data-level="30.6" data-path="publish.html"><a href="publish.html#faire-une-page-404-personnalisee"><i class="fa fa-check"></i><b>30.6</b> Faire une page 404 personnalisée</a></li>
+<li class="chapter" data-level="30.7" data-path="publish.html"><a href="publish.html#choper-travis"><i class="fa fa-check"></i><b>30.7</b> Choper Travis</a><ul>
+<li class="chapter" data-level="30.7.1" data-path="publish.html"><a href="publish.html#ajouter-les-fichiers-de-travis-au-repo-github"><i class="fa fa-check"></i><b>30.7.1</b> Ajouter les fichiers de Travis au repo GitHub</a></li>
+<li class="chapter" data-level="30.7.2" data-path="publish.html"><a href="publish.html#ajouter-le-service-de-travis"><i class="fa fa-check"></i><b>30.7.2</b> Ajouter le service de Travis</a></li>
+</ul></li>
+<li class="chapter" data-level="30.8" data-path="publish.html"><a href="publish.html#notes-sur-notre-workflow"><i class="fa fa-check"></i><b>30.8</b> Notes sur notre workflow</a><ul>
+<li class="chapter" data-level="30.8.1" data-path="publish.html"><a href="publish.html#section"><i class="fa fa-check"></i><b>30.8.1</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="30.9" data-path="publish.html"><a href="publish.html#autres-ressources-1"><i class="fa fa-check"></i><b>30.9</b> Autres ressources</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i><b>31</b> Workflow Notes</a></li>
+<li class="chapter" data-level="32" data-path="general.html"><a href="general.html"><i class="fa fa-check"></i><b>32</b> Ressources générales</a><ul>
+<li class="chapter" data-level="32.1" data-path="general.html"><a href="general.html#livres"><i class="fa fa-check"></i><b>32.1</b> Livres</a></li>
+<li class="chapter" data-level="32.2" data-path="general.html"><a href="general.html#cheatsheets"><i class="fa fa-check"></i><b>32.2</b> Cheatsheets</a></li>
+<li class="chapter" data-level="32.3" data-path="general.html"><a href="general.html#articles"><i class="fa fa-check"></i><b>32.3</b> Articles</a></li>
+<li class="chapter" data-level="32.4" data-path="general.html"><a href="general.html#meetups"><i class="fa fa-check"></i><b>32.4</b> Meetups</a></li>
+<li class="chapter" data-level="32.5" data-path="general.html"><a href="general.html#twitter"><i class="fa fa-check"></i><b>32.5</b> Twitter</a></li>
+<li class="chapter" data-level="32.6" data-path="general.html"><a href="general.html#data"><i class="fa fa-check"></i><b>32.6</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="chapter-index.html"><a href="chapter-index.html"><i class="fa fa-check"></i><b>33</b> Chapter Index by Resource Type</a><ul>
+<li class="chapter" data-level="33.1" data-path="chapter-index.html"><a href="chapter-index.html#vue-densemble-15"><i class="fa fa-check"></i><b>33.1</b> Vue d’ensemble</a></li>
+<li class="chapter" data-level="33.2" data-path="chapter-index.html"><a href="chapter-index.html#index"><i class="fa fa-check"></i><b>33.2</b> Index</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">edav.info/</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!-- 
+Header 
+  - included at the top (head) of every page
+  - EDAV logo back to index.html
+  - smiles on hover :)
+-->
+
+<!-- Free Font Awesome Stylesheet -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+<!-- JS -->
+<script>
+function hover(element) {
+  element.setAttribute('src', 'images/icons/edav_resource_url.png');
+}
+
+function unhover(element) {
+  element.setAttribute('src', 'images/icons/edav_resource_url_no_smile.png');
+}
+</script>
+
+<!-- Anchor point for scroll-top button -->
+<a id="top"></a>
+
+<!-- URL Logo -->
+<center>
+<br><br>
+<a href="index.html"><img src="images/icons/edav_resource_url_no_smile.png" onmouseover="hover(this);" onmouseout="unhover(this);" /></a>
+</center>
+<div id="github" class="section level1">
+<h1><span class="header-section-number">29</span> GitHub/git Resources</h1>
+<p><img src="images/banners/banner_github.png" /></p>
+<div id="vue-densemble-13" class="section level2">
+<h2><span class="header-section-number">29.1</span> Vue d’ensemble</h2>
+<p>Cette section décrit les différents workflows pour travailler avec Github/git et donne des conseils sur comment collaborer en équipe sur de grands projects de programmation. Si vous voulez apprendre comment proposer des changements au livre <a href="edav.info">edav.info</a> (ou n’importe quel autre repo) sans quitter github.com, veuillez vous référer au chapitre <a href="contribute.html">Contribuer à cette ressource</a>.</p>
+<p>Ok, pas satisfait de supprimer des futes de frappes sur GitHub? Vous êtes prêts à travailler localement et modifier du code entre vos repos (ou ceux de quelqu’un d’autre) et votre machine? Pour cela, vous aurez besoin de Git, un système de contrôle de version très répandu. C’est très puissant et utile, mais aussi très agaçant et <a href="https://xkcd.com/1597/" target="_blank">difficile à comprendre</a>. Plutôt que d’essayer de maîtriser tout le système, on suggère de commencer avec des workflows plutôt basiques, comme ceux expliqués ci-dessous. On peut en tirer beaucoup de profit sans être un expert pour autant.</p>
+</div>
+<div id="tout-dabord" class="section level2">
+<h2><span class="header-section-number">29.2</span> Tout d’abord</h2>
+<ol style="list-style-type: decimal">
+<li><p><em>Installer Git</em> Pour se faire, suivre les instructions dans le chapitre <a href="https://happygitwithr.com/install-git.html" target="_blank">Install Git</a> de <em>Happy Git with R</em>.</p></li>
+<li><p><em>Entrez votre nom et votre adresse mail.</em> <a href="https://happygitwithr.com/hello-git.html" target="_blank">Introduce yourself to Git</a> in <em>Happy Git</em> explique comment faire.</p></li>
+<li><p>(Optionel) <em>Assurez-vous que vous pouvez lancer des pulls et pushs entre Github et votre ordinateur</em> <a href="https://happygitwithr.com/push-pull-github.html" target="_blank">Connect to GitHub</a></p></li>
+</ol>
+</div>
+<div id="le-workflow-sans-branche" class="section level2">
+<h2><span class="header-section-number">29.3</span> Le workflow sans branche</h2>
+<p>Pour vous familiariser avec Git, commencez par ce workflow basique dans lequel vous allez pull de et push vers <em>votre</em> repo sur Github. Cela reste entre vous, sans collaboration avec personne:</p>
+<center>
+<img src="images/git/no-branch.png" />
+</center>
+<p>Le chapitre <a href="https://happygitwithr.com/rstudio-git-github.html" target="_blank">Connect RStudio to Git and GitHub</a> de <em>Happy Git</em> vous aidera à commencer: vous allez créer un repo su GitHub, cloner le repo dans un projet RStudio, et faire des changements.</p>
+<p>Une fois que tout est prêt, votre workflow local sera <strong>pull, work, commit/push</strong></p>
+<p><strong>PULL</strong> A chaque fois que vous ouvrez RStudio et choisissez le projet, vous ‘pullerez’ tous les changements faits sur le repo en clickant sur la <strong>Flèche vers le bas</strong> dans le panel Git dans RStudio. Vous pouvez penser qu’aucun changement n’a été fait et qu’il n’y a rien à ‘pull’, mais vous pouvez oublier les fautes de frappe que vous avez corrigé en ligne et c’est une bonne chose de toujours commencer par ‘pull’ au cas où.</p>
+<p><strong>TRAVAILLEZ</strong> Faites ce que vous avez à faire, faites des changements dans vos fichiers, ajoutez-en des nouveaux, etc. Gardez un oeil sur le panel Git dans RStudio: il vous montrera quels fichiers ont été modifiés.</p>
+<p><strong>COMMIT/PUSH</strong> Quand vous avez fini de travailler, il faut décider de ce qu’on fait avec les fichiers qui ont été modifiés. Si vous aimez comme nous garder un panel Git propre, vous avez trois options pour chaque fichier: 1) Clicker sur “Staged” pour préparer le fichier à être envoyer sur GitHub; 2) Supprimer le fichier si on n’en a pas besoin, 3) Ajouter le fichier à <code>.gitignore</code> s’il s’agit d’un fichier que vous souhaitez garder localement sans l’envoyer sur GitHub. (Gardez à l’esprit que les fichiers dans <code>.gitignore</code> ne sont pas sauvegardés à moins que vous auez un autre système de backup.).</p>
+<p>L’étape suivante est de clicker sur le bouton <strong>Commit</strong> et ajouter un message qui décrit ce qui a été changé. Enfin, clickez sur la <strong>Flèche du Haut</strong> pour envoyer le commit sur GitHub.</p>
+<p>Ce n’est pas une bonne idée de commit trop souvent mais si vous êtes débutants, cela peut être utile pour apprendre comme ça fonctionne.</p>
+</div>
+<div id="votre-repo-avec-branche" class="section level2">
+<h2><span class="header-section-number">29.4</span> Votre repo avec branche</h2>
+<p>Une fois que vous êtes à l’aise avec le workflow décrit ci-dessus, vous êtes prêt à commencer le branching. Le procédé est similaire que l’on travaille sur son propre repo ou sur celui de quelqu’un d’autres.</p>
+<center>
+<img src="images/git/your-repo.jpeg" />
+</center>
+<p>S’il s’agit de <em>votre</em> repo, vous pouvez suivre les étapes énoncées dans <a href="https://github.com/jtr13/EDAV/blob/master/pdfs/BranchingYourRepo.pdf" target="_blank">ces slides</a>, qui expliquent pas-à-pas comment créer une branche, travailler dessus et envoyer une demande de pull pour fusionner les changements sur l’origin/master. Ou vous pouvez suivre les étapes suivantes, en passant les étapes 1 et 3.</p>
+</div>
+<div id="ere-pr-sur-un-autre-repo-avec-branching" class="section level2">
+<h2><span class="header-section-number">29.5</span> 1ère PR sur un autre repo avec branching</h2>
+<center>
+<img src="images/git/pull-request-1.png" />
+</center>
+<div id="etape-1-fork-le-repo-upstream-une-seule-fois" class="section level3 unnumbered">
+<h3>Etape 1: ‘Fork’ le repo ‘upstream’ (une seule fois)</h3>
+<p><em>Passez cette étape si vous êtes en sync avec votre propre repo, c’est-à-dire que vous avez créé le repo et vous ne clonez pas une fork du repo quelqu’un d’autre.</em></p>
+<p>Supposons que vous souhaitiez contribuer à EDAV! ‘Forkez’ <a href="https://github.com/jtr13/EDAV" target="_blank">notre repo GitHub</a>, puis, sur votre propre page GitHub, vous verrez un repo ** EDAV ** dans la section ‘repositories’. Notez qu’à partir de maintenant, le terme ** repo upsteam ** fait référence au repo d’origine du projet que vous avez forké et le terme ** repo d’origine ** fait référence au repo que vous avez créé ou forké sur GitHub. De votre point de vue, ** upstream ** et ** origine ** sont tous deux des repos dit “remote”.</p>
+<center>
+<img src="images/git/fork.png" />
+<em>A fork of jtr13/EDAV</em>
+</center>
+</div>
+<div id="etape-2-clonez-le-repo-dorigine-et-creez-un-repo-local-une-fois" class="section level3 unnumbered">
+<h3>Etape 2: Clonez le repo d’origine et créez un repo local (une fois)</h3>
+<p>Un ** repo local ** est le repo résidant sur votre ordinateur. Pour pouvoir travailler localement, nous devons créer une copie locale du repo ‘remote’.</p>
+<p>Comme nous avons déjà connecté git à RStudio, nous pouvons créer un repo local de la manière suivante. Dans RStudio, cliquez sur <strong>Fichier</strong> -&gt; <strong>Nouveau projet</strong> -&gt; <strong>Contrôle de version</strong> -&gt; ** Git<strong>. Vous pouvez maintenant renseigner l’URL du repo </strong> d’origine ** et cliquer sur <strong>Create Project</strong> pour créer un repo local.</p>
+</div>
+<div id="etape-3-configurez-le-repo-remote-qui-est-relie-au-repo-upstream-une-fois" class="section level3 unnumbered">
+<h3>Etape 3: Configurez le repo ‘remote’ qui est relié au repo ‘upstream’ (une fois)</h3>
+<p><em>Ignorez cette étape si vous synchronisez avec votre propre repo.</em></p>
+<p>Le but de cette étape est de spécifier l’emplacement du repo ‘upstream’, c’est-à-dire le projet d’origine, pas votre copie.</p>
+<p>Pour compléter cette étape, tapez la ligne de commande suivante:</p>
+<p><code>&gt; git remote add upstream &lt;upstream repo url&gt;</code></p>
+<p>Source: <a href="https://help.github.com/en/articles/configuring-a-remote-for-a-fork" target="_blank">Configuring a remote for a fork</a></p>
+</div>
+<div id="etape-4-branch" class="section level3 unnumbered">
+<h3>Etape 4: Branch</h3>
+<p>Avec ce workflow, tout nouveau travail est effectué sur une branche. Il est donc important de ne pas oublier de créer une nouvelle branche avant de commencer à travailler. Une fois le travail terminé, une ‘pull request’ est soumise et si tout se passe bien, le nouveau code sera fusionné dans la branche principale du projet sur GitHub.</p>
+<p>Lorsque vous êtes prêt à commencer à travailler sur quelque chose de nouveau, créez une nouvelle branche. <strong>Ne réutilisez pas une branche fusionnée.</strong> Chaque “fix” devrait avoir sa propre branche et être supprimé après avoir été fusionné.</p>
+<p>Pour créer une branche, cliquez sur le bouton présenté ci-dessous:</p>
+<p><br></p>
+<center>
+<img src="images/git/newbranch.png" />
+</center>
+<p><br></p>
+<p>Donnez à votre nouvelle branche un nom significatif. Par exemple, si vous avez l’intention d’ajouter un exemple de facet au chapitre sur les histogrammes, vous pouvez appeler votre branche <code>add_hist_facet</code>. Laissez la case “Sync branche with remote” cochée. Ainsi, vous créerez non seulement une branche locale, mais également une branche ‘remote’ sur l’origine et la branche locale sera configurée pour suivre la branche remote. En bref, ils seront liés et git prendra note de tout changement de l’un ou l’autre.</p>
+</div>
+<div id="etape-5-travaillez-commit-et-push" class="section level3 unnumbered">
+<h3>Etape 5: Travaillez, commit et push</h3>
+<p>Lorsque vous créez une branche en suivant la méthode décrite à l’étape 4, vous serez automatiquement envoyés sur la nouvelle branche. Vous pouvez changer de branche en cliquant sur la liste déroulante située à droite du bouton de la nouvelle branche. Cependant, faites bien attention lorsque vous le faites. Les travaux non commit, même s’ils sont sauvegardés, n’appartiennent pas à une branche et sont donc déplacés avec vous lorsque vous changez de branche. On peut donc facilement être sur la mauvaise branche. Vérifiez toujours que vous êtes au bon endroit et pendant que vous travaillez, gardez un œil sur les fichiers modifiés dans le panel Git.</p>
+<center>
+<img src="images/git/gitpane.png" />
+</center>
+<p><br></p>
+<p>Rappelez-vous les trois étapes pour déplacer un travail sauvegardé de votre directory vers GitHub, représentées par les commandes git: <code>add</code>,<code>commit</code> et <code>push</code>.</p>
+<p><br></p>
+<center>
+<img src="images/git/add-commit-push.png" />
+</center>
+<p><br></p>
+<p>Dans RStudio, pour <strong>add</strong>, il vous suffit de cliquer sur la case à cocher de chaque fichier que vous avez modifié dans la colonne “staged” située à gauche du volet Git. Pour <strong>commit</strong>, il suffit de cliquer sur le bouton <strong>commit</strong> sous l’onglet Git. La saisie d’un message commit est obligatoire. choisissez une description en lien avec les modifications du code. Enfin, pour appliquer les modifications à GitHub, cliquez sur le bouton <strong>push</strong>, qui est représenté par une flèche pointant vers le haut. Vous pouvez combiner plusieurs commits en un “push”.</p>
+<p>Il n’est pas considéré comme bon de commit trop souvent, car tous les commits sont entrés dans l’historique des commits et il est difficile de trouver ce dont vous avez besoin si vous ‘commit’ votre travail toutes les cinq minutes. (Au début, cependant, ne vous en faites pas. Il est plus important d’utiliser les commandes fréquemment pour acquérir de l’expérience.)</p>
+<p>Le chapitre <a href="https://happygitwithr.com/repeated-amend.html" target="_blank">Repeated Amend de Happy Git with R</a> décrit une approche pour traiter de la fréquence des commits.</p>
+</div>
+<div id="etape-6-envoyer-une-pull-request" class="section level3 unnumbered">
+<h3>Etape 6: Envoyer une pull request</h3>
+<p>Vous pouvez maintenant voir la branche que vous avez créée sur la page GitHub. L’étape suivante consiste à soumettre une pull request. Le processus est très similaire au processus décrit dans <a href="contribue.html#étape-5-comparaison-modifications">GitHub only walkthrough</a>, en commençant par l’étape 6.</p>
+</div>
+<div id="etape-7-fusionner-la-pull-request" class="section level3 unnumbered">
+<h3>Etape 7: Fusionner la pull request</h3>
+<p>Si vous avez soumis un PR à un autre projet, vous n’êtes pas celui qui va fusionner la PR. Vous n’avez donc rien à faire ici.</p>
+<p>S’il s’agit de votre projet et qu’il vous incombe de le faire, sachez qu’il existe de nombreuses méthodes pour fusionner une demande. La plus simple et directe consiste à <a href="https://help.github.com/fr/articles/merging-a-pull-request#merging-a-pull-request-on-github">fusionner le PR sur GitHub</a>. Cette méthode fonctionne bien pour la fusion de fautes de frappe fixes. Si vous souhaitez pouvoir tester le code, vous pouvez vérifier le PR localement, le tester et même éventuellement le modifier avant de le fusionner.</p>
+<p>Les meilleures pratiques dans ce domaine évoluent. Notre recommandation actuelle est d’utiliser le paquetage <code>usethis</code>, qui simplifie énormément les tâches complexes. <a href="https://github.com/jtr13/usethis_demos/blob/master/how_to1.md">“Comment modifier une demande d’extraction localement”</a> explique comment procéder.</p>
+<p>Une autre ressource intéressante est <a href="https://happygitwithr.com/pr-extend.html">“Explore and extend a pull request”</a> dans <em>Happy Git with R</em>. Ce chapitre décrit deux versions officielles de GitHub qui permettent de fusionner un pull request, ainsi qu’un workflow en développement en utilisant <code>git2r</code>.</p>
+</div>
+</div>
+<div id="eme-neme-pr-sur-un-autre-repo-avec-branching" class="section level2">
+<h2><span class="header-section-number">29.6</span> 2ème-<em>n</em>ème PR sur un autre repo avec branching</h2>
+<center>
+<p><img src="images/git/pull-request-2.png" /></p>
+</center>
+<p>Après la première pull request, le processus change un peu. Nous n’avons plus besoin de bifurquer et de cloner le repo. Ce que nous devons faire, cependant, est de nous assurer que notre copie locale du repo est à jour avec la version de GitHub. Nous devons effectuer d’autres opérations de nettoyage. Par conséquent, après la première pull request, nous remplacerons les étapes 1 à 3 ci-dessus par les opérations suivantes:</p>
+<div id="step-1-synchroniser" class="section level3 unnumbered">
+<h3>Step 1: Synchroniser</h3>
+<p>La façon dont vous synchronisez dépend de si vous synchronisez avec votre propre repo (“origine”) ou celui de quelqu’un d’autre (“upstream”). Cela devrait être fait au début de chaque session de travail.</p>
+<p><strong>Votre repo</strong></p>
+<p>Allez sur la branche principale (important!), puis cliquez sur le bouton Pull (flèche vers le bas) de le panel Git de RStudio. Ou vous pouvez taper ce qui suit dans le terminal:</p>
+<p><code>&gt; git checkout master</code></p>
+<p><code>&gt; git pull</code></p>
+<p>Il n’y aura pas de rappel vous prévenant que vous êtes en retard, alors c’est à vous de décider. Faites-en une habitude.</p>
+<p><strong>Le repo de quelqu’un d’autre</strong></p>
+<p>Si vous travaillez sur le repo de quelqu’un d’autre, assurez-vous que vous avez <a href="https://edav.info/github.html#step-3-configure-remote-that-points-to-the-%20upstream-repository-once">configuré un repo upstream</a>.</p>
+<p>Faites ensuite ce qui suit pour updater votre fork:</p>
+<p><code>&gt; git fetch upstream</code></p>
+<p><code>&gt; git checkout master</code></p>
+<p><code>&gt; git merge upstream/master</code></p>
+<p>Source: <a href="https://help.github.com/en/articles/syncing-a-fork" target="_blank">Syncing a fork</a></p>
+<p>Notez que ces commandes apportent des modifications directement à partir du repo upstream.</p>
+</div>
+<div id="etape-2-supprimer-lancienne-branche" class="section level3 unnumbered">
+<h3>Etape 2: Supprimer l’ancienne branche</h3>
+<p>Si votre pull request précédente a été fusionnée, il est recommandé de supprimer la branche associée, car l’upstream contient déjà toutes les modifications que vous avez apportées. Pour supprimer complètement une branche, vous devez 1) supprimer la branche locale, 2) supprimer la branche distante, 3) cesser de suivre la branche:</p>
+<ol style="list-style-type: decimal">
+<li>Une façon de supprimer la branche remote est de le faire sur GitHub. Accédez à la pull request fermée sur le repo upstream. Si votre branche a été fusionnée, la boîte de dialogue de pull request affiche le message suivant: “Vous avez terminé - la branche<code>&lt;nom de la branche&gt;</code>peut être supprimée en toute sécurité.” Cliquez simplement sur le bouton Supprimer la branche à côté du message.</li>
+</ol>
+<p>Si vous préférez travailler dans le terminal, vous pouvez supprimer la branche distante avec:</p>
+<p><code>&gt; git push origin --delete &lt;branchname&gt;</code></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Pour supprimer la branche locale, passez à la branche principale dans RStudio puis tapez ce qui suit dans le terminal:</li>
+</ol>
+<p><code>&gt; git branch -d branchname</code></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Notez que git n’arrête pas de suivre la branche remote même si elle est supprimées des deux endroits! Pour arrêter de suivre les branches supprimées, utilisez les éléments suivants:</li>
+</ol>
+<p><code>&gt; git fetch -p</code></p>
+<p>Sinon, vous verrez toujours les branches supprimées répertoriées dans le panel Git de RStudio, et elles apparaîtront quand même lorsque vous regarderez toutes vos branches avec la fonction suivante:</p>
+<p><code>&gt; git branch -a</code> (* = checked out branch)</p>
+<p>En parlant de cela, sachez que le panel Git n’a pas tendance à se mettre à jour en temps réel. Vous verrez donc probablement toujours les branches supprimées. Veillez à ne pas être envoyés dessus, ou vous les recréerez par inadvertance. (Les branches supprimées ont l’habitude de revenir.) Un clic sur master (même si vous êtes déjà dessus) apparaît pour déclencher une mise à jour de la liste déroulante. Si cela ne fonctionne pas, le fait de quitter le projet et d’y revenir le fera si vous voulez être sûr que les branches que vous avez supprimées le sont vraiment.</p>
+<div id="troubleshooting" class="section level4 unnumbered">
+<h4>Troubleshooting</h4>
+<ul>
+<li><p>Assurez-vous de ne pas être sur la branche que vous essayez de supprimer.</p></li>
+<li><p>Notez que si vous essayez de supprimer une branche qui n’a pas été complètement fusionnée, vous recevrez un avertissement, ou peut-être une erreur en fonction de ce qui s’est passé. Il est possible qu’il pense juste que la branche n’a pas été fusionnée alors que vous l’avez fait, car vous n’êtes pas à jour. On peut y remédier avec <code>git pull</code>. Dans les autres cas, vous devrez suivre les instructions pour utiliser <code>-D</code> au lieu de<code>-d</code>, par exemple, si vous décidez d’abandonner et de supprimer une branche sans soumettre de pull request.</p></li>
+<li><p>Si vous avez du mal à vous débarrasser des branches, rassurez-vous, vous n’êtes pas seul. [Comment puis-je supprimer une branche Git localement et à distance?] _blank&quot;} est la **<a href="https://stackoverflow.com/questions?sort=votes">troisième question la plus posée</a>{target =&quot;_blank&quot;}** sur StackOverflow!</p></li>
+</ul>
+</div>
+</div>
+<div id="etape-3-mettre-a-jour-votre-fork-sur-github" class="section level3 unnumbered">
+<h3>Etape 3: Mettre à jour votre fork sur GitHub</h3>
+<p>Ignorez cette étape s’il n’y a pas de repo upstream.</p>
+<p>Oui, c’est étrange, mais une fois que vous avez créé et cloné le repo du projet, la copie sur GitHub devient relativement inutile. Cependant, ce n’est pas une mauvaise idée de la garder à jour, ne serait-ce que parce qu’il est dérangeant de voir des messages comme celui-ci dans votre panel Git:</p>
+<p><br></p>
+<center>
+<img src="images/git/your-branch-ahead.png" />
+</center>
+<p><br></p>
+<p>Heureusement, votre fork de GitHub peut être facilement mis à jour en cliquant sur la flèche verte vers le haut ou en entrant «git push» dans le terminal.</p>
+</div>
+<div id="etapes-4-7-voir-ci-dessus" class="section level3 unnumbered">
+<h3>Etapes 4-7: Voir ci-dessus</h3>
+<p>Nous sommes maintenant prêts à répéter le worklow: branche, travail, commit, push, pull request. Pour ce faire, suivez <a href="#%20étape-4-branche">Étapes 4 à 7 ci-dessus</a>.</p>
+</div>
+</div>
+<div id="infos-git-qui-peuvent-etre-utiles" class="section level2">
+<h2><span class="header-section-number">29.7</span> Infos Git qui peuvent être utiles</h2>
+<div id="supprimer-le-dernier-commit" class="section level3">
+<h3><span class="header-section-number">29.7.1</span> Supprimer le dernier commit</h3>
+<p><code>git reset --soft HEAD~1</code></p>
+</div>
+<div id="supprimer-tous-les-changements-depuis-le-dernier-commit" class="section level3">
+<h3><span class="header-section-number">29.7.2</span> Supprimer tous les changements depuis le dernier commit</h3>
+<p><code>git reset HEAD --hard</code></p>
+</div>
+<div id="oublier-de-creer-une-nouvelle-branche-sans-commit" class="section level3">
+<h3><span class="header-section-number">29.7.3</span> Oublier de créer une nouvelle branche (sans commit)</h3>
+<p>Créez simplement la nouvelle branche et les modifications y seront déplacées … <a href="https://stackoverflow.com/a/1394804/5314416" target="_blank">les modifications du répertoire de travail n’appartiennent pas à une branche tant qu’elles ne sont pas validées</a> (Il semblerait que les modifications sont également dans le master, mais une fois que vous avez commit les modifications, elles disparaîtront de ce dernier.)</p>
+</div>
+<div id="annuler-la-supression-dune-branche" class="section level3">
+<h3><span class="header-section-number">29.7.4</span> Annuler la supression d’une branche</h3>
+<p>Recherchez le SHA (hash) renvoyé lorsque vous avez supprimé la branche. Alors ensuite, tapez:</p>
+<p><code>git checkout -b &lt;branch-name&gt; &lt;SHA&gt;</code></p>
+<p>Voir aussi: <a href="https://stackoverflow.com/a/39038276/5314416" target="_blank">Git undo local branch delete</a></p>
+</div>
+</div>
+<div id="autres-ressources" class="section level2">
+<h2><span class="header-section-number">29.8</span> Autres ressources</h2>
+<div id="obtenir-de-laide" class="section level3 unnumbered">
+<h3>Obtenir de l’aide</h3>
+<p>Si vous êtes perdus, ce qui suit pourrait aider:</p>
+<ul>
+<li><a href="https://guides.github.com/" target="_blank">GitHub Guides</a>: Il s’agit d’une collection phénoménale de courts articles de GitHub destinés à vous aider à en apprendre davantage sur les fondamentaux de GitHub. Ils sont vraiment géniaux. Ci-dessous d’autres articles intéressants:
+<ul>
+<li><p><a href="https://guides.github.com/introduction/flow/" target="_blank">Understanding the GitHub Flow</a>: Explique comment fonctionne GitHub en général.</p></li>
+<li><p><a href="https://guides.github.com/introduction/git-handbook/" target="_blank">Git Handbook</a>: Explique le contrôle de version.</p></li>
+</ul></li>
+<li><a href="https://help.github.com/" target="_blank">GitHub Help</a>: Les pages jaunes de GitHub. Vous pouvez poser une question et il essaiera de vous rediriger dans la bonne direction. <a href="https://getyarn.io/yarn-clip/6e7f4795-b65b-4fad-b1fb-c5c9161a95fa" target="_blank">Get it?</a></li>
+</ul>
+</div>
+<div id="ramification" class="section level3 unnumbered">
+<h3>Ramification</h3>
+<p>GitHub est super sociable. Apprenez comment vous impliquer! <a href="https://getyarn.io/yarn-clip/c5de0e9e-6122-48f9-87ed-337aeb2e9ae4" target="_blank"><i class="far fa-smile"></i></a></p>
+<ul>
+<li><a href="https://opensource.guide/how-to-contribute/" target="_blank">Open Source Guide</a>: Info sur comment contribuer à réaliser des projets open-source.</li>
+<li><a href="https://guides.github.com/activities/forking/" target="_blank">Forking Projects</a>: Lecture rapide de GitHub sur comment forker un repo pour pouvoir y contribuer.</li>
+<li><a href="https://guides.github.com/features/issues/" target="_blank">Mastering Issues</a>: Sur les problèmes qu’on peut avoir en utilisant GitHub et comment ils peuvent aider à accomplir notre travail.</li>
+<li><a href="contribute.html">Notre page pour contribuer</a>: Vous pouvez contribuer à <em>edav.info/</em> grâce à vos nouvelles compétences GitHub! Allez voir notre page sur comment contribuer à travers des pulls requests et autres problèmes.</li>
+</ul>
+</div>
+<div id="ressources-additionnelles" class="section level3 unnumbered">
+<h3>Ressources additionnelles</h3>
+<p>Pour bien commencer, consultez <a href="https://lab.github.com/" target="_blank">GitHub Learning Lab</a>. Cette application vous apprendra comment utiliser GitHub avec des cours pratiques utilisant des repos réels. C’est le moyen idéal pour comprendre comment utiliser GitHub.</p>
+<p>Pour les <a href="https://getyarn.io/yarn-clip/64bbb001-ed8a-450a-8826-b939f653b969" target="_blank">nerds dans la pièce</a> …</p>
+<ul>
+<li><p><a href="https://www.youtube.com/watch?v=3m7BgIvC-uQ" target="_blank">Git For 4 ans et plus</a>: Il se passe beaucoup de choses sous le capot. Cette présentation aidera à expliquer comment tout cela fonctionne … avec des jouets pour enfants!</p></li>
+<li><a href="https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs" target="_blank">Créer de jolis logs git</a>: Rappelez-vous toujours <a href="https:%20//%20i%20.stack.imgur.com%20/%20ElVkf.jpg" target="_ blank">(Un chien)</a>. De plus, cette commande d’alias est bonne à connaître:
+<ul>
+<li><code>git config --global alias.adog &quot;log --all --decorate --oneline --graph&quot;</code></li>
+</ul></li>
+<li><a href="https://stackoverflow.com/questions/4298960/git-add-and-commit-in-one-command" target="_blank"><code>add</code> et<code>commit</code> avec une commande</a>: un autre commande d’alias utile:
+<ul>
+<li><code>git config --global alias.add-commit '!git add -A &amp;&amp; git commit'</code></li>
+</ul></li>
+<li><p><a href="https://github.com/jimeh/git-aware-prompt" target="_blank">Git Aware Prompt</a>: Un excellent complément au terminal qui vous indique quelle branche vous avez consultée. Quelqu’un a également créé <a href="https://github.com/udondan/git-aware-prompt" target="_blank">une version encore plus performante</a> où il vous informera de votre statut git en utilisant des émojis utiles.</p></li>
+<li><p><a href="https://popgen.nescent.org/CONTRIBUTING_WITH_GIT2R.html" target="_blank">Contribuer avec git2r</a>, sur la <a href="https://popgen.nescent.org/index.%20html" target="_ blank">Génétique des populations en R</a> fournit des informations utiles sur l’utilisation des commandes git dans R par le biais du paquet git2r. En particulier, il explique comment créer un GITHUB_PAT puis définir le paramètre <code>credential</code> dans certaines fonctions pour trouver le PAT. (Notez cependant que le site a été créé en 2015 et qu’il n’a pas été mis à jour depuis février 2019.)</p></li>
+<li><p><strong>Vous voulez lire un peu aussi?</strong>: <a href="https://try.github.io/" target="_blank">Resources to learn Git</a> est un site simple divisé en deux parties: <em>Apprendre en lisant</em> et <em>apprendre en faisant</em>. Faites votre choix. <i class ="far fa-smile"></i></p></li>
+<li><p><a href="https://tonyelhabr.rbind.io/post/making-first-pull-request/" target="_blank">Guide du débutant pour effectuer une pull request (pour un package R)</a>, l’expérience de Tony Elhabr pour faire une pull request à un package R lors de la journée des développeurs tidyverse (élément de <a href="https://www.rstudio.com/conference/" target="_blank">rstudio:: conf 2019</a>.</p></li>
+</ul>
+
+</div>
+</div>
+</div>
+<!-- 
+Footer 
+  - included at the end of every page
+  - EDAV logo to top of current page
+  - GitHub link
+  - License Link
+  - scroll-top button
+-->
+
+<center>
+<br><br>
+<a href="index.html"><img class="active-banner footer-logo" src="images/icons/edav_resource_black_small.png" title="Jump to the homepage"></a>
+<br><br>
+<a href="https://github.com/jtr13/EDAV" target="_blank"><img class="active-banner github-logo" src="images/icons/GitHub-Mark-120px-plus.png" title="Our GitHub repo"></a>
+<br><br>
+<i class="fas fa-code"></i> <b>with</b> <i class="fas fa-heart"></i>
+<a href="#top" id="scroll-top"><i class="fas fa-chevron-up"></i></a>
+</center>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="themes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="publish.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Amelrich/EDAV/edit/master/github_resources.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

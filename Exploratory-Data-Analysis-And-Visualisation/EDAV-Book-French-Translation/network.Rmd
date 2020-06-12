@@ -1,0 +1,104 @@
+# Interactive Networks {#network}
+
+![](images/banners/banner_network.png)
+
+<!--## ggnetwork (static)-->
+
+## visNetwork (interactive)
+
+`visNetwork` est une puissante implémentation via R de la librairie JavaScript `vis.js`; il utilise `tidyverse`: [Documentation VisNetwork](https://datastorm-open.github.io/visNetwork/){target="_blank"}.
+
+--> Le Vignette a des exemples clairement élaborés disponibles sur : https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html
+
+
+La documentation `visNetwork` ne fournit pas le même niveau d’explication que la documentation original, il est donc intéressant de consulter la documentation de `vis.js` : http://visjs.org/index.html  En particulier, les [exemples interactifs](http://visjs.org/network_examples.html){target="_blank"} sont particulièrement utiles pour essayer différentes options. Par exemple, vous pouvez essayer des options concrètes avec le [network configurator](http://visjs.org/examples/network/physics/physicsConfiguration.html){target="_blank"}. 
+
+
+### L'exemple service minimum
+
+Créer un [node data frame](https://datastorm-open.github.io/visNetwork/nodes.html){target="_blank"} avec au moins une colonne (appelée `id`) contenant le nom des noeuds :
+
+```{r}
+# nodes
+boroughs <- data.frame(id = c("The Bronx", "Manhattan", "Queens", "Brooklyn", "Staten Island"))
+```
+
+
+Créer un autre dataframe contenant les [arêtes](https://datastorm-open.github.io/visNetwork/edges.html){target="_blank"} avec pour colonnes `from` et `to`. 
+
+
+```{r}
+# edges
+connections <- data.frame(from = c("The Bronx", "The Bronx", "Queens", "Queens", "Manhattan", "Brooklyn"), to = c("Manhattan", "Queens", "Brooklyn", "Manhattan", "Brooklyn", "Staten Island"))
+```
+
+
+Dessinons le graphe avec `visNetwork(nodes, edges)`
+
+```{r}
+library(visNetwork)
+visNetwork(boroughs, connections)
+```
+
+
+Tu peux ajouter des labels en ajoutant l'argument label à la colonne `nodes`:
+
+```{r message=FALSE}
+library(dplyr)
+boroughs <- boroughs %>% mutate(label = id)
+visNetwork(boroughs, connections)
+```
+
+
+
+### Performance
+
+`visNetwork` peut être très lent. 
+
+`%>% visPhysics(stabilization = FALSE)` commence l'affichage avant que la stabilisation soit complète, ce qui accélère réellement les choses mais vous permet de voir ce qui se passe en temps réel. Cela fait une grande différence dans l'expérience utilisateur. (C’est aussi amusant de regarder la stabilisation du graphe). D'autres astuces de performance sont décrites [ici](https://datastorm-open.github.io/visNetwork/performance.html){target="_blank"}.
+  
+### Des outils de configuration utiles  
+  
+`%>% visConfigure(enabled = TRUE)` est un outil utile pour configurer les options de manière interactive. Une fois terminé, cliquez sur "generate options" pour que le code reproduise les paramètres. Plus d'info [ici](https://datastorm-open.github.io/visNetwork/configure.html){target="_blank"} (Notez que changer les options puis les visualiser nécessite beaucoup le défilement vertical dans le navigateur. Je ne suis pas sûr que quelque chose peut être fait à ce sujet. Si vous avez une solution, n'hésitez pas à partager !)
+  
+### Colorer les noeuds
+
+Ajouter une colonne avec les vrais noms des couleurs dans le dataframe des noeuds :
+
+```{r}
+boroughs <- boroughs %>% mutate(is.island = c(FALSE, TRUE, FALSE, FALSE, TRUE)) %>% mutate(color = ifelse(is.island, "blue", "yellow"))
+visNetwork(boroughs, connections)
+```
+
+### Noeuds orientés (flèches)
+
+```{r}
+visNetwork(boroughs, connections) %>% 
+  visEdges(arrows = "to;from", color = "green")
+  
+```
+
+### Désactiver le mouvement du graphe
+
+C'est beaucoup plus rapide sans la simulation. Le nodes sont placés au hasard et peuvent être déplacés sans affecter le reste du graphe, au moins dans le cas des petits graphes.
+
+```{r}
+visNetwork(boroughs, connections) %>% 
+  visEdges(physics = FALSE)
+```
+
+### Griser les noeuds loins de celui selectionné (par définition du degré)
+
+(Cliquez sur un noeud pour voir l'effet)
+
+```{r}
+# defaults to 1 degree
+visNetwork(boroughs, connections) %>% 
+  visOptions(highlightNearest = TRUE)
+
+# set degree to 2
+visNetwork(boroughs, connections) %>% 
+  visOptions(highlightNearest = list(enabled = TRUE, 
+                                     degree = 2))
+```
+
