@@ -1,5 +1,10 @@
 # HW3
 
+This code was given to us by professor Asaf Cidon to help us implement neural networks on the Google Cloud Platform. This code is not mine, and the homework required us to modify some classes in this folder in order to get a running distributed net. 
+
+Homework guidelines: https://cs-w4121.github.io/homeworks/hw3.html
+
+
 Codebase adapted from that of https://github.com/tensorflow/models/tree/master/tutorials/image/cifar10_estimator
 
 # LICENSE
