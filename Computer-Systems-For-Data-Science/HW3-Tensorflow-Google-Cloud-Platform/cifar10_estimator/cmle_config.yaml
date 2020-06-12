@@ -1,0 +1,7 @@
+trainingInput:
+  scaleTier: CUSTOM
+  masterType: n1-standard-16
+  parameterServerType: n1-standard-16
+  workerType: n1-standard-16
+  workerCount: 3
+  parameterServerCount: 1
