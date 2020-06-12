@@ -3,8 +3,6 @@ Things I studied at Columbia.
 
 Looks like Columbia is more sensitive about us sharing our work than Telecom. This repo contains a few group projects that are already publicly available, as well as some labs instructors authorized us to share. In the mean time, you might find some useful code in the Telecom folder.
 
-Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.com/in/maxime-tchibozo/) for more information on the private stuff.
-
 Courses:
 
 * Algorithms for Data Science CSORW4246 (private)
@@ -14,3 +12,5 @@ Courses:
 * Machine Learning COMSW4721 (private)
 * Computer Systems for Data Science COMSW4121 (private)
 * Applied Machine Learning COMSW4995 (all courses and labs available : https://www.cs.columbia.edu/~amueller/comsw4995s20/schedule/)
+
+Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.com/in/maxime-tchibozo/) for more information on the private stuff.
