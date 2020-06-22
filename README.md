@@ -16,8 +16,6 @@ Courses:
 * Applied Machine Learning - COMSW4995_011 (all courses and labs available : https://www.cs.columbia.edu/~amueller/comsw4995s20/schedule/)
 * Causal Inference - COMSW4995_013 (private) 
 
-
-
 ## First Semester
 
 <table>
@@ -116,12 +114,12 @@ Courses:
     <tbody>
                <!-- Machine Learning -->
          <tr>
-              <td rowspan=1><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Scholar-Affiliation-Recognition-Project">PAF: Scholar Affiliation Recognition </a></td>
+              <td rowspan=1><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning</a></td>
               <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Scholar-Affiliation-Recognition-Project">Project</a></td>
          </tr>
          <!-- Applied Machine Learning -->
          <tr>
-              <td rowspan=2><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Advanced-Statistics">Advanced Statistics</a></td>
+              <td rowspan=2><a href="https://www.cs.columbia.edu/~amueller/comsw4995s19/schedule/#top">Applied Machine Learning</a></td>
               <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Advanced-Statistics/Splines">Splines</a></td>
          </tr>
          <tr>
@@ -129,7 +127,7 @@ Courses:
          </tr>
          <!-- Computer Systems for Data Science -->
          <tr>
-              <td rowspan=3><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank">Data Mining</a></td>
+              <td rowspan=3><a href="https://cs-w4121.github.io/">Computer Systems for Data Science</a></td>
               <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/Clustering">Clustering</a></td>
          </tr>
          <tr>
@@ -140,7 +138,7 @@ Courses:
          </tr>
          <!-- Causal Inference for Data Science -->
          <tr>
-              <td rowspan=4><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM">Machine Learning</a></td>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science</a></td>
               <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_EnsembleMethods">Ensemble Methods</a></td>
          </tr>
          <tr>
