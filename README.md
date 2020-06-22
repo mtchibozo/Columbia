@@ -114,40 +114,61 @@ Courses:
     <tbody>
                <!-- Machine Learning -->
          <tr>
-              <td rowspan=1><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning</a></td>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Scholar-Affiliation-Recognition-Project">Project</a></td>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning</a></td>
+              <td><a>HW1: </a></td>
          </tr>
+         <tr>
+              <td><a>HW2: </a></td>
+         </tr>       
+         <tr>
+              <td><a>HW3: </a></td>
+         </tr>       
+         <tr>
+              <td><a>HW4: </a></td>
+         </tr>       
          <!-- Applied Machine Learning -->
          <tr>
-              <td rowspan=2><a href="https://www.cs.columbia.edu/~amueller/comsw4995s19/schedule/#top">Applied Machine Learning</a></td>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Advanced-Statistics/Splines">Splines</a></td>
+              <td rowspan=5><a href="https://www.cs.columbia.edu/~amueller/comsw4995s19/schedule/#top">Applied Machine Learning</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Advanced-Statistics/Splines">HW1</a></td>
          </tr>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Advanced-Statistics/Wavelets">Wavelets</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Advanced-Statistics/Wavelets">HW2</a></td>
          </tr>
+         <tr>
+              <td><a>HW3: </a></td>
+         </tr>       
+          <tr>
+              <td><a>HW4: </a></td>
+         </tr>       
+          <tr>
+              <td><a>HW5: </a></td>
+         </tr>       
          <!-- Computer Systems for Data Science -->
          <tr>
-              <td rowspan=3><a href="https://cs-w4121.github.io/">Computer Systems for Data Science</a></td>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/Clustering">Clustering</a></td>
+              <td rowspan=4><a href="https://cs-w4121.github.io/">Computer Systems for Data Science</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/Clustering">HW1: </a></td>
          </tr>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/DecisionTree">Decision Trees</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/DecisionTree">HW2: </a></td>
          </tr>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/PageRank">PageRank</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/PageRank">HW3: </a></td>
+         </tr>
+          <tr>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/PageRank">HW4: </a></td>
          </tr>
          <!-- Causal Inference for Data Science -->
          <tr>
               <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science</a></td>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_EnsembleMethods">Ensemble Methods</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_EnsembleMethods">HW1: </a></td>
          </tr>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_SVM">Support Vector Machines</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_SVM">HW2: </a></td>
          </tr>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_Trees">Decision Trees</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_Trees">HW3: </a></td>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_NeuralNets">Neural Networks</a></td>
+              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_NeuralNets">HW4: </a></td>
          </tr>
          </tr>
     </tbody>
