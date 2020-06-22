@@ -5,17 +5,6 @@ Looks like Columbia is more sensitive about us sharing our work than Telecom. Th
 
 Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.com/in/maxime-tchibozo/) for more information on the private stuff.
 
-Courses:
-
-* Algorithms for Data Science - CSORW4246 (private)
-* Machine Learning for Image Analysis - STATGR5293 (private)
-* Exploratory Data Analysis and Visualization - STATW5702 (some projects available)
-* Statistical Inference and Modeling - STATGR5703 (private)
-* Machine Learning - COMSW4721 (private)
-* Computer Systems for Data Science - COMSW4121 (private)
-* Applied Machine Learning - COMSW4995_011 (all courses and labs available : https://www.cs.columbia.edu/~amueller/comsw4995s20/schedule/)
-* Causal Inference - COMSW4995_013 (private) 
-
 ## First Semester
 
 <table>
@@ -28,7 +17,7 @@ Courses:
     <tbody>
          <!-- EDAV -->
          <tr>
-              <td rowspan=7><a href="https://github.com/mtchibozo/Columbia/tree/master/Exploratory-Data-Analysis-And-Visualisation">Exploratory Data Analysis and Visualisation</a></td>
+              <td rowspan=7><a href="https://github.com/mtchibozo/Columbia/tree/master/Exploratory-Data-Analysis-And-Visualisation">Exploratory Data Analysis and Visualisation (Private)</a></td>
               <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Exploratory-Data-Analysis-And-Visualisation/Data-Visualisation-Project">Project</a></td>
          </tr>
          <tr>
@@ -46,7 +35,7 @@ Courses:
          </tr>         
                <!-- Stat Inference -->
          <tr>
-              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Statistical Inference and Modeling</a></td>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Statistical Inference and Modeling (Private)</a></td>
               <td><a>HW1: Estimation, Rao-Blackwell</a></td>
          </tr>              
          <td><a>HW2: Survival Data, Missing Data, Markov Chains, Time Series</a></td>
@@ -57,7 +46,7 @@ Courses:
          </tr>
          <!-- Algorithms for Data Science -->
          <tr>
-              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Algorithms for Data Science</a></td>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Algorithms for Data Science (Private)</a></td>
               <td><a>HW1: Complexity, Sorting Algorithms</a></td>
          </tr>
          <tr>
@@ -71,7 +60,7 @@ Courses:
          </tr>
          <!-- ML for Image Analysis -->
          <tr>
-              <td rowspan=5><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning for Image Analysis</a></td>
+              <td rowspan=5><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning for Image Analysis (Private)</a></td>
               <td><a>HW1: KMeans for Face Recognition</a></td>
          </tr>
          <tr>
@@ -133,7 +122,7 @@ Courses:
          </tr>
                <!-- Machine Learning -->
          <tr>
-              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning</a></td>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning (Private)</a></td>
               <td><a>HW1: Maximum Likelihood, Bias-Variance Tradeoff</a></td>
          </tr>
          <tr>
@@ -147,7 +136,7 @@ Courses:
          </tr>       
          <!-- Causal Inference for Data Science -->
          <tr>
-              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science</a></td>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science (Private)</a></td>
               <td><a>HW1: Counterfactuals, Causal Effects, Experiment Design</a></td>
          </tr>
          <tr>
