@@ -112,6 +112,20 @@ Courses:
         </tr>
     </thead>
     <tbody>
+         <!-- Computer Systems for Data Science -->
+         <tr>
+              <td rowspan=4><a href="https://cs-w4121.github.io/">Computer Systems for Data Science</a></td>
+              <td><a href="https://cs-w4121.github.io/homeworks/hw1.html">HW1: SQL, Google Cloud Platform </a></td>
+         </tr>
+         <tr>
+              <td><a href="https://cs-w4121.github.io/homeworks/WrittenHW1.html">HW2: ACID, Transactions, 2-Phase Locking</a></td>
+         </tr>
+         <tr>
+              <td><a href="https://cs-w4121.github.io/homeworks/hw2.html">HW3: Apache Spark, GCP</a></td>
+         </tr>
+          <tr>
+              <td><a href="https://cs-w4121.github.io/homeworks/hw3.html">HW4: Tensoflow, Google Cloud</a></td>
+         </tr>
                <!-- Machine Learning -->
          <tr>
               <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning</a></td>
@@ -143,20 +157,6 @@ Courses:
           <tr>
               <td><a>HW5: </a></td>
          </tr>       
-         <!-- Computer Systems for Data Science -->
-         <tr>
-              <td rowspan=4><a href="https://cs-w4121.github.io/">Computer Systems for Data Science</a></td>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/Clustering">HW1: </a></td>
-         </tr>
-         <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/DecisionTree">HW2: </a></td>
-         </tr>
-         <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/PageRank">HW3: </a></td>
-         </tr>
-          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Clustering-Trees-and-PageRank/PageRank">HW4: </a></td>
-         </tr>
          <!-- Causal Inference for Data Science -->
          <tr>
               <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science</a></td>
