@@ -126,49 +126,49 @@ Courses:
           <tr>
               <td><a href="https://cs-w4121.github.io/homeworks/hw3.html">HW4: Tensoflow, Google Cloud</a></td>
          </tr>
-               <!-- Machine Learning -->
-         <tr>
-              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning</a></td>
-              <td><a>HW1: </a></td>
-         </tr>
-         <tr>
-              <td><a>HW2: </a></td>
-         </tr>       
-         <tr>
-              <td><a>HW3: </a></td>
-         </tr>       
-         <tr>
-              <td><a>HW4: </a></td>
-         </tr>       
          <!-- Applied Machine Learning -->
          <tr>
               <td rowspan=5><a href="https://www.cs.columbia.edu/~amueller/comsw4995s19/schedule/#top">Applied Machine Learning</a></td>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Advanced-Statistics/Splines">HW1</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW1-Visualization">HW1: Visualisation</a></td>
          </tr>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Advanced-Statistics/Wavelets">HW2</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW2-sklearn-tricks">HW2: Scikit-learn Tricks</a></td>
          </tr>
          <tr>
-              <td><a>HW3: </a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW3-Feature-Engineering">HW3: Feature Engineering</a></td>
          </tr>       
           <tr>
-              <td><a>HW4: </a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW4-NLP-Transformers-BERT">HW4: Transformers, BERT</a></td>
          </tr>       
           <tr>
-              <td><a>HW5: </a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW5-Deep-Learning">HW5: Deep Learning</a></td>
+         </tr>
+               <!-- Machine Learning -->
+         <tr>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning</a></td>
+              <td><a>HW1: Maximum Likelihood, Bias-Variance Tradeoff</a></td>
+         </tr>
+         <tr>
+              <td><a>HW2: Linear Classifiers, Decision Trees</a></td>
+         </tr>       
+         <tr>
+              <td><a>HW3: Optimisation, Logistic Regression, SVM</a></td>
+         </tr>       
+         <tr>
+              <td><a>HW4: Optimisation, Neural Networks, Kernels</a></td>
          </tr>       
          <!-- Causal Inference for Data Science -->
          <tr>
               <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science</a></td>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_EnsembleMethods">HW1: </a></td>
+              <td><a>HW1: Counterfactuals, Causal Effects, Experiment Design</a></td>
          </tr>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_SVM">HW2: </a></td>
+              <td><a>HW2: Bayesian Graphs, Backdoor Sets</a></td>
          </tr>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_Trees">HW3: </a></td>
+              <td><a>HW3: Propensity Scoring, Doubly Robust Treatment Effect Estimation</a></td>
          <tr>
-              <td><a href="https://github.com/mtchibozo/Telecom/tree/master/Data%20Science/Ensemble-Methods-SVM/TP_NeuralNets">HW4: </a></td>
+              <td><a>HW4: Instrumental Variables, Mechanisms, Front-Door Criterion</a></td>
          </tr>
          </tr>
     </tbody>
