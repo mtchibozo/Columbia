@@ -5,7 +5,7 @@ Looks like Columbia is more sensitive about us sharing our work than Telecom. Th
 
 Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.com/in/maxime-tchibozo/) for more information on the private stuff.
 
-## First Semester
+## First Semester (Fall 2019)
 
 <table>
     <thead>
@@ -78,7 +78,7 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
     </tbody>
 </table>
 
-## Second Semester
+## Second Semester (Spring 2020)
 
 
 <table>
