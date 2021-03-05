@@ -5,6 +5,132 @@ Looks like Columbia is more sensitive about us sharing our work than Telecom. Th
 
 Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.com/in/maxime-tchibozo/) for more information on the private stuff.
 
+
+
+
+## Third Semester (Fall 2020)
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Labs/Projects</th>
+        </tr>
+    </thead>
+    <tbody>
+         <!-- Capstone Project -->
+         <tr>
+              <td rowspan=4><a href="">Capstone Project</a></td>
+              <td><a href="">Project Reports </a></td>
+         </tr>
+         <tr>
+              <td><a href="">Code Repository</a></td>
+         </tr>
+         <tr>
+              <td><a href="https://www.youtube.com/watch?v=Oe-qwGFXC3I">Presentation Video</a></td>
+         </tr>
+         <!-- Foundations of Graphical Models -->
+         <tr>
+              <td rowspan=5><a href="http://www.cs.columbia.edu/~blei/fogm/2020F/">Foundations of Graphical Models (David M. Blei)</a></td>
+              <td><a href="">Homework 0: Probability and Statistics</a></td>
+         </tr>
+         <tr>
+              <td><a href="">Homework 1: MCMC, Gibbs Sampling</a></td>
+         </tr>
+         <tr>
+              <td><a href="">Homework 2: Variational Inference, Mixed-Membership Models</a></td>
+         </tr>       
+          <tr>
+              <td><a href="">Final Project: Identifying Bias in Text</a></td>
+         </tr> 
+         <!-- Bayesian Models for Machine Learning -->
+         <tr>
+              <td rowspan=4><a href="">Bayesian Models for Machine Learning (John Paisley) (Private)</a></td>
+              <td><a>HW1: EM Algorithm, MCMC</a></td>
+         </tr>
+         <tr>
+              <td><a>HW2: Variational Inference, MAP estimation</a></td>
+         </tr>
+         <tr>
+              <td><a>HW3: Mixture Models, Bayesian nonparametric Gibbs sampler</a></td>
+         </tr>
+    </tbody>
+</table>
+
+## Second Semester (Spring 2020)
+
+<table>
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Labs/Projects</th>
+        </tr>
+    </thead>
+    <tbody>
+         <!-- Computer Systems for Data Science -->
+         <tr>
+              <td rowspan=4><a href="https://cs-w4121.github.io/">Computer Systems for Data Science</a></td>
+              <td><a href="https://cs-w4121.github.io/homeworks/hw1.html">SQL, Google Cloud Platform </a></td>
+         </tr>
+         <tr>
+              <td><a href="https://cs-w4121.github.io/homeworks/WrittenHW1.html">ACID, Transactions, 2-Phase Locking</a></td>
+         </tr>
+         <tr>
+              <td><a href="https://cs-w4121.github.io/homeworks/hw2.html">Apache Spark, GCP</a></td>
+         </tr>
+          <tr>
+              <td><a href="https://cs-w4121.github.io/homeworks/hw3.html">Tensoflow, Google Cloud</a></td>
+         </tr>
+         <!-- Applied Machine Learning -->
+         <tr>
+              <td rowspan=5><a href="https://www.cs.columbia.edu/~amueller/comsw4995s19/schedule/#top">Applied Machine Learning</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW1-Visualization">Visualisation</a></td>
+         </tr>
+         <tr>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW2-sklearn-tricks">Scikit-learn Tricks</a></td>
+         </tr>
+         <tr>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW3-Feature-Engineering">Feature Engineering</a></td>
+         </tr>       
+          <tr>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW4-NLP-Transformers-BERT">Transformers, BERT</a></td>
+         </tr>       
+          <tr>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW5-Deep-Learning">Deep Learning</a></td>
+         </tr>
+               <!-- Machine Learning -->
+         <tr>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning (Private)</a></td>
+              <td><a>HW1: Maximum Likelihood, Bias-Variance Tradeoff</a></td>
+         </tr>
+         <tr>
+              <td><a>HW2: Linear Classifiers, Decision Trees</a></td>
+         </tr>       
+         <tr>
+              <td><a>HW3: Optimisation, Logistic Regression, SVM</a></td>
+         </tr>       
+         <tr>
+              <td><a>HW4: Optimisation, Neural Networks, Kernels</a></td>
+         </tr>       
+         <!-- Causal Inference for Data Science -->
+         <tr>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science (Private)</a></td>
+              <td><a>HW1: Counterfactuals, Causal Effects, Experiment Design</a></td>
+         </tr>
+         <tr>
+              <td><a>HW2: Bayesian Graphs, Backdoor Sets</a></td>
+         </tr>
+         <tr>
+              <td><a>HW3: Propensity Scoring, Doubly Robust Treatment Effect Estimation</a></td>
+         <tr>
+              <td><a>HW4: Instrumental Variables, Mechanisms, Front-Door Criterion</a></td>
+         </tr>
+         </tr>
+    </tbody>
+</table>
+
+
 ## First Semester (Fall 2019)
 
 <table>
@@ -74,79 +200,6 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
          </tr>         
          <tr>
               <td><a>Digit Recognition Project, Convolutional Neural Networks</a></td>
-         </tr>
-    </tbody>
-</table>
-
-## Second Semester (Spring 2020)
-
-
-<table>
-    <thead>
-        <tr>
-            <th>Course</th>
-            <th>Labs/Projects</th>
-        </tr>
-    </thead>
-    <tbody>
-         <!-- Computer Systems for Data Science -->
-         <tr>
-              <td rowspan=4><a href="https://cs-w4121.github.io/">Computer Systems for Data Science</a></td>
-              <td><a href="https://cs-w4121.github.io/homeworks/hw1.html">SQL, Google Cloud Platform </a></td>
-         </tr>
-         <tr>
-              <td><a href="https://cs-w4121.github.io/homeworks/WrittenHW1.html">ACID, Transactions, 2-Phase Locking</a></td>
-         </tr>
-         <tr>
-              <td><a href="https://cs-w4121.github.io/homeworks/hw2.html">Apache Spark, GCP</a></td>
-         </tr>
-          <tr>
-              <td><a href="https://cs-w4121.github.io/homeworks/hw3.html">Tensoflow, Google Cloud</a></td>
-         </tr>
-         <!-- Applied Machine Learning -->
-         <tr>
-              <td rowspan=5><a href="https://www.cs.columbia.edu/~amueller/comsw4995s19/schedule/#top">Applied Machine Learning</a></td>
-              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW1-Visualization">Visualisation</a></td>
-         </tr>
-         <tr>
-              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW2-sklearn-tricks">Scikit-learn Tricks</a></td>
-         </tr>
-         <tr>
-              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW3-Feature-Engineering">Feature Engineering</a></td>
-         </tr>       
-          <tr>
-              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW4-NLP-Transformers-BERT">Transformers, BERT</a></td>
-         </tr>       
-          <tr>
-              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Applied-Machine-Learning/HW5-Deep-Learning">Deep Learning</a></td>
-         </tr>
-               <!-- Machine Learning -->
-         <tr>
-              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Machine Learning (Private)</a></td>
-              <td><a>HW1: Maximum Likelihood, Bias-Variance Tradeoff</a></td>
-         </tr>
-         <tr>
-              <td><a>HW2: Linear Classifiers, Decision Trees</a></td>
-         </tr>       
-         <tr>
-              <td><a>HW3: Optimisation, Logistic Regression, SVM</a></td>
-         </tr>       
-         <tr>
-              <td><a>HW4: Optimisation, Neural Networks, Kernels</a></td>
-         </tr>       
-         <!-- Causal Inference for Data Science -->
-         <tr>
-              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science (Private)</a></td>
-              <td><a>HW1: Counterfactuals, Causal Effects, Experiment Design</a></td>
-         </tr>
-         <tr>
-              <td><a>HW2: Bayesian Graphs, Backdoor Sets</a></td>
-         </tr>
-         <tr>
-              <td><a>HW3: Propensity Scoring, Doubly Robust Treatment Effect Estimation</a></td>
-         <tr>
-              <td><a>HW4: Instrumental Variables, Mechanisms, Front-Door Criterion</a></td>
-         </tr>
          </tr>
     </tbody>
 </table>
