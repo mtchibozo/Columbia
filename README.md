@@ -21,7 +21,7 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
     <tbody>
          <!-- Capstone Project -->
          <tr>
-              <td rowspan=4><a href="">Capstone Project</a></td>
+              <td rowspan=3><a href="">Capstone Project</a></td>
               <td><a href="">Project Reports </a></td>
          </tr>
          <tr>
@@ -32,7 +32,7 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
          </tr>
          <!-- Foundations of Graphical Models -->
          <tr>
-              <td rowspan=5><a href="http://www.cs.columbia.edu/~blei/fogm/2020F/">Foundations of Graphical Models (David M. Blei)</a></td>
+              <td rowspan=4><a href="http://www.cs.columbia.edu/~blei/fogm/2020F/">Foundations of Graphical Models (David M. Blei)</a></td>
               <td><a href="">Homework 0: Probability and Statistics</a></td>
          </tr>
          <tr>
@@ -46,7 +46,7 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
          </tr> 
          <!-- Bayesian Models for Machine Learning -->
          <tr>
-              <td rowspan=4><a href="">Bayesian Models for Machine Learning (John Paisley) (Private)</a></td>
+              <td rowspan=3><a href="">Bayesian Models for Machine Learning (John Paisley) (Private)</a></td>
               <td><a>HW1: EM Algorithm, MCMC</a></td>
          </tr>
          <tr>
