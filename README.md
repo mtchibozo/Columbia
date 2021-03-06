@@ -32,7 +32,10 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
          </tr>
          <!-- Foundations of Graphical Models -->
          <tr>
-              <td rowspan=4><a href="http://www.cs.columbia.edu/~blei/fogm/2020F/">Foundations of Graphical Models (David M. Blei)</a></td>
+              <td rowspan=5><a href="http://www.cs.columbia.edu/~blei/fogm/2020F/">Foundations of Graphical Models (David M. Blei)</a></td>
+              <td><a href="">Weekly Readings</a></td>
+         </tr>
+         <tr>
               <td><a href="">Homework 0: Probability and Statistics</a></td>
          </tr>
          <tr>
