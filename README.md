@@ -21,7 +21,7 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
     <tbody>
          <!-- Capstone Project -->
          <tr>
-              <td rowspan=3><a href="">Capstone Project</a></td>
+              <td rowspan=3><a>Capstone Project</a></td>
               <td><a href="">Project Reports </a></td>
          </tr>
          <tr>
@@ -33,23 +33,23 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
          <!-- Foundations of Graphical Models -->
          <tr>
               <td rowspan=5><a href="http://www.cs.columbia.edu/~blei/fogm/2020F/">Foundations of Graphical Models (David M. Blei)</a></td>
-              <td><a href="">Weekly Readings</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/tree/master/Foundations-Graphical-Models/Readings">Reading Reports</a></td>
          </tr>
          <tr>
-              <td><a href="">Homework 0: Probability and Statistics</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Foundations-Graphical-Models/Homeworks/MT3390_FGM_HW0.pdf">Homework 0: Basic Probability and Statistics</a></td>
          </tr>
          <tr>
-              <td><a href="">Homework 1: MCMC, Gibbs Sampling</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Foundations-Graphical-Models/Homeworks/MT3390_FGM_HW1.pdf">Homework 1: MCMC, Gibbs Sampling</a></td>
          </tr>
          <tr>
-              <td><a href="">Homework 2: Variational Inference, Mixed-Membership Models</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Foundations-Graphical-Models/Homeworks/MT3390_FGM_HW2.pdf">Homework 2: Variational Inference, Mixed-Membership Models</a></td>
          </tr>       
           <tr>
-              <td><a href="">Final Project: Identifying Bias in Text</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Foundations-Graphical-Models/Final%20Project/Final%20Project%20-%20Bias%20Check%20-%20Maxime%20Tchibozo.pdf">Final Project: Identifying Bias in Text</a></td>
          </tr> 
          <!-- Bayesian Models for Machine Learning -->
          <tr>
-              <td rowspan=3><a href="">Bayesian Models for Machine Learning (John Paisley) (Private)</a></td>
+              <td rowspan=3><a>Bayesian Models for Machine Learning (John Paisley) (Private)</a></td>
               <td><a>HW1: EM Algorithm, MCMC</a></td>
          </tr>
          <tr>
