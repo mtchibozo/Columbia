@@ -21,11 +21,17 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
     <tbody>
          <!-- Capstone Project -->
          <tr>
-              <td rowspan=3><a>Capstone Project</a></td>
-              <td><a href="">Project Reports </a></td>
+              <td rowspan=5><a>Capstone Project</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Capstone-Project/Capstone_1st_report.pdf">First Report </a></td>
          </tr>
          <tr>
-              <td><a href="">Code Repository</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Capstone-Project/Capstone_2nd_report.pdf">Second Report</a></td>
+         </tr>
+         <tr>
+              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Capstone-Project/Capstone_Final_Report.pdf">Final Report</a></td>
+         </tr>
+         <tr>
+              <td><a href="https://github.com/Amelrich/Capstone-Fall-2020/tree/master">Code Repository</a></td>
          </tr>
          <tr>
               <td><a href="https://www.youtube.com/watch?v=Oe-qwGFXC3I">Presentation Video</a></td>
