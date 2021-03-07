@@ -125,15 +125,15 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
          <!-- Causal Inference for Data Science -->
          <tr>
               <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science (Private)</a></td>
-              <td><a>HW1: Counterfactuals, Causal Effects, Experiment Design</a></td>
+              <td><a href='https://github.com/mtchibozo/Columbia/blob/master/Causal-Inference/HW1.pdf'>HW1: Counterfactuals, Causal Effects, Experiment Design</a></td>
          </tr>
          <tr>
-              <td><a>HW2: Bayesian Graphs, Backdoor Sets</a></td>
+              <td><a href='https://github.com/mtchibozo/Columbia/blob/master/Causal-Inference/HW2.pdf'>HW2: Bayesian Graphs, Backdoor Sets</a></td>
          </tr>
          <tr>
-              <td><a>HW3: Propensity Scoring, Doubly Robust Treatment Effect Estimation</a></td>
+              <td><a href='https://github.com/mtchibozo/Columbia/blob/master/Causal-Inference/HW3.pdf'>HW3: Propensity Scoring, Doubly Robust Treatment Effect Estimation</a></td>
          <tr>
-              <td><a>HW4: Instrumental Variables, Mechanisms, Front-Door Criterion</a></td>
+              <td><a href='https://github.com/mtchibozo/Columbia/blob/master/Causal-Inference/HW4.pdf'>HW4: Instrumental Variables, Mechanisms, Front-Door Criterion</a></td>
          </tr>
          </tr>
     </tbody>
