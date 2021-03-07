@@ -51,7 +51,7 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
               <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Foundations-Graphical-Models/Homeworks/MT3390_FGM_HW2.pdf">Homework 2: Variational Inference, Mixed-Membership Models</a></td>
          </tr>       
           <tr>
-              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Foundations-Graphical-Models/Final%20Project/Final%20Project%20-%20Bias%20Check%20-%20Maxime%20Tchibozo.pdf">Final Project: Identifying Bias in Text</a></td>
+              <td><a href="https://github.com/mtchibozo/Columbia/blob/master/Foundations-Graphical-Models/Final%20Project/Final%20Project%20-%20Bias%20Check%20-%20Maxime%20Tchibozo.pdf">Final Project: Identifying Bias in Text (supervised LDA - sLDA)</a></td>
          </tr> 
          <!-- Bayesian Models for Machine Learning -->
          <tr>
