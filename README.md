@@ -124,7 +124,7 @@ Feel free to email me (mt3390@columbia.edu) or message me (https://www.linkedin.
          </tr>       
          <!-- Causal Inference for Data Science -->
          <tr>
-              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science (Private)</a></td>
+              <td rowspan=4><a href="https://www.datascience.columbia.edu/course-inventory">Causal Inference for Data Science</a></td>
               <td><a href='https://github.com/mtchibozo/Columbia/blob/master/Causal-Inference/HW1.pdf'>HW1: Counterfactuals, Causal Effects, Experiment Design</a></td>
          </tr>
          <tr>
